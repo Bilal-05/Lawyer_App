@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/startVM/start_vm.dart';
+// import 'package:lawyer_app/views/start_view/start_vm.dart';
 import 'package:stacked/stacked.dart';
 
 class StartView extends StatelessWidget {
@@ -18,8 +19,8 @@ class StartView extends StatelessWidget {
               width: 1.sh,
               height: 1.sh,
               margin: EdgeInsets.only(
-                right: 20,
-                left: 20,
+                right: 0.02.sw,
+                left: 0.02.sw,
                 top: 0.02.sh,
               ),
               child: Center(
@@ -27,42 +28,45 @@ class StartView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
+                      width: 0.75.sw,
                       child: Image.asset(
                         vModel.personLaptop,
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: 0.05.sh,
-                      ),
-                      width: 300,
-                      child: Text(
-                        'Find the best lawyer.',
-                        style: Style.semiBold35ptb,
-                        textAlign: TextAlign.center,
-                      ),
+                    0.05.sh.verticalSpace,
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: 300,
+                          child: Text(
+                            'Find the best lawyer.',
+                            softWrap: true,
+                            style: Style.semiBold35ptb,
+                            textAlign: TextAlign.center,
+                            strutStyle: const StrutStyle(height: -1.5),
+                          ),
+                        ),
+                        30.verticalSpace,
+                        SizedBox(
+                          width: 350,
+                          child: Text(
+                            'Explore the best lawyers in K-Town and make your life easy',
+                            style: Style.regular16ptb,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
                     ),
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: 0.05.sh,
-                      ),
-                      width: 350,
-                      child: Text(
-                        'Explore the best lawyers in K-Town and make your life easy',
-                        style: Style.regular16ptb,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                    const Spacer(),
                     Center(
                       child: Container(
-                        margin: EdgeInsets.only(
-                          top: 0.04.sh,
-                        ),
+                        margin: EdgeInsets.only(bottom: 0.03.sh),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Container(
+                            SizedBox(
                               child: ElevatedButton(
                                 style: vModel.b1style,
                                 onPressed: () {
@@ -75,7 +79,7 @@ class StartView extends StatelessWidget {
                               ),
                             ),
                             10.horizontalSpace,
-                            Container(
+                            SizedBox(
                               child: ElevatedButton(
                                 style: vModel.b2style,
                                 onPressed: () {

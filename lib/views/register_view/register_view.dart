@@ -18,175 +18,171 @@ class RegisterView extends StatelessWidget {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           body: SafeArea(
-            child: Container(
-              height: 1.sh,
-              width: 1.sh,
-              margin: EdgeInsets.only(
-                right: 0.05.sw,
-                left: 0.05.sw,
-                top: 0.075.sh,
-              ),
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Center(
-                      child: Text(
-                        'Create Account',
-                        style: Style.bol30ptb,
-                      ),
-                    ),
-                    Center(
-                      child: Container(
-                        margin: EdgeInsets.only(
-                          top: 0.015.sh,
-                        ),
-                        width: 300.w,
+            child: InkWell(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: Container(
+                height: 1.sh,
+                width: 1.sh,
+                margin: EdgeInsets.only(
+                  right: 0.05.sw,
+                  left: 0.05.sw,
+                  top: 0.075.sh,
+                ),
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Center(
                         child: Text(
-                          'Unlock your way to LegalEase by creating Account.',
-                          style: Style.medium16ptb,
-                          textAlign: TextAlign.center,
+                          'Create Account',
+                          style: Style.bol30ptb,
                         ),
                       ),
-                    ),
-                    Center(
-                      child: Container(
-                        margin: EdgeInsets.only(
-                          top: 0.02.sh,
+                      0.01.sh.verticalSpace,
+                      Center(
+                        child: SizedBox(
+                          width: 350,
+                          child: Text(
+                            'Unlock your way to LegalEase by creating Account.',
+                            style: Style.medium14ptb,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                        child: Form(
-                          key: vModel.formKey,
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                  vertical: 0.02.sh,
-                                ),
-                                child: vModel.customTextFormField(
-                                  vModel.emailController,
-                                  'Email',
-                                  (value) {
-                                    bool emailValid = RegExp(
-                                            r'[\w-\.]+@(\w-])+\.)+[\w-]{2-4}')
-                                        .hasMatch(value!);
+                      ),
+                      0.06.sh.verticalSpace,
+                      Center(
+                        child: SizedBox(
+                          child: Form(
+                            key: vModel.formKey,
+                            child: Column(
+                              children: [
+                                Container(
+                                  child: vModel.texttFieldService
+                                      .customTextFormField(
+                                    vModel.emailController,
+                                    'Email',
+                                    (value) {
+                                      bool emailValid = RegExp(
+                                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                          .hasMatch(value!);
 
-                                    if (value.isEmpty || !emailValid) {
-                                      return 'Enter correct email';
-                                    } else {
-                                      return null;
-                                    }
-                                  },
+                                      if (value.isEmpty || !emailValid) {
+                                        return 'Enter correct email';
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                  vertical: 0.02.sh,
+                                20.verticalSpace,
+                                Container(
+                                  child: vModel.texttFieldService
+                                      .customTextFormField(
+                                    vModel.passController,
+                                    'Password',
+                                    (value) {
+                                      bool validPass = RegExp(
+                                              "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}\$")
+                                          .hasMatch(value!);
+                                      if (value.isEmpty || !validPass) {
+                                        return 'Minimum eight characters and must be unique.';
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                  ),
                                 ),
-                                child: vModel.customTextFormField(
-                                  vModel.passController,
-                                  'Password',
-                                  (value) {
-                                    bool validPass = RegExp(
-                                            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}\$")
-                                        .hasMatch(value!);
-                                    if (value.isEmpty || !validPass) {
-                                      return 'Minimum eight characters and must be unique.';
-                                    } else {
-                                      return null;
-                                    }
-                                  },
+                                20.verticalSpace,
+                                Container(
+                                  child: vModel.texttFieldService
+                                      .customTextFormField(
+                                    vModel.passConfirmController,
+                                    'Confirm',
+                                    (value) {
+                                      if (value != vModel.passController.text) {
+                                        return 'Password does\'nt match.';
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                  vertical: 0.02.sh,
-                                ),
-                                child: vModel.customTextFormField(
-                                  vModel.passConfirmController,
-                                  'Confirm',
-                                  (value) {
-                                    if (value != vModel.passController.text) {
-                                      return 'Password does\'nt match.';
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    // Container(
-                    //   margin: EdgeInsets.symmetric(
-                    //     vertical: 0.02.sh,
-                    //   ),
-                    //   child: InkWell(
-                    //     onTap: () {},
-                    //     child: Text(
-                    //       'Forgot your password?',
-                    //       style: Style.semiBold16ptb,
-                    //     ),
-                    //   ),
-                    // ),
-                    // 20.verticalSpace,
-                    Center(
-                      child: Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: 0.015.sh,
-                        ),
-                        child: ElevatedButton(
-                          style: vModel.b1style,
-                          onPressed: () {},
-                          child: Text(
-                            'Sign up',
-                            style: Style.semiBold20ptw,
+                      // Container(
+                      //   margin: EdgeInsets.symmetric(
+                      //     vertical: 0.02.sh,
+                      //   ),
+                      //   child: InkWell(
+                      //     onTap: () {},
+                      //     child: Text(
+                      //       'Forgot your password?',
+                      //       style: Style.semiBold16ptb,
+                      //     ),
+                      //   ),
+                      // ),
+                      // 20.verticalSpace,
+                      0.03.sh.verticalSpace,
+                      Center(
+                        child: SizedBox(
+                          child: ElevatedButton(
+                            style: vModel.b1style,
+                            onPressed: () {
+                              if (vModel.formKey.currentState!.validate()) {}
+                            },
+                            child: Text(
+                              'Sign up',
+                              style: Style.semiBold20ptw,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Center(
-                      child: Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: 0.02.sh,
-                        ),
-                        child: InkWell(
-                          onTap: () {
-                            vModel.navigateToLoginView();
-                          },
-                          child: Text(
-                            'Already have an account',
-                            style: Style.semiBold16ptb,
+                      0.03.sh.verticalSpace,
+                      Center(
+                        child: SizedBox(
+                          child: InkWell(
+                            onTap: () {
+                              vModel.navigateToLoginView();
+                            },
+                            child: Text(
+                              'Already have an account',
+                              style: Style.semiBold16ptb,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    30.verticalSpace,
-                    Center(
-                      child: Text(
-                        'Or continue with',
-                        style: Style.semiBold16ptb,
-                      ),
-                    ),
-                    Center(
-                      child: Container(
-                        margin: EdgeInsets.only(top: 0.02.sh),
-                        child: ElevatedButton.icon(
-                          style: vModel.b2style,
-                          onPressed: () {},
-                          icon: SvgPicture.asset(
-                            vModel.google,
-                            width: 24.w,
-                          ),
-                          label: Text(
-                            'Contiune with google',
-                            style: Style.semiBold14ptb,
-                          ),
+                      const Spacer(),
+                      Center(
+                        child: Text(
+                          'Or continue with',
+                          style: Style.semiBold16ptb,
                         ),
                       ),
-                    )
-                  ],
+                      0.01.sh.verticalSpace,
+                      Center(
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 0.03.sh),
+                          child: ElevatedButton.icon(
+                            style: vModel.b2style,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: SvgPicture.asset(
+                              vModel.google,
+                              width: 24.w,
+                            ),
+                            label: Text(
+                              'Contiune with google',
+                              style: Style.semiBold14ptb,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
