@@ -29,13 +29,17 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   another_flutter_splash_screen: ^1.2.0
+  cunning_document_scanner: ^1.1.4
   cupertino_icons: ^1.0.2
+  date_field: ^3.0.5
   dropdown_button2: ^2.3.9
   easy_splash_screen: ^1.0.4
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.9
+  image_picker: ^1.0.2
+  intl_phone_number_input: ^0.7.3+1
   lottie: ^2.7.0
   pinput: ^3.0.1
   stacked: ^3.4.1+1

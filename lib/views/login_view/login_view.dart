@@ -61,6 +61,8 @@ class LoginView extends StatelessWidget {
                                 Container(
                                   child: vModel.texttFieldService
                                       .customTextFormField(
+                                    TextInputType.emailAddress,
+                                    null,
                                     vModel.emailController,
                                     'Email',
                                     (value) {
@@ -79,11 +81,13 @@ class LoginView extends StatelessWidget {
                                 20.verticalSpace,
                                 Container(
                                   child: vModel.texttFieldService
-                                      .customPassTextFormField(
+                                      .customTextFormField(
+                                    TextInputType.visiblePassword,
+                                    null,
                                     vModel.passController,
                                     'Password',
                                     (value) {
-                                      if (value == null) {
+                                      if (value!.isEmpty) {
                                         return 'Enter correct password';
                                       } else {
                                         return null;
@@ -114,9 +118,7 @@ class LoginView extends StatelessWidget {
                           child: ElevatedButton(
                             style: vModel.b1style,
                             onPressed: () {
-                              if (vModel.formKey.currentState!.validate()) {
-                                vModel.navigateToBoardingView();
-                              }
+                              vModel.navigateToBoardingView();
                             },
                             child: Text(
                               'Sign in',

@@ -74,6 +74,9 @@ class OnBoardingVM extends BaseViewModel {
   navigateToOnBoardingView() {
     if (selectedValue == 'I am looking for lawyers') {
       navigationService.navigateToLawyerView();
+    } else if (selectedValue == 'I am looking for clients') {
+      navigationService.navigateToClientView();
     }
+    return null;
   }
 }

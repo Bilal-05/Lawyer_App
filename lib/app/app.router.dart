@@ -5,10 +5,13 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i11;
+import 'package:flutter/material.dart' as _i14;
 import 'package:flutter/material.dart';
+import 'package:lawyer_app/views/client_view/client_view.dart' as _i13;
 import 'package:lawyer_app/views/forgot_view/forget_view.dart' as _i6;
+import 'package:lawyer_app/views/lawyer_view/cnic_view.dart' as _i11;
 import 'package:lawyer_app/views/lawyer_view/forlawyer_view.dart' as _i10;
+import 'package:lawyer_app/views/lawyer_view/upload_cnic.dart' as _i12;
 import 'package:lawyer_app/views/login_view/login_view.dart' as _i4;
 import 'package:lawyer_app/views/new_password_view/new_password_view.dart'
     as _i8;
@@ -18,7 +21,7 @@ import 'package:lawyer_app/views/register_view/register_view.dart' as _i5;
 import 'package:lawyer_app/views/splash_view/splash_view.dart' as _i2;
 import 'package:lawyer_app/views/start_view/start_view.dart' as _i3;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i12;
+import 'package:stacked_services/stacked_services.dart' as _i15;
 
 class Routes {
   static const splashView = '/';
@@ -39,6 +42,12 @@ class Routes {
 
   static const lawyerView = '/lawyer-view';
 
+  static const cnicView = '/cnic-view';
+
+  static const uploadCnicView = '/upload-cnic-view';
+
+  static const clientView = '/client-view';
+
   static const all = <String>{
     splashView,
     startView,
@@ -49,6 +58,9 @@ class Routes {
     newPasswordView,
     onBoardingView,
     lawyerView,
+    cnicView,
+    uploadCnicView,
+    clientView,
   };
 }
 
@@ -90,61 +102,91 @@ class StackedRouter extends _i1.RouterBase {
       Routes.lawyerView,
       page: _i10.LawyerView,
     ),
+    _i1.RouteDef(
+      Routes.cnicView,
+      page: _i11.CnicView,
+    ),
+    _i1.RouteDef(
+      Routes.uploadCnicView,
+      page: _i12.UploadCnicView,
+    ),
+    _i1.RouteDef(
+      Routes.clientView,
+      page: _i13.ClientView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.SplashView: (data) {
-      return _i11.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.SplashView(),
         settings: data,
       );
     },
     _i3.StartView: (data) {
-      return _i11.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartView(),
         settings: data,
       );
     },
     _i4.LoginView: (data) {
-      return _i11.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.LoginView(),
         settings: data,
       );
     },
     _i5.RegisterView: (data) {
-      return _i11.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.RegisterView(),
         settings: data,
       );
     },
     _i6.ForgotView: (data) {
-      return _i11.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ForgotView(),
         settings: data,
       );
     },
     _i7.OtpView: (data) {
       final args = data.getArgs<OtpViewArguments>(nullOk: false);
-      return _i11.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => _i7.OtpView(key: args.key, email: args.email),
         settings: data,
       );
     },
     _i8.NewPasswordView: (data) {
-      return _i11.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.NewPasswordView(),
         settings: data,
       );
     },
     _i9.OnBoardingView: (data) {
-      return _i11.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.OnBoardingView(),
         settings: data,
       );
     },
     _i10.LawyerView: (data) {
-      return _i11.MaterialPageRoute<dynamic>(
+      return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.LawyerView(),
+        settings: data,
+      );
+    },
+    _i11.CnicView: (data) {
+      return _i14.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i11.CnicView(),
+        settings: data,
+      );
+    },
+    _i12.UploadCnicView: (data) {
+      return _i14.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i12.UploadCnicView(),
+        settings: data,
+      );
+    },
+    _i13.ClientView: (data) {
+      return _i14.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i13.ClientView(),
         settings: data,
       );
     },
@@ -163,7 +205,7 @@ class OtpViewArguments {
     required this.email,
   });
 
-  final _i11.Key? key;
+  final _i14.Key? key;
 
   final String email;
 
@@ -184,7 +226,7 @@ class OtpViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i12.NavigationService {
+extension NavigatorStateExtension on _i15.NavigationService {
   Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -256,7 +298,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> navigateToOtpView({
-    _i11.Key? key,
+    _i14.Key? key,
     required String email,
     int? routerId,
     bool preventDuplicates = true,
@@ -308,6 +350,48 @@ extension NavigatorStateExtension on _i12.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.lawyerView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToCnicView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.cnicView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToUploadCnicView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.uploadCnicView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToClientView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.clientView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -385,7 +469,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> replaceWithOtpView({
-    _i11.Key? key,
+    _i14.Key? key,
     required String email,
     int? routerId,
     bool preventDuplicates = true,
@@ -437,6 +521,48 @@ extension NavigatorStateExtension on _i12.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.lawyerView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithCnicView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.cnicView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithUploadCnicView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.uploadCnicView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithClientView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.clientView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

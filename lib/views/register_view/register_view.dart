@@ -59,6 +59,8 @@ class RegisterView extends StatelessWidget {
                                 Container(
                                   child: vModel.texttFieldService
                                       .customTextFormField(
+                                    TextInputType.emailAddress,
+                                    null,
                                     vModel.emailController,
                                     'Email',
                                     (value) {
@@ -78,6 +80,8 @@ class RegisterView extends StatelessWidget {
                                 Container(
                                   child: vModel.texttFieldService
                                       .customTextFormField(
+                                    TextInputType.visiblePassword,
+                                    null,
                                     vModel.passController,
                                     'Password',
                                     (value) {
@@ -96,6 +100,8 @@ class RegisterView extends StatelessWidget {
                                 Container(
                                   child: vModel.texttFieldService
                                       .customTextFormField(
+                                    TextInputType.phone,
+                                    null,
                                     vModel.passConfirmController,
                                     'Confirm',
                                     (value) {

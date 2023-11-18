@@ -34,7 +34,7 @@ class ForgotView extends StatelessWidget {
                         'Forget Password',
                         style: Style.bol30ptb,
                       ),
-                      Container(
+                      SizedBox(
                         width: 0.75.sw,
                         child: Text(
                           'Reset your password here.',
@@ -43,7 +43,7 @@ class ForgotView extends StatelessWidget {
                         ),
                       ),
                       0.03.sh.verticalSpace,
-                      Container(
+                      SizedBox(
                         width: 0.50.sw,
                         child: Lottie.asset(vModel.forgot),
                       ),
@@ -61,6 +61,8 @@ class ForgotView extends StatelessWidget {
                         child: Form(
                           key: vModel.formKey,
                           child: vModel.textFieldService.customTextFormField(
+                            TextInputType.emailAddress,
+                            null,
                             vModel.emailController,
                             'Email',
                             (value) {

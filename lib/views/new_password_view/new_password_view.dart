@@ -44,6 +44,8 @@ class NewPasswordView extends StatelessWidget {
                         children: [
                           Container(
                             child: vModel.textFieldService.customTextFormField(
+                              TextInputType.visiblePassword,
+                              null,
                               vModel.newPassController,
                               'New password',
                               (value) {
@@ -62,6 +64,8 @@ class NewPasswordView extends StatelessWidget {
                           20.verticalSpace,
                           Container(
                             child: vModel.textFieldService.customTextFormField(
+                              TextInputType.visiblePassword,
+                              null,
                               vModel.confirmPassController,
                               'Confirm password',
                               (value) {

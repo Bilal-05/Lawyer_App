@@ -13,9 +13,10 @@ class StartView extends StatelessWidget {
     return ViewModelBuilder.nonReactive(
       viewModelBuilder: () => StartVM(),
       builder: (ctx, vModel, child) {
-        return SafeArea(
-          child: Scaffold(
-            body: Container(
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: SafeArea(
+            child: Container(
               width: 1.sh,
               height: 1.sh,
               margin: EdgeInsets.only(
