@@ -1,6 +1,8 @@
 import 'package:lawyer_app/services/textfield_service.dart';
 import 'package:lawyer_app/views/client_view/education_view.dart';
 import 'package:lawyer_app/views/client_view/forclient_view.dart';
+import 'package:lawyer_app/views/client_view/scan_barcard_back_view.dart';
+import 'package:lawyer_app/views/client_view/scan_barcard_front_view.dart';
 import 'package:lawyer_app/views/client_view/timing_view.dart';
 import 'package:lawyer_app/views/forgot_view/forget_view.dart';
 import 'package:lawyer_app/views/lawyer_view/cnic_view.dart';
@@ -34,6 +36,8 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: UploadCnicBackView),
     MaterialRoute(page: EducationView),
     MaterialRoute(page: TimingView),
+    MaterialRoute(page: BarFrontView),
+    MaterialRoute(page: BarBackView),
   ],
   dependencies: [
     Singleton(

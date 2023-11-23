@@ -129,7 +129,9 @@ class TimingView extends StatelessWidget {
                   margin: EdgeInsets.only(bottom: 0.03.sh),
                   child: ElevatedButton(
                     style: vModel.b1style,
-                    onPressed: () {},
+                    onPressed: () {
+                      vModel.navigateToScanBarCard();
+                    },
                     child: Text(
                       'Next',
                       style: Style.semiBold20ptw,
