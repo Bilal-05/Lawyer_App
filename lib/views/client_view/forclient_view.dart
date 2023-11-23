@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
-import 'package:lawyer_app/viewmodels/lawyerVM/forlawyer_vm.dart';
+import 'package:lawyer_app/viewmodels/clientVM/forclient_vm.dart';
 import 'package:stacked/stacked.dart';
 
-class LawyerView extends StatelessWidget {
-  const LawyerView({super.key});
+class ClientView extends StatelessWidget {
+  const ClientView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.nonReactive(
-      viewModelBuilder: () => LawyerVM(),
+      viewModelBuilder: () => ClientVM(),
       builder: (context, vModel, child) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -50,11 +50,11 @@ class LawyerView extends StatelessWidget {
                             child: vModel.textFieldService.customTextFormField(
                               TextInputType.text,
                               null,
-                              vModel.fnameController,
-                              'First name',
+                              vModel.fullnameController,
+                              'Full name',
                               (value) {
                                 if (value == null) {
-                                  return 'Please enter your first name';
+                                  return 'Please enter your full name';
                                 }
                                 return null;
                               },
@@ -65,11 +65,26 @@ class LawyerView extends StatelessWidget {
                             child: vModel.textFieldService.customTextFormField(
                               TextInputType.text,
                               null,
-                              vModel.lnameController,
-                              'Last name',
+                              vModel.designationController,
+                              'Designation',
                               (value) {
                                 if (value == null) {
-                                  return 'Please enter your last name';
+                                  return 'Please enter your designation';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          20.verticalSpace,
+                          Container(
+                            child: vModel.textFieldService.customTextFormField(
+                              TextInputType.text,
+                              null,
+                              vModel.bioController,
+                              'Bio',
+                              (value) {
+                                if (value == null) {
+                                  return 'Write yourself a bio.';
                                 }
                                 return null;
                               },
@@ -79,21 +94,24 @@ class LawyerView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  20.verticalSpace,
-                  Container(
-                    child: vModel.phoneNumberField(),
-                  ),
-                  20.verticalSpace,
+                  // 20.verticalSpace,
+                  // Container(
+                  //     // child: vModel.phoneNumberField(),
+                  //     ),
+                  // 20.verticalSpace,
                   const Spacer(),
                   Container(
                     margin: EdgeInsets.only(bottom: 0.03.sh),
                     child: ElevatedButton(
                       style: vModel.b1style,
                       onPressed: () {
+                        // if (vModel.formKey.currentState!.validate()) {
+                        //   // vModel.navigateToEducation();
+                        // }
                         // print(vModel.fnameController.text);
                         // print(vModel.lnameController.text);
                         // print(vModel.phoneController.text);
-                        vModel.navigateToCnic();
+                        vModel.navigateToEducation();
                       },
                       child: Text(
                         'Next',

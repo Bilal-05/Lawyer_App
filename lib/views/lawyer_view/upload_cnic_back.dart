@@ -8,8 +8,8 @@ import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/lawyerVM/upload_vm.dart';
 import 'package:stacked/stacked.dart';
 
-class UploadCnicView extends StatelessWidget {
-  const UploadCnicView({super.key});
+class UploadCnicBackView extends StatelessWidget {
+  const UploadCnicBackView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +37,14 @@ class UploadCnicView extends StatelessWidget {
                   SizedBox(
                     width: 0.75.sw,
                     child: Text(
-                      'Scan front side of your cnic.',
+                      'Scan back side of your cnic.',
                       style: Style.medium14ptb,
                       textAlign: TextAlign.center,
                     ),
                   ),
                   0.03.sh.verticalSpace,
-                  for (var picture in viewModel.frontSide)
-                    viewModel.frontSide.length == 1
+                  for (var picture in viewModel.backSide)
+                    viewModel.backSide.length == 1
                         ? SizedBox(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -75,34 +75,30 @@ class UploadCnicView extends StatelessWidget {
                           )
                         : Container(),
                   const Spacer(),
-                  viewModel.frontSide.isNotEmpty
+                  viewModel.backSide.isNotEmpty
                       ? Container(
                           margin: EdgeInsets.only(bottom: 0.03.sh),
                           child: ElevatedButton(
                             style: viewModel.b3style,
-                            onPressed: viewModel.onPressedfirst,
+                            onPressed: viewModel.onPressedback,
                             child: const Text("The picture isn't clear."),
                           ),
                         )
                       : Container(),
-                  viewModel.frontSide.isEmpty
+                  viewModel.backSide.isEmpty
                       ? Container(
                           margin: EdgeInsets.only(bottom: 0.03.sh),
                           child: ElevatedButton(
                             style: viewModel.b3style,
-                            onPressed: viewModel.onPressedfirst,
-                            child: const Text("Scan front side"),
+                            onPressed: viewModel.onPressedback,
+                            child: const Text("Scan back side"),
                           ),
                         )
                       : Container(
                           margin: EdgeInsets.only(bottom: 0.03.sh),
                           child: ElevatedButton(
                             style: viewModel.b3style,
-                            onPressed: () {
-                              viewModel.frontSide.isNotEmpty
-                                  ? viewModel.navigateToBack()
-                                  : null;
-                            },
+                            onPressed: () {},
                             child: const Text("The picture is clear."),
                           ),
                         ),

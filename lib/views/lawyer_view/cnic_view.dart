@@ -26,7 +26,7 @@ class CnicView extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Enter Cnic Details',
+                    'Enter Cnic',
                     textAlign: TextAlign.center,
                     style: Style.bol30ptb,
                   ),
@@ -34,7 +34,7 @@ class CnicView extends StatelessWidget {
                   SizedBox(
                     width: 0.75.sw,
                     child: Text(
-                      'To verify your Account.',
+                      'Provide us your CNIC details.',
                       style: Style.medium14ptb,
                       textAlign: TextAlign.center,
                     ),
@@ -191,9 +191,9 @@ class CnicView extends StatelessWidget {
                     child: ElevatedButton(
                       style: vModel.b3style,
                       onPressed: () {
-                        if (vModel.formKey.currentState!.validate()) {
-                          vModel.navigateToScanView();
-                        }
+                        // if (vModel.formKey.currentState!.validate()) {
+                        vModel.navigateToScanView();
+                        // }
                       },
                       child: Text(
                         'Next',

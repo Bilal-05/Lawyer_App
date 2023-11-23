@@ -1,9 +1,12 @@
 import 'package:lawyer_app/services/textfield_service.dart';
-import 'package:lawyer_app/views/client_view/client_view.dart';
+import 'package:lawyer_app/views/client_view/education_view.dart';
+import 'package:lawyer_app/views/client_view/forclient_view.dart';
+import 'package:lawyer_app/views/client_view/timing_view.dart';
 import 'package:lawyer_app/views/forgot_view/forget_view.dart';
 import 'package:lawyer_app/views/lawyer_view/cnic_view.dart';
 import 'package:lawyer_app/views/lawyer_view/forlawyer_view.dart';
 import 'package:lawyer_app/views/lawyer_view/upload_cnic.dart';
+import 'package:lawyer_app/views/lawyer_view/upload_cnic_back.dart';
 import 'package:lawyer_app/views/login_view/login_view.dart';
 import 'package:lawyer_app/views/new_password_view/new_password_view.dart';
 import 'package:lawyer_app/views/onboarding_view/onboarding_view.dart';
@@ -28,6 +31,9 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: CnicView),
     MaterialRoute(page: UploadCnicView),
     MaterialRoute(page: ClientView),
+    MaterialRoute(page: UploadCnicBackView),
+    MaterialRoute(page: EducationView),
+    MaterialRoute(page: TimingView),
   ],
   dependencies: [
     Singleton(

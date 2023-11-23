@@ -5,13 +5,16 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i14;
+import 'package:flutter/material.dart' as _i17;
 import 'package:flutter/material.dart';
-import 'package:lawyer_app/views/client_view/client_view.dart' as _i13;
+import 'package:lawyer_app/views/client_view/education_view.dart' as _i15;
+import 'package:lawyer_app/views/client_view/forclient_view.dart' as _i13;
+import 'package:lawyer_app/views/client_view/timing_view.dart' as _i16;
 import 'package:lawyer_app/views/forgot_view/forget_view.dart' as _i6;
 import 'package:lawyer_app/views/lawyer_view/cnic_view.dart' as _i11;
 import 'package:lawyer_app/views/lawyer_view/forlawyer_view.dart' as _i10;
 import 'package:lawyer_app/views/lawyer_view/upload_cnic.dart' as _i12;
+import 'package:lawyer_app/views/lawyer_view/upload_cnic_back.dart' as _i14;
 import 'package:lawyer_app/views/login_view/login_view.dart' as _i4;
 import 'package:lawyer_app/views/new_password_view/new_password_view.dart'
     as _i8;
@@ -21,7 +24,7 @@ import 'package:lawyer_app/views/register_view/register_view.dart' as _i5;
 import 'package:lawyer_app/views/splash_view/splash_view.dart' as _i2;
 import 'package:lawyer_app/views/start_view/start_view.dart' as _i3;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i15;
+import 'package:stacked_services/stacked_services.dart' as _i18;
 
 class Routes {
   static const splashView = '/';
@@ -48,6 +51,12 @@ class Routes {
 
   static const clientView = '/client-view';
 
+  static const uploadCnicBackView = '/upload-cnic-back-view';
+
+  static const educationView = '/education-view';
+
+  static const timingView = '/timing-view';
+
   static const all = <String>{
     splashView,
     startView,
@@ -61,6 +70,9 @@ class Routes {
     cnicView,
     uploadCnicView,
     clientView,
+    uploadCnicBackView,
+    educationView,
+    timingView,
   };
 }
 
@@ -114,79 +126,109 @@ class StackedRouter extends _i1.RouterBase {
       Routes.clientView,
       page: _i13.ClientView,
     ),
+    _i1.RouteDef(
+      Routes.uploadCnicBackView,
+      page: _i14.UploadCnicBackView,
+    ),
+    _i1.RouteDef(
+      Routes.educationView,
+      page: _i15.EducationView,
+    ),
+    _i1.RouteDef(
+      Routes.timingView,
+      page: _i16.TimingView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.SplashView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i17.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.SplashView(),
         settings: data,
       );
     },
     _i3.StartView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i17.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartView(),
         settings: data,
       );
     },
     _i4.LoginView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i17.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.LoginView(),
         settings: data,
       );
     },
     _i5.RegisterView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i17.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.RegisterView(),
         settings: data,
       );
     },
     _i6.ForgotView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i17.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ForgotView(),
         settings: data,
       );
     },
     _i7.OtpView: (data) {
       final args = data.getArgs<OtpViewArguments>(nullOk: false);
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i17.MaterialPageRoute<dynamic>(
         builder: (context) => _i7.OtpView(key: args.key, email: args.email),
         settings: data,
       );
     },
     _i8.NewPasswordView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i17.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.NewPasswordView(),
         settings: data,
       );
     },
     _i9.OnBoardingView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i17.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.OnBoardingView(),
         settings: data,
       );
     },
     _i10.LawyerView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i17.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.LawyerView(),
         settings: data,
       );
     },
     _i11.CnicView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i17.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.CnicView(),
         settings: data,
       );
     },
     _i12.UploadCnicView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i17.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.UploadCnicView(),
         settings: data,
       );
     },
     _i13.ClientView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i17.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.ClientView(),
+        settings: data,
+      );
+    },
+    _i14.UploadCnicBackView: (data) {
+      return _i17.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i14.UploadCnicBackView(),
+        settings: data,
+      );
+    },
+    _i15.EducationView: (data) {
+      return _i17.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i15.EducationView(),
+        settings: data,
+      );
+    },
+    _i16.TimingView: (data) {
+      return _i17.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i16.TimingView(),
         settings: data,
       );
     },
@@ -205,7 +247,7 @@ class OtpViewArguments {
     required this.email,
   });
 
-  final _i14.Key? key;
+  final _i17.Key? key;
 
   final String email;
 
@@ -226,7 +268,7 @@ class OtpViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i15.NavigationService {
+extension NavigatorStateExtension on _i18.NavigationService {
   Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -298,7 +340,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToOtpView({
-    _i14.Key? key,
+    _i17.Key? key,
     required String email,
     int? routerId,
     bool preventDuplicates = true,
@@ -398,6 +440,48 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToUploadCnicBackView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.uploadCnicBackView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToEducationView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.educationView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToTimingView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.timingView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -469,7 +553,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithOtpView({
-    _i14.Key? key,
+    _i17.Key? key,
     required String email,
     int? routerId,
     bool preventDuplicates = true,
@@ -563,6 +647,48 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.clientView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithUploadCnicBackView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.uploadCnicBackView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithEducationView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.educationView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithTimingView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.timingView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
-import 'package:lawyer_app/viewmodels/lawyerVM/forlawyer_vm.dart';
+import 'package:lawyer_app/viewmodels/clientVM/education_vm.dart';
 import 'package:stacked/stacked.dart';
 
-class LawyerView extends StatelessWidget {
-  const LawyerView({super.key});
+class EducationView extends StatelessWidget {
+  const EducationView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.nonReactive(
-      viewModelBuilder: () => LawyerVM(),
+      viewModelBuilder: () => EducationVM(),
       builder: (context, vModel, child) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -50,11 +50,11 @@ class LawyerView extends StatelessWidget {
                             child: vModel.textFieldService.customTextFormField(
                               TextInputType.text,
                               null,
-                              vModel.fnameController,
-                              'First name',
+                              vModel.institutionController,
+                              'Institution name',
                               (value) {
                                 if (value == null) {
-                                  return 'Please enter your first name';
+                                  return 'Please enter institution name';
                                 }
                                 return null;
                               },
@@ -65,25 +65,53 @@ class LawyerView extends StatelessWidget {
                             child: vModel.textFieldService.customTextFormField(
                               TextInputType.text,
                               null,
-                              vModel.lnameController,
-                              'Last name',
+                              vModel.degreeController,
+                              'Degree',
                               (value) {
                                 if (value == null) {
-                                  return 'Please enter your last name';
+                                  return 'What degree did you persue?.';
                                 }
                                 return null;
                               },
                             ),
                           ),
+                          20.verticalSpace,
+                          vModel.dateTextField(
+                            vModel.doeController,
+                            context,
+                            'Year of enrollment',
+                            (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter your year of enrollment';
+                              } else if (value == vModel.dogController.text) {
+                                return 'Date of enrollment and date of graduation cannot be same';
+                              }
+                              return null;
+                            },
+                          ),
+                          20.verticalSpace,
+                          vModel.dateTextField(
+                            vModel.doeController,
+                            context,
+                            'Year of graduation',
+                            (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter your year of graduation';
+                              } else if (value == vModel.doeController.text) {
+                                return 'Date of graduation and date of enrollment cannot be same';
+                              }
+                              return null;
+                            },
+                          ),
                         ],
                       ),
                     ),
                   ),
-                  20.verticalSpace,
-                  Container(
-                    child: vModel.phoneNumberField(),
-                  ),
-                  20.verticalSpace,
+                  // 20.verticalSpace,
+                  // Container(
+                  //     // child: vModel.phoneNumberField(),
+                  //     ),
+                  // 20.verticalSpace,
                   const Spacer(),
                   Container(
                     margin: EdgeInsets.only(bottom: 0.03.sh),
@@ -93,7 +121,7 @@ class LawyerView extends StatelessWidget {
                         // print(vModel.fnameController.text);
                         // print(vModel.lnameController.text);
                         // print(vModel.phoneController.text);
-                        vModel.navigateToCnic();
+                        vModel.navigateToTiming();
                       },
                       child: Text(
                         'Next',
