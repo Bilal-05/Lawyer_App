@@ -81,7 +81,10 @@ class UploadCnicView extends StatelessWidget {
                           child: ElevatedButton(
                             style: viewModel.b3style,
                             onPressed: viewModel.onPressedfirst,
-                            child: const Text("The picture isn't clear."),
+                            child: Text(
+                              "The picture isn't clear.",
+                              style: Style.semiBold20ptw,
+                            ),
                           ),
                         )
                       : Container(),
@@ -91,7 +94,10 @@ class UploadCnicView extends StatelessWidget {
                           child: ElevatedButton(
                             style: viewModel.b3style,
                             onPressed: viewModel.onPressedfirst,
-                            child: const Text("Scan front side"),
+                            child: Text(
+                              "Scan front side",
+                              style: Style.semiBold20ptw,
+                            ),
                           ),
                         )
                       : Container(
@@ -99,11 +105,12 @@ class UploadCnicView extends StatelessWidget {
                           child: ElevatedButton(
                             style: viewModel.b3style,
                             onPressed: () {
-                              viewModel.frontSide.isNotEmpty
-                                  ? viewModel.navigateToBack()
-                                  : null;
+                              viewModel.navigateToBack();
                             },
-                            child: const Text("The picture is clear."),
+                            child: Text(
+                              "The picture is clear.",
+                              style: Style.semiBold20ptw,
+                            ),
                           ),
                         ),
                 ],

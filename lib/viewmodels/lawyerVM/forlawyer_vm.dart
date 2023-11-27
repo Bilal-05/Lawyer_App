@@ -12,12 +12,14 @@ import 'package:stacked_services/stacked_services.dart';
 class LawyerVM extends BaseViewModel {
   final formKey = GlobalKey<FormState>();
   final textFieldService = locator<TextFieldService>();
+  final snackBarService = locator<SnackbarService>();
   final navigationService = locator<NavigationService>();
   TextEditingController fnameController = TextEditingController();
   TextEditingController lnameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   String initialCountry = 'PK';
   PhoneNumber number = PhoneNumber(isoCode: 'PK');
+  bool correctNumber = false;
 
   Widget phoneNumberField() {
     return InternationalPhoneNumberInput(
@@ -25,7 +27,13 @@ class LawyerVM extends BaseViewModel {
         print(number.phoneNumber);
       },
       onInputValidated: (bool value) {
-        print(value);
+        if (!value) {
+          print('Invalid Number');
+        } else {
+          print(value);
+          correctNumber = true;
+          notifyListeners();
+        }
       },
       hintText: '3XX-XXXXXXX',
       selectorConfig: const SelectorConfig(
@@ -58,7 +66,22 @@ class LawyerVM extends BaseViewModel {
     ),
   );
 
+  clear() {
+    fnameController.clear();
+    lnameController.clear();
+    phoneController.clear();
+  }
+
   navigateToCnic() {
-    navigationService.navigateToCnicView();
+    if (formKey.currentState!.validate() && correctNumber) {
+      clear();
+      navigationService.navigateToCnicView();
+    } else {
+      snackBarService.showSnackbar(
+        message: 'Fill all fields',
+        title: 'Error',
+        duration: const Duration(seconds: 2),
+      );
+    }
   }
 }

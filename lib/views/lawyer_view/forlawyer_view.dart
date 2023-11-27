@@ -42,8 +42,8 @@ class LawyerView extends StatelessWidget {
                   ),
                   0.03.sh.verticalSpace,
                   Container(
-                    key: vModel.formKey,
                     child: Form(
+                      key: vModel.formKey,
                       child: Column(
                         children: [
                           Container(
@@ -52,11 +52,23 @@ class LawyerView extends StatelessWidget {
                               null,
                               vModel.fnameController,
                               'First name',
+                              // (value) {
+                              //   value!.isEmpty
+                              //       ? 'Please enter your first name'
+                              //       : null;
+                              //   // bool isName = RegExp('/^[a-z ,.\'-]+\$/i')
+                              //   //     .hasMatch(value!);
+                              //   // if (!isName) {
+                              //   //   return 'Please enter your fisrt name';
+                              //   // }
+                              //   // return null;
+                              // },
                               (value) {
-                                if (value == null) {
-                                  return 'Please enter your first name';
+                                if (value!.isEmpty) {
+                                  return 'Enter your first name';
+                                } else {
+                                  return null;
                                 }
-                                return null;
                               },
                             ),
                           ),
@@ -68,10 +80,11 @@ class LawyerView extends StatelessWidget {
                               vModel.lnameController,
                               'Last name',
                               (value) {
-                                if (value == null) {
-                                  return 'Please enter your last name';
+                                if (value!.isEmpty) {
+                                  return 'Enter your last name';
+                                } else {
+                                  return null;
                                 }
-                                return null;
                               },
                             ),
                           ),

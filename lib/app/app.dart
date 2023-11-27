@@ -1,5 +1,7 @@
+import 'package:lawyer_app/services/appbar_service.dart';
 import 'package:lawyer_app/services/textfield_service.dart';
 import 'package:lawyer_app/views/client_view/education_view.dart';
+import 'package:lawyer_app/views/client_view/for_appointment_view.dart';
 import 'package:lawyer_app/views/client_view/forclient_view.dart';
 import 'package:lawyer_app/views/client_view/scan_barcard_back_view.dart';
 import 'package:lawyer_app/views/client_view/scan_barcard_front_view.dart';
@@ -10,6 +12,7 @@ import 'package:lawyer_app/views/lawyer_view/forlawyer_view.dart';
 import 'package:lawyer_app/views/lawyer_view/upload_cnic.dart';
 import 'package:lawyer_app/views/lawyer_view/upload_cnic_back.dart';
 import 'package:lawyer_app/views/login_view/login_view.dart';
+import 'package:lawyer_app/views/mainmenu_view/mainmenu_view.dart';
 import 'package:lawyer_app/views/new_password_view/new_password_view.dart';
 import 'package:lawyer_app/views/onboarding_view/onboarding_view.dart';
 import 'package:lawyer_app/views/otp_view/otp_view.dart';
@@ -38,12 +41,14 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: TimingView),
     MaterialRoute(page: BarFrontView),
     MaterialRoute(page: BarBackView),
+    MaterialRoute(page: ForAppointmentView),
+    MaterialRoute(page: MainMenuView),
   ],
   dependencies: [
-    Singleton(
-      classType: NavigationService,
-    ),
+    Singleton(classType: NavigationService),
+    Singleton(classType: SnackbarService),
     LazySingleton(classType: TextFieldService),
+    LazySingleton(classType: AppBarService)
   ],
 )
 class App {}

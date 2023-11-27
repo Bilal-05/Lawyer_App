@@ -58,4 +58,8 @@ class BarCardVM extends BaseViewModel {
   navigateToBarCardBack() {
     navigationService.navigateToBarBackView();
   }
+
+  navigateToMainMenu() {
+    navigationService.navigateToMainMenuView();
+  }
 }

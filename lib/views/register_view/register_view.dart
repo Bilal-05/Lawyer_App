@@ -86,7 +86,7 @@ class RegisterView extends StatelessWidget {
                                     'Password',
                                     (value) {
                                       bool validPass = RegExp(
-                                              "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}\$")
+                                              "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&])[A-Za-z\\d@\$!%*#?&]{8,}\$")
                                           .hasMatch(value!);
                                       if (value.isEmpty || !validPass) {
                                         return 'Minimum eight characters and must be unique.';
@@ -100,10 +100,10 @@ class RegisterView extends StatelessWidget {
                                 Container(
                                   child: vModel.texttFieldService
                                       .customTextFormField(
-                                    TextInputType.phone,
+                                    TextInputType.text,
                                     null,
                                     vModel.passConfirmController,
-                                    'Confirm',
+                                    'Confirm Password',
                                     (value) {
                                       if (value != vModel.passController.text) {
                                         return 'Password does\'nt match.';
@@ -137,7 +137,7 @@ class RegisterView extends StatelessWidget {
                           child: ElevatedButton(
                             style: vModel.b1style,
                             onPressed: () {
-                              if (vModel.formKey.currentState!.validate()) {}
+                              vModel.register();
                             },
                             child: Text(
                               'Sign up',

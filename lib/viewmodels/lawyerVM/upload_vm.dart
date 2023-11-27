@@ -60,4 +60,8 @@ class UploadCnicVM extends BaseViewModel {
   navigateToBack() {
     navigationService.navigateToUploadCnicBackView();
   }
+
+  navigateToMenuMain() {
+    navigationService.navigateToMainMenuView();
+  }
 }

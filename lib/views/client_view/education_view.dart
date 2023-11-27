@@ -27,7 +27,7 @@ class EducationView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Tell us about yourself',
+                    'Education',
                     textAlign: TextAlign.center,
                     style: Style.bol30ptb,
                   ),
@@ -35,15 +35,15 @@ class EducationView extends StatelessWidget {
                   SizedBox(
                     width: 0.75.sw,
                     child: Text(
-                      'Fill the form below to get started.',
+                      'Tell us about your education.',
                       style: Style.medium14ptb,
                       textAlign: TextAlign.center,
                     ),
                   ),
                   0.03.sh.verticalSpace,
-                  Container(
-                    key: vModel.formKey,
+                  SizedBox(
                     child: Form(
+                      key: vModel.formKey,
                       child: Column(
                         children: [
                           Container(
@@ -121,7 +121,7 @@ class EducationView extends StatelessWidget {
                         // print(vModel.fnameController.text);
                         // print(vModel.lnameController.text);
                         // print(vModel.phoneController.text);
-                        vModel.navigateToTiming();
+                        vModel.navigateToAppointmentView();
                       },
                       child: Text(
                         'Next',

@@ -81,9 +81,7 @@ class EducationVM extends BaseViewModel {
     );
   }
 
-  navigateToTiming() {
-    // if (formKey.currentState!.validate()) {
-    navigationService.navigateToTimingView();
-    // }
+  navigateToAppointmentView() {
+    navigationService.navigateToForAppointmentView();
   }
 }

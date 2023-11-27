@@ -41,9 +41,9 @@ class ClientView extends StatelessWidget {
                     ),
                   ),
                   0.03.sh.verticalSpace,
-                  Container(
-                    key: vModel.formKey,
+                  SizedBox(
                     child: Form(
+                      key: vModel.formKey,
                       child: Column(
                         children: [
                           Container(
@@ -94,10 +94,6 @@ class ClientView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // 20.verticalSpace,
-                  // Container(
-                  //     // child: vModel.phoneNumberField(),
-                  //     ),
                   // 20.verticalSpace,
                   const Spacer(),
                   Container(

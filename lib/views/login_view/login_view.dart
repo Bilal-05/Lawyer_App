@@ -13,6 +13,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
+      onViewModelReady: (viewModel) => viewModel.initialize(),
       viewModelBuilder: () => LoginVM(),
       builder: (context, vModel, child) {
         return Scaffold(
@@ -118,7 +119,7 @@ class LoginView extends StatelessWidget {
                           child: ElevatedButton(
                             style: vModel.b1style,
                             onPressed: () {
-                              vModel.navigateToBoardingView();
+                              vModel.login();
                             },
                             child: Text(
                               'Sign in',

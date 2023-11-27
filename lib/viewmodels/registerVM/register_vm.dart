@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
@@ -9,6 +12,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class RegisterVM extends BaseViewModel {
   final navigationService = locator<NavigationService>();
+  final snackBarService = locator<SnackbarService>();
   final formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
@@ -16,36 +20,65 @@ class RegisterVM extends BaseViewModel {
   String google = 'assets/svg/google.svg';
   final texttFieldService = locator<TextFieldService>();
 
-  // Widget customTextFormField(
-  //   TextEditingController controller,
-  //   String hintText,
-  //   String? Function(String?)? validator,
-  // ) {
-  //   return TextFormField(
-  //     controller: controller,
-  //     style: Style.medium16ptb,
-  //     decoration: InputDecoration(
-  //       filled: true,
-  //       hintText: hintText,
-  //       hintStyle: Style.medium16ptb,
-  //       fillColor: const Color(0xff626262).withOpacity(0.10),
-  //       enabledBorder: OutlineInputBorder(
-  //         borderRadius: BorderRadius.circular(10),
-  //         borderSide: BorderSide(
-  //           color: const Color(0xff626262).withOpacity(0.10),
-  //         ),
-  //       ),
-  //       focusedBorder: OutlineInputBorder(
-  //         borderRadius: BorderRadius.circular(10),
-  //         borderSide: BorderSide(
-  //           color: AppColors.primaryColor,
-  //           width: 3,
-  //         ),
-  //       ),
-  //     ),
-  //     validator: validator,
-  //   );
-  // }
+  clear() {
+    emailController.clear();
+    passController.clear();
+    passConfirmController.clear();
+    notifyListeners();
+  }
+
+  register() {
+    if (formKey.currentState!.validate()) {
+      registerUser();
+    } else {
+      snackBarService.showSnackbar(
+        message: 'Please enter valid email and password',
+        title: 'Error',
+        duration: const Duration(seconds: 2),
+      );
+    }
+  }
+
+  registerUser() async {
+    try {
+      // ignore: unused_local_variable
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passController.text,
+      );
+
+      await Future.delayed(
+        const Duration(milliseconds: 100),
+      );
+      clear();
+      snackBarService.showSnackbar(
+        message: 'Account created successfully',
+        title: 'Success',
+        duration: const Duration(seconds: 2),
+      );
+      navigationService.navigateToLoginView();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        snackBarService.showSnackbar(
+          message: 'The password provided is too weak.',
+          title: 'Error',
+          duration: const Duration(seconds: 2),
+        );
+        log('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        snackBarService.showSnackbar(
+          message: 'The account already exists for that email.',
+          title: 'Error',
+          duration: const Duration(seconds: 2),
+        );
+        log('The account already exists for that email.');
+      }
+      log(e.code);
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 
   var b1style = ElevatedButton.styleFrom(
     backgroundColor: AppColors.primaryColor,
