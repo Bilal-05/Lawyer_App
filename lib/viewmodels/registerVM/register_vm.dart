@@ -97,6 +97,6 @@ class RegisterVM extends BaseViewModel {
   );
 
   navigateToLoginView() {
-    navigationService.navigateToLoginView();
+    navigationService.replaceWithLoginView();
   }
 }

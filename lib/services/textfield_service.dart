@@ -14,6 +14,7 @@ class TextFieldService extends BaseViewModel {
     String? Function(String?)? validator,
   ) {
     return TextFormField(
+      readOnly: hintText == 'Rating' ? true : false,
       maxLines: hintText == 'Bio' ? null : 1,
       keyboardType: keyboardType,
       controller: controller,

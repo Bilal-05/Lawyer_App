@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
-import 'package:lawyer_app/viewmodels/clientVM/forclient_vm.dart';
+import 'package:lawyer_app/viewmodels/clientVM/experience_vm.dart';
 import 'package:stacked/stacked.dart';
 
-class ClientView extends StatelessWidget {
-  const ClientView({super.key});
+class ExperienceView extends StatelessWidget {
+  const ExperienceView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.nonReactive(
-      viewModelBuilder: () => ClientVM(),
+      viewModelBuilder: () => ExperienceVM(),
       builder: (context, vModel, child) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -27,7 +27,7 @@ class ClientView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Tell us about yourself',
+                    'Experience',
                     textAlign: TextAlign.center,
                     style: Style.bol30ptb,
                   ),
@@ -35,7 +35,7 @@ class ClientView extends StatelessWidget {
                   SizedBox(
                     width: 0.75.sw,
                     child: Text(
-                      'Fill the form below to get started.',
+                      'Tell us about your experience.',
                       style: Style.medium14ptb,
                       textAlign: TextAlign.center,
                     ),
@@ -48,13 +48,13 @@ class ClientView extends StatelessWidget {
                         children: [
                           Container(
                             child: vModel.textFieldService.customTextFormField(
-                              TextInputType.text,
+                              TextInputType.number,
                               null,
-                              vModel.fullnameController,
-                              'Full name',
+                              vModel.experienceController,
+                              'Years of Experience.',
                               (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your full name';
+                                if (value == null) {
+                                  return 'Enter your no. of experience';
                                 }
                                 return null;
                               },
@@ -63,13 +63,13 @@ class ClientView extends StatelessWidget {
                           20.verticalSpace,
                           Container(
                             child: vModel.textFieldService.customTextFormField(
-                              TextInputType.text,
+                              TextInputType.number,
                               null,
-                              vModel.designationController,
-                              'Designation',
+                              vModel.noOfCasesController,
+                              'Number of Cases Handled.',
                               (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your designation';
+                                if (value == null) {
+                                  return 'Enter your no. of cases handled';
                                 }
                                 return null;
                               },
@@ -78,16 +78,41 @@ class ClientView extends StatelessWidget {
                           20.verticalSpace,
                           Container(
                             child: vModel.textFieldService.customTextFormField(
-                              TextInputType.text,
+                              TextInputType.number,
                               null,
-                              vModel.bioController,
-                              'Bio',
+                              vModel.wonCasesController,
+                              'Number of cases won.',
                               (value) {
-                                if (value!.isEmpty) {
-                                  return 'Write yourself a bio.';
+                                if (value == null) {
+                                  return 'Enter your no. of cases won';
                                 }
                                 return null;
                               },
+                            ),
+                          ),
+                          20.verticalSpace,
+                          Container(
+                            child: vModel.textFieldService.customTextFormField(
+                              TextInputType.number,
+                              null,
+                              vModel.ratingController,
+                              'Rating',
+                              (value) {
+                                if (value == null) {
+                                  return 'Tap the button below to rate yourself';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          10.verticalSpace,
+                          TextButton(
+                            onPressed: () {
+                              vModel.calculateRating();
+                            },
+                            child: Text(
+                              'Rate yourself',
+                              style: Style.regular16ptb,
                             ),
                           ),
                         ],
@@ -95,19 +120,21 @@ class ClientView extends StatelessWidget {
                     ),
                   ),
                   // 20.verticalSpace,
+                  // Container(
+                  //     // child: vModel.phoneNumberField(),
+                  //     ),
+                  // 20.verticalSpace,
                   const Spacer(),
                   Container(
                     margin: EdgeInsets.only(bottom: 0.03.sh),
                     child: ElevatedButton(
                       style: vModel.b1style,
                       onPressed: () {
-                        // if (vModel.formKey.currentState!.validate()) {
-                        //   // vModel.navigateToEducation();
-                        // }
                         // print(vModel.fnameController.text);
                         // print(vModel.lnameController.text);
                         // print(vModel.phoneController.text);
-                        vModel.navigateToEducation();
+                        // vModel.navigateToAppointmentView();
+                        vModel.navigateToTiming();
                       },
                       child: Text(
                         'Next',

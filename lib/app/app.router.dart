@@ -5,9 +5,11 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i21;
+import 'package:flutter/material.dart' as _i24;
 import 'package:flutter/material.dart';
+import 'package:lawyer_app/views/client_view/contact_info_view.dart' as _i21;
 import 'package:lawyer_app/views/client_view/education_view.dart' as _i15;
+import 'package:lawyer_app/views/client_view/experience_view.dart' as _i23;
 import 'package:lawyer_app/views/client_view/for_appointment_view.dart' as _i19;
 import 'package:lawyer_app/views/client_view/forclient_view.dart' as _i13;
 import 'package:lawyer_app/views/client_view/scan_barcard_back_view.dart'
@@ -16,6 +18,7 @@ import 'package:lawyer_app/views/client_view/scan_barcard_front_view.dart'
     as _i17;
 import 'package:lawyer_app/views/client_view/timing_view.dart' as _i16;
 import 'package:lawyer_app/views/forgot_view/forget_view.dart' as _i6;
+import 'package:lawyer_app/views/forgot_view/forgot_select_view.dart' as _i22;
 import 'package:lawyer_app/views/lawyer_view/cnic_view.dart' as _i11;
 import 'package:lawyer_app/views/lawyer_view/forlawyer_view.dart' as _i10;
 import 'package:lawyer_app/views/lawyer_view/upload_cnic.dart' as _i12;
@@ -30,7 +33,7 @@ import 'package:lawyer_app/views/register_view/register_view.dart' as _i5;
 import 'package:lawyer_app/views/splash_view/splash_view.dart' as _i2;
 import 'package:lawyer_app/views/start_view/start_view.dart' as _i3;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i22;
+import 'package:stacked_services/stacked_services.dart' as _i25;
 
 class Routes {
   static const splashView = '/';
@@ -71,6 +74,12 @@ class Routes {
 
   static const mainMenuView = '/main-menu-view';
 
+  static const contactInfoView = '/contact-info-view';
+
+  static const forgotSelectView = '/forgot-select-view';
+
+  static const experienceView = '/experience-view';
+
   static const all = <String>{
     splashView,
     startView,
@@ -91,6 +100,9 @@ class Routes {
     barBackView,
     forAppointmentView,
     mainMenuView,
+    contactInfoView,
+    forgotSelectView,
+    experienceView,
   };
 }
 
@@ -172,121 +184,150 @@ class StackedRouter extends _i1.RouterBase {
       Routes.mainMenuView,
       page: _i20.MainMenuView,
     ),
+    _i1.RouteDef(
+      Routes.contactInfoView,
+      page: _i21.ContactInfoView,
+    ),
+    _i1.RouteDef(
+      Routes.forgotSelectView,
+      page: _i22.ForgotSelectView,
+    ),
+    _i1.RouteDef(
+      Routes.experienceView,
+      page: _i23.ExperienceView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.SplashView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.SplashView(),
         settings: data,
       );
     },
     _i3.StartView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartView(),
         settings: data,
       );
     },
     _i4.LoginView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.LoginView(),
         settings: data,
       );
     },
     _i5.RegisterView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.RegisterView(),
         settings: data,
       );
     },
     _i6.ForgotView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ForgotView(),
         settings: data,
       );
     },
     _i7.OtpView: (data) {
-      final args = data.getArgs<OtpViewArguments>(nullOk: false);
-      return _i21.MaterialPageRoute<dynamic>(
-        builder: (context) => _i7.OtpView(key: args.key, email: args.email),
+      return _i24.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i7.OtpView(),
         settings: data,
       );
     },
     _i8.NewPasswordView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.NewPasswordView(),
         settings: data,
       );
     },
     _i9.OnBoardingView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.OnBoardingView(),
         settings: data,
       );
     },
     _i10.LawyerView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.LawyerView(),
         settings: data,
       );
     },
     _i11.CnicView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.CnicView(),
         settings: data,
       );
     },
     _i12.UploadCnicView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.UploadCnicView(),
         settings: data,
       );
     },
     _i13.ClientView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.ClientView(),
         settings: data,
       );
     },
     _i14.UploadCnicBackView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i14.UploadCnicBackView(),
         settings: data,
       );
     },
     _i15.EducationView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i15.EducationView(),
         settings: data,
       );
     },
     _i16.TimingView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i16.TimingView(),
         settings: data,
       );
     },
     _i17.BarFrontView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i17.BarFrontView(),
         settings: data,
       );
     },
     _i18.BarBackView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i18.BarBackView(),
         settings: data,
       );
     },
     _i19.ForAppointmentView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i19.ForAppointmentView(),
         settings: data,
       );
     },
     _i20.MainMenuView: (data) {
-      return _i21.MaterialPageRoute<dynamic>(
+      return _i24.MaterialPageRoute<dynamic>(
         builder: (context) => const _i20.MainMenuView(),
+        settings: data,
+      );
+    },
+    _i21.ContactInfoView: (data) {
+      return _i24.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i21.ContactInfoView(),
+        settings: data,
+      );
+    },
+    _i22.ForgotSelectView: (data) {
+      return _i24.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i22.ForgotSelectView(),
+        settings: data,
+      );
+    },
+    _i23.ExperienceView: (data) {
+      return _i24.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i23.ExperienceView(),
         settings: data,
       );
     },
@@ -299,34 +340,7 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-class OtpViewArguments {
-  const OtpViewArguments({
-    this.key,
-    required this.email,
-  });
-
-  final _i21.Key? key;
-
-  final String email;
-
-  @override
-  String toString() {
-    return '{"key": "$key", "email": "$email"}';
-  }
-
-  @override
-  bool operator ==(covariant OtpViewArguments other) {
-    if (identical(this, other)) return true;
-    return other.key == key && other.email == email;
-  }
-
-  @override
-  int get hashCode {
-    return key.hashCode ^ email.hashCode;
-  }
-}
-
-extension NavigatorStateExtension on _i22.NavigationService {
+extension NavigatorStateExtension on _i25.NavigationService {
   Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -397,17 +411,14 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToOtpView({
-    _i21.Key? key,
-    required String email,
+  Future<dynamic> navigateToOtpView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
+  ]) async {
     return navigateTo<dynamic>(Routes.otpView,
-        arguments: OtpViewArguments(key: key, email: email),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -596,6 +607,48 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToContactInfoView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.contactInfoView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToForgotSelectView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.forgotSelectView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToExperienceView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.experienceView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -666,17 +719,14 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithOtpView({
-    _i21.Key? key,
-    required String email,
+  Future<dynamic> replaceWithOtpView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
+  ]) async {
     return replaceWith<dynamic>(Routes.otpView,
-        arguments: OtpViewArguments(key: key, email: email),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -859,6 +909,48 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.mainMenuView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithContactInfoView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.contactInfoView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithForgotSelectView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.forgotSelectView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithExperienceView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.experienceView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

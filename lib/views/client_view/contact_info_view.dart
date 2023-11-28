@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
-import 'package:lawyer_app/viewmodels/clientVM/for_appointment_vm.dart';
+import 'package:lawyer_app/viewmodels/clientVM/contact_info_vm.dart';
 import 'package:stacked/stacked.dart';
 
-class ForAppointmentView extends StatelessWidget {
-  const ForAppointmentView({super.key});
+class ContactInfoView extends StatelessWidget {
+  const ContactInfoView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
-      viewModelBuilder: () => ForAppointmentVM(),
+      viewModelBuilder: () => ContactInfoVM(),
       builder: (context, vModel, child) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -25,7 +25,7 @@ class ForAppointmentView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Appointment',
+                    'Contact Info',
                     textAlign: TextAlign.center,
                     style: Style.bol30ptb,
                   ),
@@ -33,7 +33,7 @@ class ForAppointmentView extends StatelessWidget {
                   SizedBox(
                     width: 0.75.sw,
                     child: Text(
-                      'Provide us your appointment details.',
+                      'Provide us your contact details.',
                       style: Style.medium14ptb,
                       textAlign: TextAlign.center,
                     ),
@@ -46,51 +46,30 @@ class ForAppointmentView extends StatelessWidget {
                         children: [
                           Container(
                             child: vModel.textFieldService.customTextFormField(
-                              TextInputType.text,
+                              TextInputType.emailAddress,
                               null,
-                              vModel.practiceController,
-                              'Practice Area',
+                              vModel.emailController,
+                              'Email',
                               (value) {
-                                if (value == null) {
-                                  return 'Please enter your practice area';
+                                bool emailValid = RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(value!);
+
+                                if (value.isEmpty || !emailValid) {
+                                  return 'Enter correct email';
+                                } else {
+                                  return null;
                                 }
-                                return null;
-                              },
-                            ),
-                          ),
-                          20.verticalSpace,
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.text,
-                              null,
-                              vModel.hourlyController,
-                              'How much do you charge hourly?',
-                              (value) {
-                                if (value == null) {
-                                  return 'Please enter your hourly rate';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          20.verticalSpace,
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.text,
-                              null,
-                              vModel.locationController,
-                              'Where is your office situated?',
-                              (value) {
-                                if (value == null) {
-                                  return 'Please enter your office address';
-                                }
-                                return null;
                               },
                             ),
                           ),
                         ],
                       ),
                     ),
+                  ),
+                  20.verticalSpace,
+                  Container(
+                    child: vModel.phoneNumberField(),
                   ),
                   20.verticalSpace,
                   Container(
@@ -107,11 +86,7 @@ class ForAppointmentView extends StatelessWidget {
                     child: ElevatedButton(
                       style: vModel.b1style,
                       onPressed: () {
-                        // print(vModel.fnameController.text);
-                        // print(vModel.lnameController.text);
-                        // print(vModel.phoneController.text);
-                        // vModel.navigateToTiming();
-                        vModel.navigateToExperience();
+                        // vModel.navigateToScanView();
                       },
                       child: Text(
                         'Next',

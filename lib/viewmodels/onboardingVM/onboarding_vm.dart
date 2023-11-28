@@ -1,17 +1,43 @@
+// import 'dart:developer';
+
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
+import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class OnBoardingVM extends BaseViewModel {
   final navigationService = locator<NavigationService>();
+  String? documentID;
+
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+  initialize() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    documentID = prefs.getString('documentID');
+    notifyListeners();
+  }
+
+  setBool() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('firstLogin', false);
+    // firstLogin = prefs.getBool('firstLogin');
+    log(prefs.getBool('firstLogin').toString());
+    notifyListeners();
+  }
 
   String looking = 'assets/JSON/Looking.json';
+  String skip = 'assets/JSON/Skip.json';
   List<String> items = [
     'I am looking for lawyers',
     'I am looking for clients',
@@ -71,10 +97,23 @@ class OnBoardingVM extends BaseViewModel {
 
   // one once yeh screen dikhani hai
   // depending on user input
-  navigateToOnBoardingView() {
+
+  navigateToMainMenu() {
+    setBool();
+    navigationService.navigateToMainMenuView();
+  }
+
+  navigateToOnBoardingView() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.setBool('onBoardComplete', true);
+    // log(prefs.getBool('onBoardComplete').toString());
     if (selectedValue == 'I am looking for lawyers') {
+      UserService().userType = 'client';
+      prefs.setString('userType', 'client');
       navigationService.navigateToLawyerView();
     } else if (selectedValue == 'I am looking for clients') {
+      UserService().userType = 'lawyer';
+      prefs.setString('userType', 'lawyer');
       navigationService.navigateToClientView();
     }
     return null;

@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
 import 'package:lawyer_app/services/textfield_service.dart';
@@ -10,15 +13,56 @@ import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class ForAppointmentVM extends BaseViewModel {
-  final formKey = GlobalKey<FormState>();
-  final textFieldService = locator<TextFieldService>();
+class ContactInfoVM extends BaseViewModel {
   final navigationService = locator<NavigationService>();
-  UserService userService = locator<UserService>();
-  TextEditingController practiceController = TextEditingController();
-  TextEditingController consultantController = TextEditingController();
-  TextEditingController hourlyController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
+  final snackBarService = locator<SnackbarService>();
+  final formKey = GlobalKey<FormState>();
+  final userService = locator<UserService>();
+  final textFieldService = locator<TextFieldService>();
+  final emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  String initialCountry = 'PK';
+  PhoneNumber number = PhoneNumber(isoCode: 'PK');
+  bool correctNumber = false;
+  String numberText = '';
+
+  Widget phoneNumberField() {
+    return InternationalPhoneNumberInput(
+      onInputChanged: (PhoneNumber number) {
+        log(number.phoneNumber.toString());
+      },
+      onInputValidated: (bool value) {
+        if (!value) {
+          log('Invalid Number');
+        } else {
+          log(value.toString());
+          correctNumber = true;
+          numberText = number.phoneNumber.toString();
+          notifyListeners();
+        }
+      },
+      hintText: '3XX-XXXXXXX',
+      selectorConfig: const SelectorConfig(
+        selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+      ),
+      ignoreBlank: false,
+      autoValidateMode: AutovalidateMode.disabled,
+      selectorTextStyle: const TextStyle(color: Colors.black),
+      initialValue: number,
+      textFieldController: phoneController,
+      formatInput: true,
+      keyboardType:
+          const TextInputType.numberWithOptions(signed: true, decimal: true),
+      inputBorder: const OutlineInputBorder(),
+      onSaved: (PhoneNumber number) {
+        log('On Saved: $number');
+      },
+      onFieldSubmitted: (value) {
+        log(value.toString());
+      },
+      errorMessage: 'Invalid phone number',
+    );
+  }
 
   List<String> items = [
     'Yes',
@@ -35,8 +79,8 @@ class ForAppointmentVM extends BaseViewModel {
         ),
         isDense: true,
         hint: Text(
-          'Do you provide free consultation?',
-          style: Style.regular16ptb,
+          'Is the above number on Whatsapp?',
+          style: Style.regular16ptb.copyWith(fontSize: 15.sp),
         ),
         items: items
             .map((String item) => DropdownMenuItem<String>(
@@ -78,19 +122,18 @@ class ForAppointmentVM extends BaseViewModel {
   );
 
   add() {
-    userService.practiceArea = practiceController.text;
-    userService.freeConsultation = consultantController.text;
-    userService.hourlyRate = hourlyController.text;
-    userService.address = locationController.text;
-    notifyListeners();
+    userService.phoneNumber = numberText;
+    userService.email = emailController.text;
+    userService.whatsAppNumber = selectedValue;
   }
 
-  navigateToExperience() {
-    if (formKey.currentState!.validate()) {
-      add();
-      navigationService.navigateToExperienceView();
+  navigateToScanView() {
+    if (formKey.currentState!.validate() &&
+        correctNumber &&
+        selectedValue != null) {
+      navigationService.navigateToBarFrontView();
     } else {
-      SnackbarService().showSnackbar(
+      snackBarService.showSnackbar(
         message: 'Fill all fields',
         title: 'Error',
         duration: const Duration(seconds: 2),

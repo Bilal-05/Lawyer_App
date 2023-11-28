@@ -11,7 +11,7 @@ class Categories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.nonReactive(
+    return ViewModelBuilder.reactive(
       viewModelBuilder: () => HomeVM(),
       builder: (context, vModel, child) {
         return StreamBuilder<QuerySnapshot>(
@@ -37,49 +37,55 @@ class Categories extends StatelessWidget {
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   DocumentSnapshot category = snapshot.data!.docs[index];
-                  return InkWell(
-                    onTap: () {},
-                    child: Container(
-                      margin: EdgeInsets.only(right: 0.05.sw),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          width: 2,
-                          color: AppColors.greyShade,
+                  return Hero(
+                    tag: '${category['area']}',
+                    child: InkWell(
+                      onTap: () async {
+                        // vModel.setFalse();
+                        vModel.setFalse();
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(right: 0.05.sw),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            width: 2,
+                            color: AppColors.greyShade,
+                          ),
                         ),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: 0.2.sw,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 2,
-                                  color: AppColors.greyShade,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                                image: const DecorationImage(
-                                  image: NetworkImage(
-                                    'https://media.istockphoto.com/id/1349700398/photo/paper-cut-family-judge-gavel-and-book-family-law.jpg?s=612x612&w=0&k=20&c=l2Lg7g0GR_XYxxQop3XXoHj33uc1oOMe2N9VEa8ZiQA=',
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: 0.2.sw,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 2,
+                                    color: AppColors.greyShade,
                                   ),
-                                  fit: BoxFit.cover,
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: const DecorationImage(
+                                    image: NetworkImage(
+                                      'https://media.istockphoto.com/id/1349700398/photo/paper-cut-family-judge-gavel-and-book-family-law.jpg?s=612x612&w=0&k=20&c=l2Lg7g0GR_XYxxQop3XXoHj33uc1oOMe2N9VEa8ZiQA=',
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          10.verticalSpace,
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              category['area'],
-                              style: Style.regular16ptb,
-                              textAlign: TextAlign.center,
-                            ),
-                          )
-                        ],
+                            10.verticalSpace,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                category['area'],
+                                style: Style.regular16ptb,
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   );

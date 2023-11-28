@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
 import 'package:lawyer_app/services/textfield_service.dart';
+import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -10,7 +11,9 @@ import 'package:stacked_services/stacked_services.dart';
 class EducationVM extends BaseViewModel {
   final formKey = GlobalKey<FormState>();
   final textFieldService = locator<TextFieldService>();
+  final snackbarService = locator<SnackbarService>();
   final navigationService = locator<NavigationService>();
+  final userService = locator<UserService>();
   TextEditingController institutionController = TextEditingController();
   TextEditingController degreeController = TextEditingController();
   TextEditingController doeController = TextEditingController();
@@ -81,7 +84,23 @@ class EducationVM extends BaseViewModel {
     );
   }
 
+  add() {
+    userService.institution = institutionController.text;
+    userService.degree = degreeController.text;
+    userService.degreeYear = dogController.text;
+    notifyListeners();
+  }
+
   navigateToAppointmentView() {
-    navigationService.navigateToForAppointmentView();
+    if (formKey.currentState!.validate()) {
+      add();
+      navigationService.navigateToForAppointmentView();
+    } else {
+      snackbarService.showSnackbar(
+        message: 'Fill all fields',
+        title: 'Error',
+        duration: const Duration(seconds: 2),
+      );
+    }
   }
 }

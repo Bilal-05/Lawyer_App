@@ -53,7 +53,7 @@ class EducationView extends StatelessWidget {
                               vModel.institutionController,
                               'Institution name',
                               (value) {
-                                if (value == null) {
+                                if (value!.isEmpty) {
                                   return 'Please enter institution name';
                                 }
                                 return null;
@@ -68,7 +68,7 @@ class EducationView extends StatelessWidget {
                               vModel.degreeController,
                               'Degree',
                               (value) {
-                                if (value == null) {
+                                if (value!.isEmpty) {
                                   return 'What degree did you persue?.';
                                 }
                                 return null;
@@ -91,7 +91,7 @@ class EducationView extends StatelessWidget {
                           ),
                           20.verticalSpace,
                           vModel.dateTextField(
-                            vModel.doeController,
+                            vModel.dogController,
                             context,
                             'Year of graduation',
                             (value) {
@@ -121,6 +121,7 @@ class EducationView extends StatelessWidget {
                         // print(vModel.fnameController.text);
                         // print(vModel.lnameController.text);
                         // print(vModel.phoneController.text);
+                        // vModel.navigateToAppointmentView();
                         vModel.navigateToAppointmentView();
                       },
                       child: Text(

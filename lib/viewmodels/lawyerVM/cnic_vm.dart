@@ -1,9 +1,18 @@
 // ignore_for_file: avoid_print
 
+// import 'dart:developer';
+
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'dart:js_util';
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
 import 'package:lawyer_app/services/textfield_service.dart';
+import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:stacked/stacked.dart';
 // ignore: depend_on_referenced_packages
@@ -14,6 +23,8 @@ class CnicVM extends BaseViewModel {
   final formKey = GlobalKey<FormState>();
   final textFieldService = locator<TextFieldService>();
   final navigationService = locator<NavigationService>();
+  final userService = locator<UserService>();
+  SnackbarService snackBarService = locator<SnackbarService>();
   final nameController = TextEditingController();
   final cnicController = TextEditingController();
   final dobController = TextEditingController();
@@ -102,7 +113,23 @@ class CnicVM extends BaseViewModel {
     );
   }
 
-  navigateToScanView() {
-    navigationService.navigateToUploadCnicView();
+  add() {
+    userService.cnicNumber = cnicController.text;
+    userService.fullName = nameController.text;
+    notifyListeners();
+    log(userService.cnicNumber.toString());
+  }
+
+  navigateToScanView() async {
+    if (formKey.currentState!.validate()) {
+      await add();
+      navigationService.replaceWithUploadCnicView();
+    } else {
+      snackBarService.showSnackbar(
+        message: 'Fill all fields',
+        title: 'Error',
+        duration: const Duration(seconds: 2),
+      );
+    }
   }
 }

@@ -1,13 +1,13 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/otpVM/otp_vm.dart';
 import 'package:stacked/stacked.dart';
 
 class OtpView extends StatelessWidget {
-  final String email;
-  const OtpView({super.key, required this.email});
+  const OtpView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class OtpView extends StatelessWidget {
                       SizedBox(
                         width: 0.75.sw,
                         child: Text(
-                          'Enter the code sent to email address.',
+                          'Enter the code sent to phone number',
                           style: Style.medium14ptb,
                           textAlign: TextAlign.center,
                         ),
@@ -52,7 +52,7 @@ class OtpView extends StatelessWidget {
                       0.1.sh.verticalSpace,
                       SizedBox(
                         child: Text(
-                          email,
+                          vModel.userService.phoneNumber.toString(),
                           style: Style.regular14ptb,
                           textAlign: TextAlign.center,
                         ),

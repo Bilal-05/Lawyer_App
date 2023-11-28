@@ -1,5 +1,6 @@
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
+import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:stacked/stacked.dart';
@@ -10,6 +11,7 @@ import 'package:stacked_services/stacked_services.dart';
 class OtpVM extends BaseViewModel {
   final navigationService = locator<NavigationService>();
   TextEditingController controller = TextEditingController();
+  final userService = locator<UserService>();
   FocusNode focusNode = FocusNode();
 
   Widget pin(

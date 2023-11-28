@@ -37,10 +37,6 @@ class TimingView extends StatelessWidget {
                   ),
                 ),
                 0.03.sh.verticalSpace,
-                Container(
-                  child: vModel.phoneNumberField(),
-                ),
-                20.verticalSpace,
                 SizedBox(
                   child: Form(
                     key: vModel.formKey,
@@ -143,7 +139,7 @@ class TimingView extends StatelessWidget {
                   child: ElevatedButton(
                     style: vModel.b1style,
                     onPressed: () {
-                      vModel.navigateToScanBarCard();
+                      vModel.navigateToContact();
                     },
                     child: Text(
                       'Next',

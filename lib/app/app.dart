@@ -1,12 +1,16 @@
 import 'package:lawyer_app/services/appbar_service.dart';
 import 'package:lawyer_app/services/textfield_service.dart';
+import 'package:lawyer_app/services/user_service.dart';
+import 'package:lawyer_app/views/client_view/contact_info_view.dart';
 import 'package:lawyer_app/views/client_view/education_view.dart';
+import 'package:lawyer_app/views/client_view/experience_view.dart';
 import 'package:lawyer_app/views/client_view/for_appointment_view.dart';
 import 'package:lawyer_app/views/client_view/forclient_view.dart';
 import 'package:lawyer_app/views/client_view/scan_barcard_back_view.dart';
 import 'package:lawyer_app/views/client_view/scan_barcard_front_view.dart';
 import 'package:lawyer_app/views/client_view/timing_view.dart';
 import 'package:lawyer_app/views/forgot_view/forget_view.dart';
+import 'package:lawyer_app/views/forgot_view/forgot_select_view.dart';
 import 'package:lawyer_app/views/lawyer_view/cnic_view.dart';
 import 'package:lawyer_app/views/lawyer_view/forlawyer_view.dart';
 import 'package:lawyer_app/views/lawyer_view/upload_cnic.dart';
@@ -43,12 +47,16 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: BarBackView),
     MaterialRoute(page: ForAppointmentView),
     MaterialRoute(page: MainMenuView),
+    MaterialRoute(page: ContactInfoView),
+    MaterialRoute(page: ForgotSelectView),
+    MaterialRoute(page: ExperienceView)
   ],
   dependencies: [
     Singleton(classType: NavigationService),
     Singleton(classType: SnackbarService),
     LazySingleton(classType: TextFieldService),
-    LazySingleton(classType: AppBarService)
+    LazySingleton(classType: AppBarService),
+    LazySingleton(classType: UserService)
   ],
 )
 class App {}

@@ -71,7 +71,7 @@ class CnicView extends StatelessWidget {
                                     RegExp('^[0-9]{5}-[0-9]{7}-[0-9]\$')
                                         .hasMatch(value!);
                                 if (value.isEmpty || !isCnic) {
-                                  return 'Please enter your cnic in correct format';
+                                  return 'Enter CNIC in 4XXXX-XXXXXXX-X format';
                                 }
                                 return null;
                               },
@@ -134,53 +134,53 @@ class CnicView extends StatelessWidget {
                           //     },
                           //   ),
                           // ),
-                          vModel.dateTextField(
-                            vModel.dobController,
-                            context,
-                            'Date of birth',
-                            (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter date';
-                              } else if (value == vModel.doiController.text) {
-                                return 'Date of birth and date of issue cannot be same';
-                              } else if (value == vModel.doeController.text) {
-                                return 'Date of birth and date of expiry cannot be same';
-                              }
-                              return null;
-                            },
-                          ),
-                          20.verticalSpace,
-                          vModel.dateTextField(
-                            vModel.doiController,
-                            context,
-                            'Date of issue',
-                            (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter date';
-                              } else if (value == vModel.dobController.text) {
-                                return 'Date of issue and date of birth cannot be same';
-                              } else if (value == vModel.doeController.text) {
-                                return 'Date of issue and date of expiry cannot be same';
-                              }
-                              return null;
-                            },
-                          ),
-                          20.verticalSpace,
-                          vModel.dateTextField(
-                            vModel.doeController,
-                            context,
-                            'Date of expiry',
-                            (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter date';
-                              } else if (value == vModel.dobController.text) {
-                                return 'Date of expiry and date of birth cannot be same';
-                              } else if (value == vModel.doiController.text) {
-                                return 'Date of expiry and date of issue cannot be same';
-                              }
-                              return null;
-                            },
-                          ),
+                          // vModel.dateTextField(
+                          //   vModel.dobController,
+                          //   context,
+                          //   'Date of birth',
+                          //   (value) {
+                          //     if (value!.isEmpty) {
+                          //       return 'Please enter date';
+                          //     } else if (value == vModel.doiController.text) {
+                          //       return 'Date of birth and date of issue cannot be same';
+                          //     } else if (value == vModel.doeController.text) {
+                          //       return 'Date of birth and date of expiry cannot be same';
+                          //     }
+                          //     return null;
+                          //   },
+                          // ),
+                          // 20.verticalSpace,
+                          // vModel.dateTextField(
+                          //   vModel.doiController,
+                          //   context,
+                          //   'Date of issue',
+                          //   (value) {
+                          //     if (value!.isEmpty) {
+                          //       return 'Please enter date';
+                          //     } else if (value == vModel.dobController.text) {
+                          //       return 'Date of issue and date of birth cannot be same';
+                          //     } else if (value == vModel.doeController.text) {
+                          //       return 'Date of issue and date of expiry cannot be same';
+                          //     }
+                          //     return null;
+                          //   },
+                          // ),
+                          // 20.verticalSpace,
+                          // vModel.dateTextField(
+                          //   vModel.doeController,
+                          //   context,
+                          //   'Date of expiry',
+                          //   (value) {
+                          //     if (value!.isEmpty) {
+                          //       return 'Please enter date';
+                          //     } else if (value == vModel.dobController.text) {
+                          //       return 'Date of expiry and date of birth cannot be same';
+                          //     } else if (value == vModel.doiController.text) {
+                          //       return 'Date of expiry and date of issue cannot be same';
+                          //     }
+                          //     return null;
+                          //   },
+                          // ),
                         ],
                       ),
                     ),
@@ -191,9 +191,7 @@ class CnicView extends StatelessWidget {
                     child: ElevatedButton(
                       style: vModel.b3style,
                       onPressed: () {
-                        // if (vModel.formKey.currentState!.validate()) {
                         vModel.navigateToScanView();
-                        // }
                       },
                       child: Text(
                         'Next',

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/forgotVM/forget_vm.dart';
-import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 
 class ForgotView extends StatelessWidget {
@@ -42,12 +41,7 @@ class ForgotView extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      0.03.sh.verticalSpace,
-                      SizedBox(
-                        width: 0.50.sw,
-                        child: Lottie.asset(vModel.forgot),
-                      ),
-                      0.03.sh.verticalSpace,
+                      0.2.sh.verticalSpace,
                       SizedBox(
                         width: 0.65.sw,
                         child: Text(
@@ -86,7 +80,7 @@ class ForgotView extends StatelessWidget {
                           style: vModel.b1style,
                           onPressed: () {
                             // if (vModel.formKey.currentState!.validate()) {}
-                            vModel.navigateToOtpView();
+                            vModel.resetPassword();
                           },
                           child: Text(
                             'Send Email',

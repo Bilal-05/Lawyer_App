@@ -1,8 +1,10 @@
 import 'dart:developer';
+// import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
 import 'package:lawyer_app/services/textfield_service.dart';
+import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +15,7 @@ class LoginVM extends BaseViewModel {
   bool obscureText = true;
   final navigationService = locator<NavigationService>();
   final snackBarService = locator<SnackbarService>();
+  final UserService userService = locator<UserService>();
   final formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
@@ -28,11 +31,12 @@ class LoginVM extends BaseViewModel {
     notifyListeners();
   }
 
-  isLoggedin() async {
+  isLoggedin(UserCredential credential) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLogin', true);
-    log("${prefs.getBool('isLogin')}");
-    log("${prefs.getBool('firstLogin')}");
+    await prefs.setString('documentID', credential.user!.uid.toString());
+    // log("${prefs.getBool('isLogin')}");
+    // log("${prefs.getBool('firstLogin')}");
     notifyListeners();
   }
 
@@ -65,13 +69,12 @@ class LoginVM extends BaseViewModel {
 
   emailLogin() async {
     try {
-      // ignore: unused_local_variable
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
         password: passController.text,
       );
-      isLoggedin();
-      await Future.delayed(
+      isLoggedin(credential);
+      Future.delayed(
         const Duration(milliseconds: 1500),
       );
       clear();
@@ -80,6 +83,12 @@ class LoginVM extends BaseViewModel {
       if (e.code == 'invalid-credential') {
         snackBarService.showSnackbar(
           message: 'Invalid Credentials.',
+          title: 'Error',
+          duration: const Duration(seconds: 2),
+        );
+      } else if (e.code == 'network-request-failed') {
+        snackBarService.showSnackbar(
+          message: 'Network timeout.',
           title: 'Error',
           duration: const Duration(seconds: 2),
         );
@@ -107,11 +116,11 @@ class LoginVM extends BaseViewModel {
   );
 
   navigateToForgotView() {
-    navigationService.navigateToForgotView();
+    navigationService.navigateToForgotSelectView();
   }
 
   navigateToRegisterView() {
-    navigationService.navigateToRegisterView();
+    navigationService.replaceWithRegisterView();
   }
 
   // navigateToBoardingView() {
@@ -121,9 +130,9 @@ class LoginVM extends BaseViewModel {
 
   navigateToView() {
     if (firstLogin) {
-      navigationService.navigateToOnBoardingView();
+      navigationService.replaceWithOnBoardingView();
     } else {
-      navigationService.navigateToMainMenuView();
+      navigationService.replaceWithMainMenuView();
     }
   }
 }
