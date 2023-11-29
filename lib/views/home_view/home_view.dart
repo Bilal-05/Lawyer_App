@@ -3,6 +3,7 @@
 // import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/colors.dart';
@@ -43,7 +44,9 @@ class HomeView extends StatelessWidget {
                       20.verticalSpace,
                       SizedBox(
                         child: FutureBuilder<DocumentSnapshot>(
-                            future: vModel.users.doc(vModel.documentID).get(),
+                            future: vModel.users
+                                .doc(FirebaseAuth.instance.currentUser!.uid)
+                                .get(),
                             builder: (context,
                                 AsyncSnapshot<DocumentSnapshot> snapshot) {
                               if (snapshot.hasError) {
@@ -58,10 +61,13 @@ class HomeView extends StatelessWidget {
                                   ConnectionState.done) {
                                 Map<String, dynamic> data = {};
                                 if (snapshot.data!.data() != null) {
-                                  data = snapshot.data!.data()
-                                      as Map<String, dynamic>;
                                   vModel.userData = snapshot.data!.data()
                                       as Map<String, dynamic>;
+                                  data = snapshot.data!.data()
+                                      as Map<String, dynamic>;
+                                  // vModel.saveData(data);
+                                  // vModel.userService.userData = snapshot.data!
+                                  //     .data() as Map<String, dynamic>;
                                 }
 
                                 return data['userType'] == 'client'
@@ -122,7 +128,7 @@ class HomeView extends StatelessWidget {
                       20.verticalSpace,
                       ElevatedButton(
                         onPressed: () {
-                          vModel.showImage();
+                          vModel.showImage(vModel.userData);
                         },
                         child: Text(
                           'Show Image',
@@ -137,20 +143,36 @@ class HomeView extends StatelessWidget {
                       // ),
 
                       if (vModel.front != '') 20.verticalSpace,
-                      if (vModel.front != '')
-                        SizedBox(
-                          child: Image(
-                            image: NetworkImage(vModel.front),
-                          ),
-                        ),
+                      vModel.front != ''
+                          ? SizedBox(
+                              child: Image(
+                                loadingBuilder:
+                                    (context, child, loadingProgress) =>
+                                        loadingProgress == null
+                                            ? child
+                                            : CircularProgressIndicator(
+                                                color: AppColors.primaryColor,
+                                              ),
+                                image: NetworkImage(vModel.front),
+                              ),
+                            )
+                          : SizedBox(),
 
                       if (vModel.back != '') 20.verticalSpace,
-                      if (vModel.back != '')
-                        SizedBox(
-                          child: Image(
-                            image: NetworkImage(vModel.back),
-                          ),
-                        ),
+                      vModel.back != ''
+                          ? SizedBox(
+                              child: Image(
+                                loadingBuilder:
+                                    (context, child, loadingProgress) =>
+                                        loadingProgress == null
+                                            ? child
+                                            : CircularProgressIndicator(
+                                                color: AppColors.primaryColor,
+                                              ),
+                                image: NetworkImage(vModel.back),
+                              ),
+                            )
+                          : SizedBox()
                     ],
                   ),
                 ),

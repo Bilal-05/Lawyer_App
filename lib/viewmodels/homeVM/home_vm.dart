@@ -10,6 +10,7 @@ import 'package:lawyer_app/app/app.router.dart';
 // import 'package:lawyer_app/app/app.router.dart';
 import 'package:lawyer_app/services/appbar_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lawyer_app/services/user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -19,6 +20,7 @@ class HomeVM extends BaseViewModel {
   final appbarService = locator<AppBarService>();
   final dialogService = locator<DialogService>();
   final navigationService = locator<NavigationService>();
+  final userService = locator<UserService>();
   CollectionReference category =
       FirebaseFirestore.instance.collection('categories');
 
@@ -30,14 +32,21 @@ class HomeVM extends BaseViewModel {
 
   late String front = '';
   late String back = '';
-
+//
   Map<String, dynamic> userData = {};
 
-  showImage() {
+  // saveData(Map<String, dynamic> data) {
+  //   userData = data;
+  //   // notifyListeners();
+  // }
+
+  showImage(userData) {
     if (userData['userType'] == 'lawyer') {
-      getBarUrl(FirebaseAuth.instance.currentUser!.uid);
+      getBarUrl();
+      log('in lawyer');
     } else {
       getUrl(userData['cnicNumber']);
+      log('in client');
     }
   }
 
@@ -54,7 +63,7 @@ class HomeVM extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> getBarUrl(cnicNumber) async {
+  Future<void> getBarUrl() async {
     final frontRef = storageRef.ref().child(
         "images/barFront/${FirebaseAuth.instance.currentUser!.uid}_bar_front.jpeg");
     final backRef = storageRef.ref().child(
@@ -106,12 +115,14 @@ class HomeVM extends BaseViewModel {
   eraseData() async {
     FirebaseAuth.instance.signOut();
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     log(prefs.getBool('isLogin').toString());
     log(prefs.getBool('firstLogin').toString());
     log(prefs.getString('documentID').toString());
     prefs.remove('isLogin');
     prefs.remove('firstLogin');
     prefs.remove('documentID');
+    userService.userData = {};
     notifyListeners();
     log(prefs.getBool('isLogin').toString());
     log(prefs.getBool('firstLogin').toString());

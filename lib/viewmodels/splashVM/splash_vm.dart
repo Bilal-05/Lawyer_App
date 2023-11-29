@@ -43,11 +43,19 @@ class SplashVM extends BaseViewModel {
 
   navigateToView() {
     if (isLogin) {
-      navigationService.replaceWithTransition(
-        const MainMenuView(),
-        // transition: 'fade',
-        duration: const Duration(milliseconds: 500),
-      );
+      if (firstLogin) {
+        navigationService.replaceWithTransition(
+          const StartView(),
+          // transition: 'fade',
+          duration: const Duration(milliseconds: 500),
+        );
+      } else {
+        navigationService.replaceWithTransition(
+          const MainMenuView(),
+          // transition: 'fade',
+          duration: const Duration(milliseconds: 500),
+        );
+      }
     } else {
       navigationService.replaceWithTransition(
         const StartView(),

@@ -26,6 +26,7 @@ class LoginVM extends BaseViewModel {
 
   bool isLogin = false;
   bool firstLogin = true;
+  bool getFirstlogin = true;
 
   clear() {
     emailController.clear();
@@ -38,7 +39,10 @@ class LoginVM extends BaseViewModel {
     await prefs.setBool('isLogin', true);
     // if (prefs.getString('documentID') != credential.user!.uid.toString()) {
     await prefs.setString('documentID', credential.user!.uid.toString());
-    //   await prefs.setBool('firstLogin', true);
+    getFirstlogin = prefs.getBool('firstLogin') ?? firstLogin;
+    if (getFirstlogin == true) {
+      await prefs.setBool('firstLogin', true);
+    }
     //   firstLogin = true;
     //   notifyListeners();
     // }

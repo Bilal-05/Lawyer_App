@@ -40,6 +40,9 @@ class UserService extends BaseViewModel {
   bool? firstLogin;
   String? fname;
   String? lname;
+  Map<String, dynamic> userData = {};
+  String? front;
+  String? back;
 
   final snackbarService = locator<SnackbarService>();
   CollectionReference users = FirebaseFirestore.instance.collection('users');
