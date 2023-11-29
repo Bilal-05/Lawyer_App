@@ -1,4 +1,5 @@
 import 'package:lawyer_app/services/appbar_service.dart';
+import 'package:lawyer_app/services/image_helper_service.dart';
 import 'package:lawyer_app/services/textfield_service.dart';
 import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/views/client_view/contact_info_view.dart';
@@ -56,7 +57,9 @@ import 'package:stacked_services/stacked_services.dart';
     Singleton(classType: SnackbarService),
     LazySingleton(classType: TextFieldService),
     LazySingleton(classType: AppBarService),
-    LazySingleton(classType: UserService)
+    LazySingleton(classType: UserService),
+    Singleton(classType: DialogService),
+    LazySingleton(classType: ImageHelperService),
   ],
 )
 class App {}

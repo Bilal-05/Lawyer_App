@@ -5,6 +5,7 @@ import 'dart:developer';
 
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:lawyer_app/app/app.locator.dart';
@@ -55,8 +56,7 @@ class LawyerVM extends BaseViewModel {
       initialValue: number,
       textFieldController: phoneController,
       formatInput: true,
-      keyboardType:
-          const TextInputType.numberWithOptions(signed: true, decimal: true),
+      keyboardType: TextInputType.phone,
       inputBorder: const OutlineInputBorder(),
       onSaved: (PhoneNumber number) {
         print('On Saved: $number');
@@ -87,6 +87,7 @@ class LawyerVM extends BaseViewModel {
     userService.phoneNumber = numberText;
     userService.fname = fnameController.text;
     userService.lname = lnameController.text;
+    userService.email = FirebaseAuth.instance.currentUser!.email;
     notifyListeners();
     log(userService.phoneNumber.toString());
   }

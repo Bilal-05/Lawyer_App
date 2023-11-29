@@ -37,64 +37,67 @@ class OnBoardingView extends StatelessWidget {
               );
             }
 
-            if (snapshot.hasData && !snapshot.data!.exists) {
-              return Scaffold(
-                // backgroundColor: AppColors.primaryColor,
-                body: SafeArea(
-                  child: Container(
-                    width: 1.sw,
-                    height: 1.sh,
-                    margin: EdgeInsets.only(
-                      right: 0.05.sw,
-                      left: 0.05.sw,
-                      top: 0.075.sh,
-                    ),
-                    child: Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 0.75.sw,
-                            child: Text(
-                              'What are  you looking for?',
-                              textAlign: TextAlign.center,
-                              style: Style.bol30ptb,
-                            ),
-                          ),
-                          Container(
-                              width: 0.65.sw,
-                              child: Lottie.asset(vModel.looking)),
-                          0.02.sh.verticalSpace,
-                          Container(
-                            child: vModel.dropDown(),
-                          ),
-                          const Spacer(),
-                          Container(
-                            margin: EdgeInsets.only(
-                              bottom: 0.03.sh,
-                            ),
-                            child: ElevatedButton(
-                              style: vModel.b1style,
-                              onPressed: () {
-                                vModel.navigateToOnBoardingView();
-                              },
-                              child: Text(
-                                'Next',
-                                style: Style.semiBold20ptw,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            }
+            // if (snapshot.hasError) {
+            //   return Scaffold(
+            //     // backgroundColor: AppColors.primaryColor,
+            //     body: SafeArea(
+            //       child: Container(
+            //         width: 1.sw,
+            //         height: 1.sh,
+            //         margin: EdgeInsets.only(
+            //           right: 0.05.sw,
+            //           left: 0.05.sw,
+            //           top: 0.075.sh,
+            //         ),
+            //         child: Center(
+            //           child: Column(
+            //             crossAxisAlignment: CrossAxisAlignment.center,
+            //             children: [
+            //               SizedBox(
+            //                 width: 0.75.sw,
+            //                 child: Text(
+            //                   'What are  you looking for?',
+            //                   textAlign: TextAlign.center,
+            //                   style: Style.bol30ptb,
+            //                 ),
+            //               ),
+            //               Container(
+            //                   width: 0.65.sw,
+            //                   child: Lottie.asset(vModel.looking)),
+            //               0.02.sh.verticalSpace,
+            //               Container(
+            //                 child: vModel.dropDown(),
+            //               ),
+            //               const Spacer(),
+            //               Container(
+            //                 margin: EdgeInsets.only(
+            //                   bottom: 0.03.sh,
+            //                 ),
+            //                 child: ElevatedButton(
+            //                   style: vModel.b1style,
+            //                   onPressed: () {
+            //                     vModel.navigateToOnBoardingView();
+            //                   },
+            //                   child: Text(
+            //                     'Next',
+            //                     style: Style.semiBold20ptw,
+            //                   ),
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   );
+            // }
 
             if (snapshot.connectionState == ConnectionState.done) {
-              Map<String, dynamic> data =
-                  snapshot.data!.data() as Map<String, dynamic>;
+              Map<String, dynamic> data = {};
+              if (snapshot.data!.data() != null) {
+                data = snapshot.data!.data() as Map<String, dynamic>;
+              }
+
               return Scaffold(
                 // backgroundColor: AppColors.primaryColor,
                 body: data['firstLogin'] == null

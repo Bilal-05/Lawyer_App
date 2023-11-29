@@ -86,7 +86,7 @@ class ContactInfoView extends StatelessWidget {
                     child: ElevatedButton(
                       style: vModel.b1style,
                       onPressed: () {
-                        // vModel.navigateToScanView();
+                        vModel.navigateToScanView();
                       },
                       child: Text(
                         'Next',

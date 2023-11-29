@@ -115,9 +115,10 @@ class CnicVM extends BaseViewModel {
 
   add() {
     userService.cnicNumber = cnicController.text;
-    userService.fullName = nameController.text;
+    userService.fullName = nameController.text.trim();
     notifyListeners();
     log(userService.cnicNumber.toString());
+    log(userService.fullName.toString());
   }
 
   navigateToScanView() async {

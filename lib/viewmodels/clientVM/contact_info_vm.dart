@@ -30,6 +30,8 @@ class ContactInfoVM extends BaseViewModel {
     return InternationalPhoneNumberInput(
       onInputChanged: (PhoneNumber number) {
         log(number.phoneNumber.toString());
+        numberText = number.phoneNumber.toString();
+        notifyListeners();
       },
       onInputValidated: (bool value) {
         if (!value) {
@@ -37,7 +39,7 @@ class ContactInfoVM extends BaseViewModel {
         } else {
           log(value.toString());
           correctNumber = true;
-          numberText = number.phoneNumber.toString();
+          // numberText = number.phoneNumber.toString();
           notifyListeners();
         }
       },
@@ -131,6 +133,7 @@ class ContactInfoVM extends BaseViewModel {
     if (formKey.currentState!.validate() &&
         correctNumber &&
         selectedValue != null) {
+      add();
       navigationService.navigateToBarFrontView();
     } else {
       snackBarService.showSnackbar(

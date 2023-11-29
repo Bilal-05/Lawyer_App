@@ -9,7 +9,7 @@ class EducationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.nonReactive(
+    return ViewModelBuilder.reactive(
       viewModelBuilder: () => EducationVM(),
       builder: (context, vModel, child) {
         return Scaffold(
@@ -41,41 +41,49 @@ class EducationView extends StatelessWidget {
                     ),
                   ),
                   0.03.sh.verticalSpace,
+                  Container(
+                    child: vModel.dropDownInstitute(),
+                  ),
+                  20.verticalSpace,
+                  Container(
+                    child: vModel.dropDownDegree(),
+                  ),
+                  20.verticalSpace,
                   SizedBox(
                     child: Form(
                       key: vModel.formKey,
                       child: Column(
                         children: [
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.text,
-                              null,
-                              vModel.institutionController,
-                              'Institution name',
-                              (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter institution name';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          20.verticalSpace,
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.text,
-                              null,
-                              vModel.degreeController,
-                              'Degree',
-                              (value) {
-                                if (value!.isEmpty) {
-                                  return 'What degree did you persue?.';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          20.verticalSpace,
+                          // // Container(
+                          // //   child: vModel.textFieldService.customTextFormField(
+                          // //     TextInputType.text,
+                          // //     null,
+                          // //     vModel.institutionController,
+                          // //     'Institution name',
+                          // //     (value) {
+                          // //       if (value!.isEmpty) {
+                          // //         return 'Please enter institution name';
+                          // //       }
+                          // //       return null;
+                          // //     },
+                          // //   ),
+                          // // ),
+                          // // 20.verticalSpace,
+                          // // Container(
+                          // //   child: vModel.textFieldService.customTextFormField(
+                          // //     TextInputType.text,
+                          // //     null,
+                          // //     vModel.degreeController,
+                          // //     'Degree',
+                          // //     (value) {
+                          // //       if (value!.isEmpty) {
+                          // //         return 'What degree did you persue?.';
+                          // //       }
+                          // //       return null;
+                          // //     },
+                          // //   ),
+                          // // ),
+                          // 20.verticalSpace,
                           vModel.dateTextField(
                             vModel.doeController,
                             context,

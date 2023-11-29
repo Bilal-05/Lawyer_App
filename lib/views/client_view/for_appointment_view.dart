@@ -49,9 +49,9 @@ class ForAppointmentView extends StatelessWidget {
                               TextInputType.text,
                               null,
                               vModel.practiceController,
-                              'Practice Area',
+                              'Eg. Civil, Criminal, Family etc.',
                               (value) {
-                                if (value == null) {
+                                if (value!.isEmpty) {
                                   return 'Please enter your practice area';
                                 }
                                 return null;
@@ -64,10 +64,10 @@ class ForAppointmentView extends StatelessWidget {
                               TextInputType.text,
                               null,
                               vModel.hourlyController,
-                              'How much do you charge hourly?',
+                              'Fees in PKR',
                               (value) {
-                                if (value == null) {
-                                  return 'Please enter your hourly rate';
+                                if (value!.isEmpty) {
+                                  return 'Please enter your fees';
                                 }
                                 return null;
                               },
@@ -81,7 +81,7 @@ class ForAppointmentView extends StatelessWidget {
                               vModel.locationController,
                               'Where is your office situated?',
                               (value) {
-                                if (value == null) {
+                                if (value!.isEmpty) {
                                   return 'Please enter your office address';
                                 }
                                 return null;
@@ -94,7 +94,7 @@ class ForAppointmentView extends StatelessWidget {
                   ),
                   20.verticalSpace,
                   Container(
-                    child: vModel.dropDown(),
+                    child: vModel.dropDownConsultation(),
                   ),
                   // 20.verticalSpace,
                   // Container(

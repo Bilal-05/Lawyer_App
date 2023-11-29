@@ -1,5 +1,6 @@
 import 'dart:developer';
 // import 'dart:html';
+// import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
@@ -21,6 +22,7 @@ class LoginVM extends BaseViewModel {
   TextEditingController passController = TextEditingController();
   String google = 'assets/svg/google.svg';
   final texttFieldService = locator<TextFieldService>();
+  String? documentID;
 
   bool isLogin = false;
   bool firstLogin = true;
@@ -34,7 +36,14 @@ class LoginVM extends BaseViewModel {
   isLoggedin(UserCredential credential) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isLogin', true);
+    // if (prefs.getString('documentID') != credential.user!.uid.toString()) {
     await prefs.setString('documentID', credential.user!.uid.toString());
+    //   await prefs.setBool('firstLogin', true);
+    //   firstLogin = true;
+    //   notifyListeners();
+    // }
+    log(prefs.getString('documentID')!);
+    log(prefs.getBool('firstLogin').toString());
     // log("${prefs.getBool('isLogin')}");
     // log("${prefs.getBool('firstLogin')}");
     notifyListeners();
@@ -57,6 +66,11 @@ class LoginVM extends BaseViewModel {
 
   login() {
     if (formKey.currentState!.validate()) {
+      snackBarService.showSnackbar(
+        message: 'Logging in...',
+        title: 'Wait',
+        duration: const Duration(seconds: 4),
+      );
       emailLogin();
     } else {
       snackBarService.showSnackbar(
@@ -129,10 +143,10 @@ class LoginVM extends BaseViewModel {
   // }
 
   navigateToView() {
-    if (firstLogin) {
-      navigationService.replaceWithOnBoardingView();
-    } else {
-      navigationService.replaceWithMainMenuView();
-    }
+    // if (firstLogin) {
+    navigationService.replaceWithOnBoardingView();
+    // } else {
+    //   navigationService.replaceWithMainMenuView();
+    // }
   }
 }

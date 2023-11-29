@@ -18,6 +18,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class OnBoardingVM extends BaseViewModel {
   final navigationService = locator<NavigationService>();
+  final userService = locator<UserService>();
   String? documentID;
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
@@ -66,7 +67,6 @@ class OnBoardingVM extends BaseViewModel {
         onChanged: (String? value) {
           selectedValue = value;
           notifyListeners();
-          rebuildUi();
         },
         buttonStyleData: ButtonStyleData(
           padding: const EdgeInsets.only(
@@ -108,11 +108,11 @@ class OnBoardingVM extends BaseViewModel {
     // prefs.setBool('onBoardComplete', true);
     // log(prefs.getBool('onBoardComplete').toString());
     if (selectedValue == 'I am looking for lawyers') {
-      UserService().userType = 'client';
+      userService.userType = 'client';
       prefs.setString('userType', 'client');
       navigationService.navigateToLawyerView();
     } else if (selectedValue == 'I am looking for clients') {
-      UserService().userType = 'lawyer';
+      userService.userType = 'lawyer';
       prefs.setString('userType', 'lawyer');
       navigationService.navigateToClientView();
     }

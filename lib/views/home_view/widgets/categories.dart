@@ -41,8 +41,8 @@ class Categories extends StatelessWidget {
                     tag: '${category['area']}',
                     child: InkWell(
                       onTap: () async {
-                        // vModel.setFalse();
                         vModel.setFalse();
+                        // vModel.showCnic();
                       },
                       child: Container(
                         margin: EdgeInsets.only(right: 0.05.sw),

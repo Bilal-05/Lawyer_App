@@ -20,6 +20,55 @@ class ForAppointmentVM extends BaseViewModel {
   TextEditingController hourlyController = TextEditingController();
   TextEditingController locationController = TextEditingController();
 
+  // List<String> practiceArea = [
+  //   'Yes',
+  //   'No ',
+  // ];
+
+  // String? selectedPracticeArea;
+
+  // Widget dropDownArea() {
+  //   return DropdownButtonHideUnderline(
+  //     child: DropdownButton2<String>(
+  //       style: TextStyle(
+  //         color: AppColors.primaryColor,
+  //       ),
+  //       isDense: true,
+  //       hint: Text(
+  //         'Do you provide free consultation?',
+  //         style: Style.regular16ptb,
+  //       ),
+  //       items: practiceArea
+  //           .map((String item) => DropdownMenuItem<String>(
+  //                 value: item,
+  //                 child: Text(item, style: Style.regular16ptb),
+  //               ))
+  //           .toList(),
+  //       value: selectedPracticeArea,
+  //       onChanged: (String? value) {
+  //         selectedPracticeArea = value;
+  //         notifyListeners();
+  //         // rebuildUi();
+  //       },
+  //       buttonStyleData: ButtonStyleData(
+  //         padding: const EdgeInsets.only(
+  //           left: 15,
+  //           right: 15,
+  //         ),
+  //         decoration: BoxDecoration(
+  //           borderRadius: BorderRadius.circular(10),
+  //           color: const Color(0xff626262).withOpacity(0.10),
+  //         ),
+  //         height: 60,
+  //         width: 1.sw,
+  //       ),
+  //       menuItemStyleData: const MenuItemStyleData(
+  //         height: 50,
+  //       ),
+  //     ),
+  //   );
+  // }
+
   List<String> items = [
     'Yes',
     'No ',
@@ -27,7 +76,7 @@ class ForAppointmentVM extends BaseViewModel {
 
   String? selectedValue;
 
-  Widget dropDown() {
+  Widget dropDownConsultation() {
     return DropdownButtonHideUnderline(
       child: DropdownButton2<String>(
         style: TextStyle(
@@ -79,7 +128,7 @@ class ForAppointmentVM extends BaseViewModel {
 
   add() {
     userService.practiceArea = practiceController.text;
-    userService.freeConsultation = consultantController.text;
+    userService.freeConsultation = selectedValue;
     userService.hourlyRate = hourlyController.text;
     userService.address = locationController.text;
     notifyListeners();

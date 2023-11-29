@@ -1,5 +1,5 @@
-import 'dart:developer';
-import 'dart:io';
+// import 'dart:developer';
+// import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +29,7 @@ class BarBackView extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Scan Bar License',
+                    'Bar License',
                     textAlign: TextAlign.center,
                     style: Style.bol30ptb,
                   ),
@@ -37,65 +37,57 @@ class BarBackView extends StatelessWidget {
                   SizedBox(
                     width: 0.75.sw,
                     child: Text(
-                      'Scan back side of your bar license.',
+                      'Upload back side of your bar license.',
                       style: Style.medium14ptb,
                       textAlign: TextAlign.center,
                     ),
                   ),
                   0.03.sh.verticalSpace,
-                  for (var picture in viewModel.backSide)
-                    viewModel.backSide.length == 1
-                        ? SizedBox(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    log(picture);
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: AppColors.primaryColor,
-                                        width: 5,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    margin: EdgeInsets.only(top: 0.1.sh),
-                                    width: 360,
-                                    height: 250,
-                                    child: Image.file(
-                                      File(picture),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                  viewModel.barBack == null
+                      ? Text(
+                          'No image selected.',
+                          style: Style.regular16ptb,
+                        )
+                      : Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColors.primaryColor,
+                              width: 5,
                             ),
-                          )
-                        : Container(),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          // width: 0.65.sw,
+                          margin: EdgeInsets.only(top: 0.1.sh),
+                          child:
+                              Image.file(viewModel.barBack!, fit: BoxFit.cover),
+                        ),
                   const Spacer(),
-                  viewModel.backSide.isNotEmpty
-                      ? Container(
-                          margin: EdgeInsets.only(bottom: 0.03.sh),
+                  viewModel.barBack == null
+                      ? Container()
+                      : Container(
+                          margin: EdgeInsets.only(bottom: 0.02.sh),
                           child: ElevatedButton(
                             style: viewModel.b3style,
-                            onPressed: viewModel.onPressedback,
+                            onPressed: () {
+                              // viewModel.startScanBack(context);
+                              viewModel.onPressedBarBack();
+                            },
                             child: Text(
                               "The picture isn't clear.",
                               style: Style.semiBold20ptw,
                             ),
                           ),
-                        )
-                      : Container(),
-                  viewModel.backSide.isEmpty
+                        ),
+                  viewModel.barBack == null
                       ? Container(
                           margin: EdgeInsets.only(bottom: 0.03.sh),
                           child: ElevatedButton(
                             style: viewModel.b3style,
-                            onPressed: viewModel.onPressedback,
+                            onPressed: () {
+                              viewModel.onPressedBarBack();
+                            },
                             child: Text(
-                              "Scan back side",
+                              'Scan Back',
                               style: Style.semiBold20ptw,
                             ),
                           ),
@@ -105,7 +97,7 @@ class BarBackView extends StatelessWidget {
                           child: ElevatedButton(
                             style: viewModel.b3style,
                             onPressed: () {
-                              viewModel.navigateToMainMenu();
+                              viewModel.navigateToMenuMain();
                             },
                             child: Text(
                               "The picture is clear.",

@@ -1,5 +1,11 @@
+// import 'dart:io';
+
+// import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/homeVM/home_vm.dart';
 import 'package:lawyer_app/views/home_view/widgets/categories.dart';
@@ -10,7 +16,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.nonReactive(
+    return ViewModelBuilder.reactive(
+      onViewModelReady: (viewModel) => viewModel.initialize(),
       viewModelBuilder: () => HomeVM(),
       builder: (context, vModel, child) {
         return Scaffold(
@@ -35,10 +42,49 @@ class HomeView extends StatelessWidget {
                       ),
                       20.verticalSpace,
                       SizedBox(
-                        child: Text(
-                          'Hi user,',
-                          style: Style.regular16ptb.copyWith(fontSize: 18.sp),
-                        ), //after firebase user name will be display
+                        child: FutureBuilder<DocumentSnapshot>(
+                            future: vModel.users.doc(vModel.documentID).get(),
+                            builder: (context,
+                                AsyncSnapshot<DocumentSnapshot> snapshot) {
+                              if (snapshot.hasError) {
+                                return const Scaffold(
+                                  body: Center(
+                                    child: Text("Something went wrong"),
+                                  ),
+                                );
+                              }
+
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                Map<String, dynamic> data = {};
+                                if (snapshot.data!.data() != null) {
+                                  data = snapshot.data!.data()
+                                      as Map<String, dynamic>;
+                                  vModel.userData = snapshot.data!.data()
+                                      as Map<String, dynamic>;
+                                }
+
+                                return data['userType'] == 'client'
+                                    ? Text(
+                                        'Hello ${data['fname']}',
+                                        style: Style.semiBold20ptb,
+                                      )
+                                    : data['userType'] == 'lawyer'
+                                        ? Text(
+                                            'Hello Mr. ${data['fullName']}',
+                                            style: Style.semiBold20ptb,
+                                          )
+                                        : Text(
+                                            'Hello Sir,',
+                                            style: Style.semiBold20ptb,
+                                          );
+                              }
+
+                              return CircularProgressIndicator(
+                                color: AppColors.primaryColor,
+                              );
+                            }),
+                        // child: Text('Hello'),
                       ),
                       SizedBox(
                         width: 0.75.sw,
@@ -65,6 +111,46 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                       const Categories(),
+                      // 20.verticalSpace,
+                      // SizedBox(
+                      //   child: Image(
+                      //     image: NetworkImage(vModel.cnicFront),
+                      //   ),
+                      // ),
+                      Text(vModel.front),
+                      Text(vModel.back),
+                      20.verticalSpace,
+                      ElevatedButton(
+                        onPressed: () {
+                          vModel.showImage();
+                        },
+                        child: Text(
+                          'Show Image',
+                          style: Style.semiBold20ptw,
+                        ),
+                      ),
+                      // 20.verticalSpace,
+                      // SizedBox(
+                      //   child: Image(
+                      //     image: FileImage(File(vModel.cnicBack)),
+                      //   ),
+                      // ),
+
+                      if (vModel.front != '') 20.verticalSpace,
+                      if (vModel.front != '')
+                        SizedBox(
+                          child: Image(
+                            image: NetworkImage(vModel.front),
+                          ),
+                        ),
+
+                      if (vModel.back != '') 20.verticalSpace,
+                      if (vModel.back != '')
+                        SizedBox(
+                          child: Image(
+                            image: NetworkImage(vModel.back),
+                          ),
+                        ),
                     ],
                   ),
                 ),

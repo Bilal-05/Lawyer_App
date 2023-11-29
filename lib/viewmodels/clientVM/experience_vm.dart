@@ -34,9 +34,10 @@ class ExperienceVM extends BaseViewModel {
       notifyListeners();
       double stars = 0;
       if (rating <= 50) {
-        stars = 0;
-      } else if (rating <= 60) {
         stars = 1;
+        notifyListeners();
+      } else if (rating <= 60) {
+        stars = 1.5;
         notifyListeners();
       } else if (rating <= 70) {
         stars = 2;

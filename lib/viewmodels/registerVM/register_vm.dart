@@ -29,6 +29,11 @@ class RegisterVM extends BaseViewModel {
 
   register() {
     if (formKey.currentState!.validate()) {
+      snackBarService.showSnackbar(
+        message: 'Registering...',
+        title: 'Wait',
+        duration: const Duration(seconds: 4),
+      );
       registerUser();
     } else {
       snackBarService.showSnackbar(

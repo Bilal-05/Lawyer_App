@@ -62,6 +62,7 @@ class UserService extends BaseViewModel {
             'userType': userType,
             'fname': fname,
             "lname": lname,
+            'email': email,
           },
         )
         .then(
@@ -86,6 +87,8 @@ class UserService extends BaseViewModel {
         .doc(user!.uid.toString())
         .set(
           {
+            'phoneNumber': phoneNumber,
+            'email': email,
             "userType": userType,
             'fullName': fullName,
             'uid': user.uid.toString(),
