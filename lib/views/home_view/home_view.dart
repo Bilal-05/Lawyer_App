@@ -172,7 +172,7 @@ class HomeView extends StatelessWidget {
                                 image: NetworkImage(vModel.back),
                               ),
                             )
-                          : SizedBox()
+                          : SizedBox(),
                     ],
                   ),
                 ),

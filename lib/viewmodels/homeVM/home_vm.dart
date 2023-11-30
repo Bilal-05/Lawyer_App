@@ -59,6 +59,7 @@ class HomeVM extends BaseViewModel {
 
     front = await frontRef.getDownloadURL();
     back = await backRef.getDownloadURL();
+    // log('${await backRef.getDownloadURL()}');
 
     notifyListeners();
   }

@@ -30,6 +30,7 @@ class UploadCnicVM extends BaseViewModel {
   bool? onBoardComplete;
 
   void onPressedfirst() async {
+    log('pressed');
     final XFile? file = await imagePicker.pickImage();
     if (file != null) {
       final croppedFile = await imagePicker.crop(
@@ -41,6 +42,7 @@ class UploadCnicVM extends BaseViewModel {
         notifyListeners();
       }
     }
+    log('out');
   }
 
   void onPressedback() async {

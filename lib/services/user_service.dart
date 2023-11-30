@@ -30,7 +30,7 @@ class UserService extends BaseViewModel {
   String? startTime;
   String? endTime;
   String? hourlyRate;
-  String? practiceArea;
+  List practiceArea = [];
   String? address;
   String? freeConsultation;
   String? whatsAppNumber;

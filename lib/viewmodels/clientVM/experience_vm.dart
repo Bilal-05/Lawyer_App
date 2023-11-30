@@ -66,7 +66,7 @@ class ExperienceVM extends BaseViewModel {
   }
 
   navigateToTiming() {
-    if (formKey.currentState!.validate()) {
+    if (formKey.currentState!.validate() && ratingController.text.isNotEmpty) {
       add();
       navigationService.navigateToTimingView();
     } else {

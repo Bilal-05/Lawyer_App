@@ -53,6 +53,10 @@ class ForAppointmentView extends StatelessWidget {
                               (value) {
                                 if (value!.isEmpty) {
                                   return 'Please enter your practice area';
+                                } else if (value.contains('_') ||
+                                    value.contains('.') ||
+                                    value.contains(r'[0-9]')) {
+                                  return 'It should not contain special characters or numbers';
                                 }
                                 return null;
                               },

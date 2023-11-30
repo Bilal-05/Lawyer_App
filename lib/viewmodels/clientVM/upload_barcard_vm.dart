@@ -179,14 +179,14 @@ class BarCardVM extends BaseViewModel {
         'images/barFront/${FirebaseAuth.instance.currentUser!.uid}_bar_front.jpeg';
     notifyListeners();
 
-    log(userService.cnicFrontUrl!);
+    log(userService.barCardFrontUrl ?? 'Error');
   }
 
   addBack() {
     userService.barCardBackUrl =
         'images/barBack/${FirebaseAuth.instance.currentUser!.uid}_bar_back.jpeg';
     notifyListeners();
-    log(userService.cincBackUrl!);
+    log(userService.barCardBackUrl ?? 'Error');
   }
 
   navigateToBarBack() async {

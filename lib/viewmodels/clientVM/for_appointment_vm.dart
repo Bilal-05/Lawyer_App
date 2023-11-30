@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,12 +11,14 @@ import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+// import 'dart:convert';
 
 class ForAppointmentVM extends BaseViewModel {
   final formKey = GlobalKey<FormState>();
   final textFieldService = locator<TextFieldService>();
   final navigationService = locator<NavigationService>();
   UserService userService = locator<UserService>();
+  final snackbarService = locator<SnackbarService>();
   TextEditingController practiceController = TextEditingController();
   TextEditingController consultantController = TextEditingController();
   TextEditingController hourlyController = TextEditingController();
@@ -127,7 +131,24 @@ class ForAppointmentVM extends BaseViewModel {
   );
 
   add() {
-    userService.practiceArea = practiceController.text;
+    var areas = practiceController.text;
+    var area = areas.split(',');
+    var practiceArea = [];
+    log(area.toString());
+    log(area.length.toString());
+    for (int i = 0; i < area.length; i++) {
+      practiceArea.add(area[i].trim());
+    }
+    log(practiceArea.toString());
+    log(practiceArea.length.toString());
+    log(practiceArea[0].toString());
+    log(practiceArea[1].toString());
+    log(practiceArea[2].toString());
+
+    // log(area.toString());
+    // log(area.length.toString());
+
+    userService.practiceArea = practiceArea;
     userService.freeConsultation = selectedValue;
     userService.hourlyRate = hourlyController.text;
     userService.address = locationController.text;
@@ -139,11 +160,10 @@ class ForAppointmentVM extends BaseViewModel {
       add();
       navigationService.navigateToExperienceView();
     } else {
-      SnackbarService().showSnackbar(
-        message: 'Fill all fields',
-        title: 'Error',
-        duration: const Duration(seconds: 2),
-      );
+      snackbarService.showSnackbar(
+          message: 'Fill all fields',
+          title: "Error",
+          duration: const Duration(seconds: 2));
     }
   }
 }

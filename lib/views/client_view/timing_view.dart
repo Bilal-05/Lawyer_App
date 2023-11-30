@@ -1,5 +1,7 @@
 // import 'dart:developer';
 
+// import 'dart:developer';
+
 import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,12 +62,12 @@ class TimingView extends StatelessWidget {
                                 errorStyle: TextStyle(color: Colors.redAccent),
                                 border: OutlineInputBorder(),
                                 suffixIcon: Icon(Icons.event_note),
-                                labelText: 'From',
+                                labelText: 'Office Time Start',
                                 hintText: 'eg. 8:00 AM'),
                             mode: DateTimeFieldPickerMode.time,
                             autovalidateMode: AutovalidateMode.always,
                             validator: (DateTime? e) {
-                              return (e?.day ?? 0) == 1
+                              return (e?.hour ?? 0) == 0
                                   ? 'Please not the first day'
                                   : null;
                             },
@@ -81,12 +83,12 @@ class TimingView extends StatelessWidget {
                                 errorStyle: TextStyle(color: Colors.redAccent),
                                 border: OutlineInputBorder(),
                                 suffixIcon: Icon(Icons.event_note),
-                                labelText: 'To',
+                                labelText: 'Office Time End',
                                 hintText: 'eg. 8:00 AM'),
                             mode: DateTimeFieldPickerMode.time,
                             autovalidateMode: AutovalidateMode.always,
                             validator: (DateTime? e) {
-                              return (e?.day ?? 0) == 1
+                              return (e?.hour ?? 0) == 1
                                   ? 'Please not the first day'
                                   : null;
                             },
