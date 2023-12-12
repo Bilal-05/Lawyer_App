@@ -69,23 +69,26 @@ class LoginVM extends BaseViewModel {
   }
 
   login() {
+    // setBusy(true);
     if (formKey.currentState!.validate()) {
-      snackBarService.showSnackbar(
-        message: 'Logging in...',
-        title: 'Wait',
-        duration: const Duration(seconds: 4),
-      );
+      // snackBarService.showSnackbar(
+      //   message: 'Logging in...',
+      //   title: 'Wait',
+      //   duration: const Duration(seconds: 1),
+      // );
       emailLogin();
     } else {
+      // setBusy(false);
       snackBarService.showSnackbar(
         message: 'Please enter valid email and password',
         title: 'Error',
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 1),
       );
     }
   }
 
   emailLogin() async {
+    setBusy(true);
     try {
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
@@ -96,23 +99,26 @@ class LoginVM extends BaseViewModel {
         const Duration(milliseconds: 1500),
       );
       clear();
+      setBusy(false);
       navigateToView();
     } on FirebaseAuthException catch (e) {
+      setBusy(false);
       if (e.code == 'invalid-credential') {
         snackBarService.showSnackbar(
           message: 'Invalid Credentials.',
           title: 'Error',
-          duration: const Duration(seconds: 2),
+          duration: const Duration(seconds: 1),
         );
       } else if (e.code == 'network-request-failed') {
         snackBarService.showSnackbar(
           message: 'Network timeout.',
           title: 'Error',
-          duration: const Duration(seconds: 2),
+          duration: const Duration(seconds: 1),
         );
       }
       log(e.code);
     } catch (e) {
+      setBusy(false);
       log(e.toString());
     }
   }
@@ -120,14 +126,6 @@ class LoginVM extends BaseViewModel {
   var b1style = ElevatedButton.styleFrom(
     backgroundColor: AppColors.primaryColor,
     fixedSize: const Size(360, 60),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-  );
-
-  var b2style = ElevatedButton.styleFrom(
-    backgroundColor: const Color(0xffECECEC),
-    fixedSize: const Size(300, 60),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(10),
     ),

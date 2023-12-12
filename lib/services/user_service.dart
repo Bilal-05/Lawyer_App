@@ -45,9 +45,37 @@ class UserService extends BaseViewModel {
   String? back;
 
   final snackbarService = locator<SnackbarService>();
+  CollectionReference clients =
+      FirebaseFirestore.instance.collection('clients');
+  CollectionReference lawyers =
+      FirebaseFirestore.instance.collection('lawyers');
+
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
-  Future<void> addClient(firstLogin) async {
+  // Future<void> addType(usertype) async {
+  //   final user = FirebaseAuth.instance.currentUser;
+  //   return usersType
+  //       .doc(user!.uid.toString())
+  //       .set(
+  //         {
+  //           'userType': usertype,
+  //         },
+  //       )
+  //       .then(
+  //         (value) => log("User Type Added"),
+  //       )
+  //       .catchError(
+  //         (error) {
+  //           snackbarService.showSnackbar(
+  //             message: error,
+  //             title: 'Error',
+  //             duration: const Duration(seconds: 2),
+  //           );
+  //         },
+  //       );
+  // }
+
+  Future<void> addClientinUser(loginProvided) async {
     final user = FirebaseAuth.instance.currentUser;
     log('inside');
     // Call the user's CollectionReference to add a new user
@@ -61,7 +89,7 @@ class UserService extends BaseViewModel {
             'cnicNumber': cnicNumber,
             'cnicFrontUrl': cnicFrontUrl,
             'cincBackUrl': cincBackUrl,
-            'firstLogin': firstLogin,
+            'firstLogin': loginProvided,
             'userType': userType,
             'fname': fname,
             "lname": lname,
@@ -82,7 +110,42 @@ class UserService extends BaseViewModel {
         );
   }
 
-  Future<void> addLawyer(firstlogin) async {
+  Future<void> addClientinClient(loginProvided) async {
+    final user = FirebaseAuth.instance.currentUser;
+    log('inside');
+    // Call the user's CollectionReference to add a new user
+    return clients
+        .doc(user!.uid.toString())
+        .set(
+          {
+            'phoneNumber': phoneNumber,
+            'uid': user.uid.toString(),
+            'fullName': fullName,
+            'cnicNumber': cnicNumber,
+            'cnicFrontUrl': cnicFrontUrl,
+            'cincBackUrl': cincBackUrl,
+            'firstLogin': loginProvided,
+            'userType': userType,
+            'fname': fname,
+            "lname": lname,
+            'email': email,
+          },
+        )
+        .then(
+          (value) => log("Client Added"),
+        )
+        .catchError(
+          (error) {
+            snackbarService.showSnackbar(
+              message: error,
+              title: 'Error',
+              duration: const Duration(seconds: 2),
+            );
+          },
+        );
+  }
+
+  Future<void> addLawyerinUser(firstloginProvided) async {
     final user = FirebaseAuth.instance.currentUser;
     log('inside');
     // Call the user's CollectionReference to add a new user
@@ -115,7 +178,57 @@ class UserService extends BaseViewModel {
             'rating': rating,
             'barFrontUrl': barCardFrontUrl,
             'barBackUrl': barCardBackUrl,
-            'firstLogin': firstLogin,
+            'firstLogin': firstloginProvided,
+          },
+        )
+        .then(
+          (value) => log("Lawyer Added"),
+        )
+        .catchError(
+          (error) {
+            snackbarService.showSnackbar(
+              message: error,
+              title: 'Error',
+              duration: const Duration(seconds: 2),
+            );
+          },
+        );
+  }
+
+  Future<void> addLawyerinLawyer(firstloginProvided) async {
+    final user = FirebaseAuth.instance.currentUser;
+    log('inside');
+    // Call the user's CollectionReference to add a new user
+    return lawyers
+        .doc(user!.uid.toString())
+        .set(
+          {
+            'phoneNumber': phoneNumber,
+            'email': email,
+            "userType": userType,
+            'fullName': fullName,
+            'uid': user.uid.toString(),
+            'designation': designation,
+            'bio': bio,
+            'institution': institution,
+            'degree': degree,
+            'degreeYear': degreeYear,
+            'practiceArea': practiceArea,
+            'experience': experience,
+            'availabileFrom': availabileFrom,
+            'availabileTill': availabileTill,
+            'startTime': startTime,
+            'endTime': endTime,
+            'hourlyRate': hourlyRate,
+            'address': address,
+            'freeConsultation': freeConsultation,
+            'whatsAppNumber': whatsAppNumber,
+            'noOfCases': noOfCases,
+            'noOfWins': noOfWins,
+            'rating': rating,
+            'barFrontUrl': barCardFrontUrl,
+            'barBackUrl': barCardBackUrl,
+            'firstLogin': firstloginProvided,
           },
         )
         .then(

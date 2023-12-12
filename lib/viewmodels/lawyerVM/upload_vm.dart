@@ -130,7 +130,8 @@ class UploadCnicVM extends BaseViewModel {
         title: 'Hold');
     await Future.delayed(const Duration(seconds: 2));
     await setBool();
-    await userService.addClient(firstLogin!);
+    await userService.addClientinClient(false);
+    await userService.addClientinUser(false);
     await saveBackImage();
     snackbarService.showSnackbar(
         message: 'Back side of CNIC uploaded successfully',

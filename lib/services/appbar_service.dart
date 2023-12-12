@@ -14,7 +14,7 @@ class AppBarService extends BaseViewModel {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
+          SizedBox(
             width: 0.15.sw,
             child: leading ?? const SizedBox(),
           ),
@@ -22,7 +22,7 @@ class AppBarService extends BaseViewModel {
             title,
             style: Style.medium20ptb,
           ),
-          Container(
+          SizedBox(
             width: 0.15.sw,
             child: action ?? const SizedBox(),
           ),

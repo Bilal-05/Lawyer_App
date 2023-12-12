@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/app/app.locator.dart';
@@ -24,8 +25,10 @@ class OnBoardingVM extends BaseViewModel {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   initialize() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    documentID = prefs.getString('documentID');
+    final user = FirebaseAuth.instance.currentUser;
+    // final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // documentID = prefs.getString('documentID') ?? ;
+    documentID = user!.uid.toString();
     notifyListeners();
   }
 

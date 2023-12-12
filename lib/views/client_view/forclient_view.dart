@@ -137,7 +137,7 @@ class ClientView extends StatelessWidget {
                     right: 0.05.sw,
                   ),
                   child: Center(
-                    child: Container(
+                    child: SizedBox(
                       // height: 0.9.sh,
                       width: 1.sw,
                       child: Column(

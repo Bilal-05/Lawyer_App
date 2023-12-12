@@ -193,15 +193,15 @@ class BarCardVM extends BaseViewModel {
     addFront();
     snackbarService.showSnackbar(
         message: 'Wait for a while',
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 1),
         title: 'Hold');
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     saveBarFrontImage();
     snackbarService.showSnackbar(
         message: 'Front side of Bar License uploaded successfully',
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 1),
         title: 'Success');
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     navigationService.replaceWithBarBackView();
     // navigationService.replaceWithUploadBarBackView();
   }
@@ -210,17 +210,18 @@ class BarCardVM extends BaseViewModel {
     addBack();
     snackbarService.showSnackbar(
         message: 'Wait for a while',
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 1),
         title: 'Hold');
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     await setBool();
-    await userService.addLawyer(firstLogin!);
+    await userService.addLawyerinLawyer(false);
+    await userService.addLawyerinUser(false);
     await saveBarBackImage();
     snackbarService.showSnackbar(
         message: 'Back side of Bar License uploaded successfully',
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 1),
         title: 'Success');
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
 
     navigationService.replaceWithMainMenuView();
   }

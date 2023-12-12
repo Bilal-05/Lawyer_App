@@ -27,6 +27,8 @@ class HomeVM extends BaseViewModel {
   String? documentID;
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  CollectionReference lawyers =
+      FirebaseFirestore.instance.collection('lawyers');
 
   final storageRef = FirebaseStorage.instance;
 
@@ -39,6 +41,11 @@ class HomeVM extends BaseViewModel {
   //   userData = data;
   //   // notifyListeners();
   // }
+
+  showData() {
+    log("userdata: ${userData.toString()}");
+    log(userService.userData.toString());
+  }
 
   showImage(userData) {
     if (userData['userType'] == 'lawyer') {

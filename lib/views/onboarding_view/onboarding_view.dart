@@ -5,14 +5,9 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:lawyer_app/app/app.router.dart';
 import 'package:lawyer_app/theme/colors.dart';
-// import 'package:dropdown_button2/dropdown_button2.dart';
-// import 'package:lawyer_app/theme/colors.dart';
-// import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/onboardingVM/onboarding_vm.dart';
 import 'package:lottie/lottie.dart';
@@ -28,8 +23,7 @@ class OnBoardingView extends StatelessWidget {
       viewModelBuilder: () => OnBoardingVM(),
       builder: (ctx, vModel, child) {
         return FutureBuilder<DocumentSnapshot>(
-          future:
-              vModel.users.doc(FirebaseAuth.instance.currentUser!.uid).get(),
+          future: vModel.users.doc(vModel.documentID).get(),
           builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
             // Map<String, dynamic> dummyData = {};
 
@@ -191,7 +185,6 @@ class OnBoardingView extends StatelessWidget {
                                   child: ElevatedButton(
                                     style: vModel.b1style,
                                     onPressed: () {
-                                      ;
                                       vModel.navigateToMainMenu();
                                     },
                                     child: Text(
@@ -226,12 +219,12 @@ class OnBoardingView extends StatelessWidget {
                                     style: Style.bol30ptb,
                                   ),
                                 ),
-                                Container(
+                                SizedBox(
                                   width: 0.65.sw,
                                   child: Lottie.asset(vModel.looking),
                                 ),
                                 0.02.sh.verticalSpace,
-                                Container(
+                                SizedBox(
                                   child: vModel.dropDown(),
                                 ),
                                 const Spacer(),

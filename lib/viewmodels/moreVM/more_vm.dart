@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,6 +13,7 @@ class MoreVM extends BaseViewModel {
 
   eraseData() async {
     FirebaseAuth.instance.signOut();
+    GoogleSignIn().signOut();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     log(prefs.getBool('isLogin').toString());
     log(prefs.getBool('firstLogin').toString());

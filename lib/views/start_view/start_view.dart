@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/startVM/start_vm.dart';
 // import 'package:lawyer_app/views/start_view/start_vm.dart';
@@ -12,6 +14,7 @@ class StartView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.nonReactive(
       viewModelBuilder: () => StartVM(),
+      onViewModelReady: (viewModel) => viewModel.initialize(),
       builder: (ctx, vModel, child) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -63,36 +66,46 @@ class StartView extends StatelessWidget {
                     const Spacer(),
                     Center(
                       child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 0.02.sw),
+                        child: ElevatedButton.icon(
+                          style: vModel.b1style,
+                          onPressed: () {
+                            vModel.navigateToLogin();
+                          },
+                          icon: const Icon(
+                            Icons.mail_outlined,
+                            color: Colors.white,
+                          ),
+                          label: Text(
+                            'Sign up with email',
+                            style: Style.semiBold20ptw,
+                          ),
+                        ),
+                      ),
+                    ),
+                    10.verticalSpace,
+                    Center(
+                      child: Container(
                         margin: EdgeInsets.only(bottom: 0.03.sh),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(
-                              child: ElevatedButton(
-                                style: vModel.b1style,
-                                onPressed: () {
-                                  vModel.navigateToLogin();
-                                },
-                                child: Text(
-                                  'Login',
-                                  style: Style.semiBold20ptw,
+                        child: ElevatedButton.icon(
+                          style: vModel.b2style,
+                          onPressed: () {
+                            vModel.signInWithGoogle();
+                          },
+                          icon: vModel.isBusy
+                              ? Container()
+                              : SvgPicture.asset(
+                                  vModel.google,
+                                  width: 24.w,
                                 ),
-                              ),
-                            ),
-                            10.horizontalSpace,
-                            SizedBox(
-                              child: ElevatedButton(
-                                style: vModel.b2style,
-                                onPressed: () {
-                                  vModel.navigateToRegister();
-                                },
-                                child: Text(
-                                  'Register',
-                                  style: Style.semiBold20ptb,
+                          label: vModel.isBusy
+                              ? CircularProgressIndicator(
+                                  color: AppColors.primaryColor,
+                                )
+                              : Text(
+                                  'Contiune with google',
+                                  style: Style.semiBold14ptb,
                                 ),
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                     )

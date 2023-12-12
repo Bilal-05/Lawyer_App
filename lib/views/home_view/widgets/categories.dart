@@ -31,7 +31,7 @@ class Categories extends StatelessWidget {
               margin: EdgeInsets.only(top: 0.02.sh),
               height: 0.1.sh,
               child: ListView.builder(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: 10,

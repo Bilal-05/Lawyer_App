@@ -41,7 +41,7 @@ class ForgotVM extends BaseViewModel {
         );
         log(e.code);
       } catch (e) {
-        print(e);
+        log(e.toString());
       }
     } else {
       SnackbarService().showSnackbar(

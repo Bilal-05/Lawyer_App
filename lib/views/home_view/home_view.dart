@@ -65,6 +65,8 @@ class HomeView extends StatelessWidget {
                                       as Map<String, dynamic>;
                                   data = snapshot.data!.data()
                                       as Map<String, dynamic>;
+                                  vModel.userService.userData = snapshot.data!
+                                      .data() as Map<String, dynamic>;
                                   // vModel.saveData(data);
                                   // vModel.userService.userData = snapshot.data!
                                   //     .data() as Map<String, dynamic>;
@@ -117,62 +119,68 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                       const Categories(),
-                      // 20.verticalSpace,
-                      // SizedBox(
-                      //   child: Image(
-                      //     image: NetworkImage(vModel.cnicFront),
-                      //   ),
-                      // ),
-                      Text(vModel.front),
-                      Text(vModel.back),
                       20.verticalSpace,
-                      ElevatedButton(
-                        onPressed: () {
-                          vModel.showImage(vModel.userData);
-                        },
-                        child: Text(
-                          'Show Image',
-                          style: Style.semiBold20ptw,
+                      SizedBox(
+                        child: Row(
+                          children: [
+                            Text(
+                              'Top Laywers',
+                              style:
+                                  Style.semiBold35ptb.copyWith(fontSize: 25.sp),
+                            ),
+                            const Spacer(),
+                            InkWell(
+                              onTap: () {},
+                              child: Text('See all', style: Style.regular16ptb),
+                            ),
+                          ],
                         ),
                       ),
+                      // const TopLawyers()
+                      // Text(vModel.front),
+                      // Text(vModel.back),
                       // 20.verticalSpace,
-                      // SizedBox(
-                      //   child: Image(
-                      //     image: FileImage(File(vModel.cnicBack)),
+                      // ElevatedButton(
+                      //   onPressed: () {
+                      //     vModel.showImage(vModel.userData);
+                      //   },
+                      //   child: Text(
+                      //     'Show Image',
+                      //     style: Style.semiBold20ptw,
                       //   ),
                       // ),
 
-                      if (vModel.front != '') 20.verticalSpace,
-                      vModel.front != ''
-                          ? SizedBox(
-                              child: Image(
-                                loadingBuilder:
-                                    (context, child, loadingProgress) =>
-                                        loadingProgress == null
-                                            ? child
-                                            : CircularProgressIndicator(
-                                                color: AppColors.primaryColor,
-                                              ),
-                                image: NetworkImage(vModel.front),
-                              ),
-                            )
-                          : SizedBox(),
+                      // if (vModel.front != '') 20.verticalSpace,
+                      // vModel.front != ''
+                      //     ? SizedBox(
+                      //         child: Image(
+                      //           loadingBuilder:
+                      //               (context, child, loadingProgress) =>
+                      //                   loadingProgress == null
+                      //                       ? child
+                      //                       : CircularProgressIndicator(
+                      //                           color: AppColors.primaryColor,
+                      //                         ),
+                      //           image: NetworkImage(vModel.front),
+                      //         ),
+                      //       )
+                      //     : const SizedBox(),
 
-                      if (vModel.back != '') 20.verticalSpace,
-                      vModel.back != ''
-                          ? SizedBox(
-                              child: Image(
-                                loadingBuilder:
-                                    (context, child, loadingProgress) =>
-                                        loadingProgress == null
-                                            ? child
-                                            : CircularProgressIndicator(
-                                                color: AppColors.primaryColor,
-                                              ),
-                                image: NetworkImage(vModel.back),
-                              ),
-                            )
-                          : SizedBox(),
+                      // if (vModel.back != '') 20.verticalSpace,
+                      // vModel.back != ''
+                      //     ? SizedBox(
+                      //         child: Image(
+                      //           loadingBuilder:
+                      //               (context, child, loadingProgress) =>
+                      //                   loadingProgress == null
+                      //                       ? child
+                      //                       : CircularProgressIndicator(
+                      //                           color: AppColors.primaryColor,
+                      //                         ),
+                      //           image: NetworkImage(vModel.back),
+                      //         ),
+                      //       )
+                      //     : const SizedBox(),
                     ],
                   ),
                 ),

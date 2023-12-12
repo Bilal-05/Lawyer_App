@@ -17,7 +17,6 @@ class RegisterVM extends BaseViewModel {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController passConfirmController = TextEditingController();
-  String google = 'assets/svg/google.svg';
   final texttFieldService = locator<TextFieldService>();
 
   clear() {
@@ -29,22 +28,24 @@ class RegisterVM extends BaseViewModel {
 
   register() {
     if (formKey.currentState!.validate()) {
-      snackBarService.showSnackbar(
-        message: 'Registering...',
-        title: 'Wait',
-        duration: const Duration(seconds: 4),
-      );
+      // snackBarService.showSnackbar(
+      //   message: 'Registering...',
+      //   title: 'Wait',
+      //   duration: const Duration(seconds: 4),
+      // );
       registerUser();
     } else {
+      // setBusy(false);
       snackBarService.showSnackbar(
         message: 'Please enter valid email and password',
         title: 'Error',
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 1),
       );
     }
   }
 
   registerUser() async {
+    setBusy(true);
     try {
       // ignore: unused_local_variable
       final credential =
@@ -56,31 +57,34 @@ class RegisterVM extends BaseViewModel {
       await Future.delayed(
         const Duration(milliseconds: 100),
       );
+      setBusy(false);
       clear();
       snackBarService.showSnackbar(
         message: 'Account created successfully',
         title: 'Success',
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 1),
       );
       navigationService.navigateToLoginView();
     } on FirebaseAuthException catch (e) {
+      setBusy(false);
       if (e.code == 'weak-password') {
         snackBarService.showSnackbar(
           message: 'The password provided is too weak.',
           title: 'Error',
-          duration: const Duration(seconds: 2),
+          duration: const Duration(seconds: 1),
         );
         log('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
         snackBarService.showSnackbar(
           message: 'The account already exists for that email.',
           title: 'Error',
-          duration: const Duration(seconds: 2),
+          duration: const Duration(seconds: 1),
         );
         log('The account already exists for that email.');
       }
       log(e.code);
     } catch (e) {
+      setBusy(false);
       log(e.toString());
     }
   }
@@ -88,14 +92,6 @@ class RegisterVM extends BaseViewModel {
   var b1style = ElevatedButton.styleFrom(
     backgroundColor: AppColors.primaryColor,
     fixedSize: const Size(360, 60),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-  );
-
-  var b2style = ElevatedButton.styleFrom(
-    backgroundColor: const Color(0xffECECEC),
-    fixedSize: const Size(300, 60),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(10),
     ),

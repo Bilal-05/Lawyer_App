@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'dart:developer';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
 import 'package:lawyer_app/services/textfield_service.dart';
@@ -174,11 +175,10 @@ class EducationVM extends BaseViewModel {
             lastDate: DateTime(2100));
 
         if (pickedDate != null) {
-          print(
-              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+          log(pickedDate
+              .toString()); //pickedDate output format => 2021-03-10 00:00:00.000
           String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
-          print(
-              formattedDate); //formatted date output using intl package =>  2021-03-16
+          log(formattedDate); //formatted date output using intl package =>  2021-03-16
 
           dateInput.text = formattedDate; //set output date to TextField value
           notifyListeners();

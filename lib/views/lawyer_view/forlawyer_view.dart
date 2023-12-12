@@ -41,7 +41,7 @@ class LawyerView extends StatelessWidget {
                     ),
                   ),
                   0.03.sh.verticalSpace,
-                  Container(
+                  SizedBox(
                     child: Form(
                       key: vModel.formKey,
                       child: Column(

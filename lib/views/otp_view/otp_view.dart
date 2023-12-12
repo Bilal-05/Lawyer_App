@@ -58,16 +58,16 @@ class OtpView extends StatelessWidget {
                         ),
                       ),
                       0.03.sh.verticalSpace,
-                      vModel.pin(
-                        (s) {
-                          if (s != "123456") {
-                            vModel.controller.clear();
-                            return "Invalid OTP";
-                          }
-                          return null;
-                        },
-                        (pin) => print(pin),
-                      ),
+                      // vModel.pin(
+                      //   (s) {
+                      //     if (s != "123456") {
+                      //       vModel.controller.clear();
+                      //       return "Invalid OTP";
+                      //     }
+                      //     return null;
+                      //   },
+                      //   (pin) => print(pin),
+                      // ),
                       0.02.sh.verticalSpace,
                       Column(
                         mainAxisSize: MainAxisSize.min,

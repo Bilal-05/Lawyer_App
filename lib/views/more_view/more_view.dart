@@ -13,7 +13,7 @@ class MoreView extends StatelessWidget {
         builder: (context, vModel, child) {
           return Scaffold(
             body: SafeArea(
-              child: Container(
+              child: SizedBox(
                 child: Center(
                   child: TextButton(
                     onPressed: () {
