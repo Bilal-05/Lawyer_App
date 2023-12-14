@@ -23,8 +23,8 @@ class StartView extends StatelessWidget {
               width: 1.sh,
               height: 1.sh,
               margin: EdgeInsets.only(
-                right: 0.02.sw,
-                left: 0.02.sw,
+                // right: 0.05.sw,
+                // left: 0.05.sw,
                 top: 0.02.sh,
               ),
               child: Center(
@@ -66,7 +66,7 @@ class StartView extends StatelessWidget {
                     const Spacer(),
                     Center(
                       child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 0.02.sw),
+                        margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
                         child: ElevatedButton.icon(
                           style: vModel.b1style,
                           onPressed: () {
@@ -86,7 +86,8 @@ class StartView extends StatelessWidget {
                     10.verticalSpace,
                     Center(
                       child: Container(
-                        margin: EdgeInsets.only(bottom: 0.03.sh),
+                        margin: EdgeInsets.only(
+                            bottom: 0.03.sh, left: 0.05.sw, right: 0.05.sw),
                         child: ElevatedButton.icon(
                           style: vModel.b2style,
                           onPressed: () {
