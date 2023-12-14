@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
-import 'package:lawyer_app/services/textfield_service.dart';
 import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
@@ -15,7 +14,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class ForAppointmentVM extends BaseViewModel {
   final formKey = GlobalKey<FormState>();
-  final textFieldService = locator<TextFieldService>();
+  // final textFieldService = locator<TextFieldService>();
   final navigationService = locator<NavigationService>();
   UserService userService = locator<UserService>();
   final snackbarService = locator<SnackbarService>();
@@ -141,12 +140,9 @@ class ForAppointmentVM extends BaseViewModel {
     }
     log(practiceArea.toString());
     log(practiceArea.length.toString());
-    log(practiceArea[0].toString());
-    log(practiceArea[1].toString());
-    log(practiceArea[2].toString());
-
-    // log(area.toString());
-    // log(area.length.toString());
+    for (int i = 0; i < practiceArea.length; i++) {
+      log(practiceArea[i].toString());
+    }
 
     userService.practiceArea = practiceArea;
     userService.freeConsultation = selectedValue;

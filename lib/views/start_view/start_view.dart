@@ -90,7 +90,7 @@ class StartView extends StatelessWidget {
                         child: ElevatedButton.icon(
                           style: vModel.b2style,
                           onPressed: () {
-                            vModel.signInWithGoogle();
+                            vModel.googleSignIn();
                           },
                           icon: vModel.isBusy
                               ? Container()

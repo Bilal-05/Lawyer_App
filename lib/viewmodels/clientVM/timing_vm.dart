@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
-import 'package:lawyer_app/services/textfield_service.dart';
 import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
@@ -15,7 +14,7 @@ class TimingVM extends BaseViewModel {
   final userService = locator<UserService>();
   final snackbarService = locator<SnackbarService>();
   final formKey = GlobalKey<FormState>();
-  final textFieldService = locator<TextFieldService>();
+  // final textFieldService = locator<TextFieldService>();
   final fromController = TextEditingController();
   final toController = TextEditingController();
   final timeFromController = TextEditingController();

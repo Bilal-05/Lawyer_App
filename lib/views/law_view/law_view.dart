@@ -31,16 +31,16 @@ class LawView extends StatelessWidget {
                       Container(),
                     ),
                     20.verticalSpace,
-                    // if (vModel.items.isEmpty)
-                    //   ElevatedButton(
-                    //     onPressed: () {
-                    //       vModel.readJson();
-                    //     },
-                    //     child: Text(
-                    //       'Read Json',
-                    //       style: Style.semiBold20ptb,
-                    //     ),
-                    //   ),
+                    if (vModel.items.isEmpty)
+                      SizedBox(
+                        height: 0.5.sh,
+                        width: 1.sw,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                      ),
                     if (vModel.items.isNotEmpty)
                       TextField(
                         onChanged: (value) => vModel.search(value),

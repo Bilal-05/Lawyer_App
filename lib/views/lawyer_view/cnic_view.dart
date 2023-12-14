@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/lawyerVM/cnic_vm.dart';
+import 'package:lawyer_app/widgets/customTextField.dart';
 import 'package:stacked/stacked.dart';
 
 class CnicView extends StatelessWidget {
@@ -45,13 +46,13 @@ class CnicView extends StatelessWidget {
                       key: vModel.formKey,
                       child: Column(
                         children: [
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.text,
-                              null,
-                              vModel.nameController,
-                              'Full name',
-                              (value) {
+                          SizedBox(
+                            child: CustomTextField(
+                              keyboardType: TextInputType.text,
+                              suffix: null,
+                              controller: vModel.nameController,
+                              hintText: 'Full name',
+                              validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Please enter your name';
                                 }
@@ -60,13 +61,13 @@ class CnicView extends StatelessWidget {
                             ),
                           ),
                           20.verticalSpace,
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.number,
-                              null,
-                              vModel.cnicController,
-                              '4XXXX-XXXXXXX-X',
-                              (value) {
+                          SizedBox(
+                            child: CustomTextField(
+                              keyboardType: TextInputType.number,
+                              suffix: null,
+                              controller: vModel.cnicController,
+                              hintText: '4XXXX-XXXXXXX-X',
+                              validator: (value) {
                                 bool isCnic =
                                     RegExp('^[0-9]{5}-[0-9]{7}-[0-9]\$')
                                         .hasMatch(value!);

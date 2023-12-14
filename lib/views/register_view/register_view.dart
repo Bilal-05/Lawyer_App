@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/registerVM/register_vm.dart';
+import 'package:lawyer_app/widgets/customTextField.dart';
 import 'package:stacked/stacked.dart';
 
 class RegisterView extends StatelessWidget {
@@ -54,14 +55,13 @@ class RegisterView extends StatelessWidget {
                               key: vModel.formKey,
                               child: Column(
                                 children: [
-                                  Container(
-                                    child: vModel.texttFieldService
-                                        .customTextFormField(
-                                      TextInputType.emailAddress,
-                                      null,
-                                      vModel.emailController,
-                                      'Email',
-                                      (value) {
+                                  SizedBox(
+                                    child: CustomTextField(
+                                      keyboardType: TextInputType.emailAddress,
+                                      suffix: null,
+                                      controller: vModel.emailController,
+                                      hintText: 'Email',
+                                      validator: (value) {
                                         bool emailValid = RegExp(
                                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                             .hasMatch(value!);
@@ -75,14 +75,14 @@ class RegisterView extends StatelessWidget {
                                     ),
                                   ),
                                   20.verticalSpace,
-                                  Container(
-                                    child: vModel.texttFieldService
-                                        .customTextFormField(
-                                      TextInputType.visiblePassword,
-                                      null,
-                                      vModel.passController,
-                                      'Password',
-                                      (value) {
+                                  SizedBox(
+                                    child: CustomTextField(
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
+                                      suffix: null,
+                                      controller: vModel.passController,
+                                      hintText: 'Password',
+                                      validator: (value) {
                                         bool validPass = RegExp(
                                                 "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*#?&])[A-Za-z\\d@\$!%*#?&]{8,}\$")
                                             .hasMatch(value!);
@@ -95,14 +95,14 @@ class RegisterView extends StatelessWidget {
                                     ),
                                   ),
                                   20.verticalSpace,
-                                  Container(
-                                    child: vModel.texttFieldService
-                                        .customTextFormField(
-                                      TextInputType.text,
-                                      null,
-                                      vModel.passConfirmController,
-                                      'Confirm Password',
-                                      (value) {
+                                  SizedBox(
+                                    child: CustomTextField(
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
+                                      suffix: null,
+                                      controller: vModel.passConfirmController,
+                                      hintText: 'Confirm Password',
+                                      validator: (value) {
                                         if (value !=
                                             vModel.passController.text) {
                                           return 'Password does\'nt match.';
@@ -117,19 +117,6 @@ class RegisterView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        // Container(
-                        //   margin: EdgeInsets.symmetric(
-                        //     vertical: 0.02.sh,
-                        //   ),
-                        //   child: InkWell(
-                        //     onTap: () {},
-                        //     child: Text(
-                        //       'Forgot your password?',
-                        //       style: Style.semiBold16ptb,
-                        //     ),
-                        //   ),
-                        // ),
-                        // 20.verticalSpace,
                         0.03.sh.verticalSpace,
                         Center(
                           child: SizedBox(

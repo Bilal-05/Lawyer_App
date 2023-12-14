@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/clientVM/experience_vm.dart';
+import 'package:lawyer_app/widgets/customTextField.dart';
 import 'package:stacked/stacked.dart';
 
 class ExperienceView extends StatelessWidget {
@@ -46,13 +47,13 @@ class ExperienceView extends StatelessWidget {
                       key: vModel.formKey,
                       child: Column(
                         children: [
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.number,
-                              null,
-                              vModel.experienceController,
-                              'Years of Experience.',
-                              (value) {
+                          SizedBox(
+                            child: CustomTextField(
+                              keyboardType: TextInputType.number,
+                              suffix: null,
+                              controller: vModel.experienceController,
+                              hintText: 'Years of Experience.',
+                              validator: (value) {
                                 if (value == null) {
                                   return 'Enter your no. of experience';
                                 }
@@ -61,13 +62,13 @@ class ExperienceView extends StatelessWidget {
                             ),
                           ),
                           20.verticalSpace,
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.number,
-                              null,
-                              vModel.noOfCasesController,
-                              'Number of Cases Handled.',
-                              (value) {
+                          SizedBox(
+                            child: CustomTextField(
+                              keyboardType: TextInputType.number,
+                              suffix: null,
+                              controller: vModel.noOfCasesController,
+                              hintText: 'Number of Cases Handled.',
+                              validator: (value) {
                                 if (value == null) {
                                   return 'Enter your no. of cases handled';
                                 }
@@ -76,13 +77,13 @@ class ExperienceView extends StatelessWidget {
                             ),
                           ),
                           20.verticalSpace,
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.number,
-                              null,
-                              vModel.wonCasesController,
-                              'Number of cases won.',
-                              (value) {
+                          SizedBox(
+                            child: CustomTextField(
+                              keyboardType: TextInputType.number,
+                              suffix: null,
+                              controller: vModel.wonCasesController,
+                              hintText: 'Number of cases won.',
+                              validator: (value) {
                                 if (value == null) {
                                   return 'Enter your no. of cases won';
                                 }
@@ -91,13 +92,13 @@ class ExperienceView extends StatelessWidget {
                             ),
                           ),
                           20.verticalSpace,
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.number,
-                              null,
-                              vModel.ratingController,
-                              'Rating',
-                              (value) {
+                          SizedBox(
+                            child: CustomTextField(
+                              keyboardType: TextInputType.number,
+                              suffix: null,
+                              controller: vModel.ratingController,
+                              hintText: 'Rating',
+                              validator: (value) {
                                 if (value == null) {
                                   return 'Tap the button below to rate yourself';
                                 }

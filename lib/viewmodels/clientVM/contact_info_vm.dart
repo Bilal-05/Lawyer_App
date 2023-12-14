@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
-import 'package:lawyer_app/services/textfield_service.dart';
 import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
@@ -18,7 +17,7 @@ class ContactInfoVM extends BaseViewModel {
   final snackBarService = locator<SnackbarService>();
   final formKey = GlobalKey<FormState>();
   final userService = locator<UserService>();
-  final textFieldService = locator<TextFieldService>();
+  // final textFieldService = locator<TextFieldService>();
   final emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   String initialCountry = 'PK';

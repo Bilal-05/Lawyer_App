@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/clientVM/for_appointment_vm.dart';
+import 'package:lawyer_app/widgets/customTextField.dart';
 import 'package:stacked/stacked.dart';
 
 class ForAppointmentView extends StatelessWidget {
@@ -44,13 +45,13 @@ class ForAppointmentView extends StatelessWidget {
                       key: vModel.formKey,
                       child: Column(
                         children: [
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.text,
-                              null,
-                              vModel.practiceController,
-                              'Eg. Civil, Criminal, Family etc.',
-                              (value) {
+                          SizedBox(
+                            child: CustomTextField(
+                              keyboardType: TextInputType.text,
+                              suffix: null,
+                              controller: vModel.practiceController,
+                              hintText: 'Eg. Civil, Criminal, Family etc.',
+                              validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Please enter your practice area';
                                 } else if (value.contains('_') ||
@@ -63,13 +64,13 @@ class ForAppointmentView extends StatelessWidget {
                             ),
                           ),
                           20.verticalSpace,
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.text,
-                              null,
-                              vModel.hourlyController,
-                              'Fees in PKR',
-                              (value) {
+                          SizedBox(
+                            child: CustomTextField(
+                              keyboardType: TextInputType.text,
+                              suffix: null,
+                              controller: vModel.hourlyController,
+                              hintText: 'Fees in PKR',
+                              validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Please enter your fees';
                                 }
@@ -78,13 +79,13 @@ class ForAppointmentView extends StatelessWidget {
                             ),
                           ),
                           20.verticalSpace,
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.text,
-                              null,
-                              vModel.locationController,
-                              'Where is your office situated?',
-                              (value) {
+                          SizedBox(
+                            child: CustomTextField(
+                              keyboardType: TextInputType.text,
+                              suffix: null,
+                              controller: vModel.locationController,
+                              hintText: 'Where is your office situated?',
+                              validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Please enter your office address';
                                 }

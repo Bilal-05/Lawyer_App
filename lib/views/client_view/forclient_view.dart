@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/clientVM/forclient_vm.dart';
+import 'package:lawyer_app/widgets/customTextField.dart';
 import 'package:stacked/stacked.dart';
 
 class ClientView extends StatelessWidget {
@@ -9,7 +11,7 @@ class ClientView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.nonReactive(
+    return ViewModelBuilder.reactive(
       viewModelBuilder: () => ClientVM(),
       builder: (context, vModel, child) {
         // return Scaffold(
@@ -162,19 +164,45 @@ class ClientView extends StatelessWidget {
                                   ),
                                 ),
                                 0.03.sh.verticalSpace,
+                                Center(
+                                  child: InkWell(
+                                    onTap: () {
+                                      vModel.getProfileImage();
+                                    },
+                                    child: CircleAvatar(
+                                      radius: 100.r,
+                                      backgroundColor: AppColors.primaryColor,
+                                      backgroundImage:
+                                          vModel.profileImage != null
+                                              ? FileImage(vModel.profileImage!)
+                                              : null,
+                                      child: vModel.profileImage == null
+                                          ? Text(
+                                              'Set Profile Image',
+                                              style:
+                                                  Style.regular14ptb.copyWith(
+                                                      // fontSize: 7.sp,
+                                                      color: Colors.white),
+                                            )
+                                          : const Opacity(
+                                              opacity: 0, child: Text('Hello')),
+                                    ),
+                                  ),
+                                ),
+                                20.verticalSpace,
                                 SizedBox(
                                   child: Form(
                                     key: vModel.formKey,
                                     child: Column(
                                       children: [
-                                        Container(
-                                          child: vModel.textFieldService
-                                              .customTextFormField(
-                                            TextInputType.text,
-                                            null,
-                                            vModel.fullnameController,
-                                            'Full name',
-                                            (value) {
+                                        SizedBox(
+                                          child: CustomTextField(
+                                            keyboardType: TextInputType.text,
+                                            suffix: null,
+                                            controller:
+                                                vModel.fullnameController,
+                                            hintText: 'Full name',
+                                            validator: (value) {
                                               if (value!.isEmpty) {
                                                 return 'Please enter your full name';
                                               }
@@ -183,14 +211,14 @@ class ClientView extends StatelessWidget {
                                           ),
                                         ),
                                         20.verticalSpace,
-                                        Container(
-                                          child: vModel.textFieldService
-                                              .customTextFormField(
-                                            TextInputType.text,
-                                            null,
-                                            vModel.designationController,
-                                            'Designation',
-                                            (value) {
+                                        SizedBox(
+                                          child: CustomTextField(
+                                            keyboardType: TextInputType.text,
+                                            suffix: null,
+                                            controller:
+                                                vModel.designationController,
+                                            hintText: 'Designation',
+                                            validator: (value) {
                                               if (value!.isEmpty) {
                                                 return 'Please enter your designation';
                                               }
@@ -199,14 +227,13 @@ class ClientView extends StatelessWidget {
                                           ),
                                         ),
                                         20.verticalSpace,
-                                        Container(
-                                          child: vModel.textFieldService
-                                              .customTextFormField(
-                                            TextInputType.text,
-                                            null,
-                                            vModel.bioController,
-                                            'Bio',
-                                            (value) {
+                                        SizedBox(
+                                          child: CustomTextField(
+                                            keyboardType: TextInputType.text,
+                                            suffix: null,
+                                            controller: vModel.bioController,
+                                            hintText: 'Bio',
+                                            validator: (value) {
                                               if (value!.isEmpty) {
                                                 return 'Write yourself a bio.';
                                               }

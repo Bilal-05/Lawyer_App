@@ -127,7 +127,7 @@ class BarCardVM extends BaseViewModel {
     }
   }
 
-  void onPressedBarBack() async {
+  openCamera() async {
     final XFile? file = await imagePicker.pickImage();
     if (file != null) {
       final croppedFile = await imagePicker.crop(
@@ -138,6 +138,13 @@ class BarCardVM extends BaseViewModel {
         barBack = File(croppedFile.path);
         notifyListeners();
       }
+    }
+  }
+
+  void onPressedBarBack() async {
+    await openCamera();
+    if (barBack != null) {
+      await addBack();
     }
   }
 
@@ -174,7 +181,8 @@ class BarCardVM extends BaseViewModel {
     notifyListeners();
   }
 
-  addFront() {
+  addFront() async {
+    await saveBarFrontImage();
     userService.barCardFrontUrl =
         'images/barFront/${FirebaseAuth.instance.currentUser!.uid}_bar_front.jpeg';
     notifyListeners();
@@ -182,47 +190,88 @@ class BarCardVM extends BaseViewModel {
     log(userService.barCardFrontUrl ?? 'Error');
   }
 
-  addBack() {
+  addBack() async {
+    await saveBarBackImage();
     userService.barCardBackUrl =
         'images/barBack/${FirebaseAuth.instance.currentUser!.uid}_bar_back.jpeg';
     notifyListeners();
     log(userService.barCardBackUrl ?? 'Error');
   }
 
+  final downloadRef = FirebaseStorage.instance;
+
+  late String frontBarNetwork = '';
+  late String backBarNetwork = '';
+
+  // Future<void> getUrl(cnicNumber) async {
+  //   final backRef =
+  //       downloadRef.ref().child("images/cnicBack/${cnicNumber}_cnic_back.jpeg");
+  //   final frontRef = downloadRef
+  //       .ref()
+  //       .child("images/cnicFront/${cnicNumber}_cnic_front.jpeg");
+
+  //   front = await frontRef.getDownloadURL();
+  //   back = await backRef.getDownloadURL();
+  //   // log('${await backRef.getDownloadURL()}');
+
+  //   notifyListeners();
+  // }
+
+  Future<void> getBarUrl() async {
+    final frontRef = downloadRef.ref().child(
+        "images/barFront/${FirebaseAuth.instance.currentUser!.uid}_bar_front.jpeg");
+    final backRef = downloadRef.ref().child(
+        "images/barBack/${FirebaseAuth.instance.currentUser!.uid}_bar_back.jpeg");
+
+    frontBarNetwork = await frontRef.getDownloadURL();
+    backBarNetwork = await backRef.getDownloadURL();
+
+    userService.barFrontNetworkUrl = frontBarNetwork;
+    userService.barBackNetworkUrl = backBarNetwork;
+    log(userService.barBackNetworkUrl!);
+    log(userService.barFrontNetworkUrl!);
+    notifyListeners();
+  }
+
   navigateToBarBack() async {
-    addFront();
+    setBusy(true);
+    await addFront();
     snackbarService.showSnackbar(
         message: 'Wait for a while',
         duration: const Duration(seconds: 1),
         title: 'Hold');
     await Future.delayed(const Duration(seconds: 1));
-    saveBarFrontImage();
+    // saveBarFrontImage();
     snackbarService.showSnackbar(
         message: 'Front side of Bar License uploaded successfully',
         duration: const Duration(seconds: 1),
         title: 'Success');
     await Future.delayed(const Duration(seconds: 1));
+    setBusy(false);
     navigationService.replaceWithBarBackView();
     // navigationService.replaceWithUploadBarBackView();
   }
 
   navigateToMenuMain() async {
-    addBack();
+    setBusy(true);
+    // await addBack();
     snackbarService.showSnackbar(
         message: 'Wait for a while',
-        duration: const Duration(seconds: 1),
+        duration: const Duration(seconds: 3),
         title: 'Hold');
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 5));
     await setBool();
+    await Future.delayed(const Duration(seconds: 5));
+    await getBarUrl();
     await userService.addLawyerinLawyer(false);
     await userService.addLawyerinUser(false);
-    await saveBarBackImage();
+    // await saveBarBackImage();
     snackbarService.showSnackbar(
         message: 'Back side of Bar License uploaded successfully',
         duration: const Duration(seconds: 1),
         title: 'Success');
     await Future.delayed(const Duration(seconds: 1));
-
+    setBusy(false);
     navigationService.replaceWithMainMenuView();
   }
 }

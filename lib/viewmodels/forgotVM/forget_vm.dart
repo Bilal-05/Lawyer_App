@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
-import 'package:lawyer_app/services/textfield_service.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -14,7 +13,7 @@ import 'package:stacked_services/stacked_services.dart';
 class ForgotVM extends BaseViewModel {
   final navigationService = locator<NavigationService>();
   String forgot = 'assets/JSON/Sofa.json';
-  TextFieldService textFieldService = locator<TextFieldService>();
+  // TextFieldService textFieldService = locator<TextFieldService>();
   final formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
 

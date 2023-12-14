@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/loginVM/login_vm.dart';
+import 'package:lawyer_app/widgets/customTextField.dart';
 import 'package:stacked/stacked.dart';
 
 class LoginView extends StatelessWidget {
@@ -57,14 +58,13 @@ class LoginView extends StatelessWidget {
                               key: vModel.formKey,
                               child: Column(
                                 children: [
-                                  Container(
-                                    child: vModel.texttFieldService
-                                        .customTextFormField(
-                                      TextInputType.emailAddress,
-                                      null,
-                                      vModel.emailController,
-                                      'Email',
-                                      (value) {
+                                  SizedBox(
+                                    child: CustomTextField(
+                                      keyboardType: TextInputType.emailAddress,
+                                      suffix: null,
+                                      controller: vModel.emailController,
+                                      hintText: 'Email',
+                                      validator: (value) {
                                         bool emailValid = RegExp(
                                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                             .hasMatch(value!);
@@ -78,14 +78,14 @@ class LoginView extends StatelessWidget {
                                     ),
                                   ),
                                   20.verticalSpace,
-                                  Container(
-                                    child: vModel.texttFieldService
-                                        .customTextFormField(
-                                      TextInputType.visiblePassword,
-                                      null,
-                                      vModel.passController,
-                                      'Password',
-                                      (value) {
+                                  SizedBox(
+                                    child: CustomTextField(
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
+                                      suffix: null,
+                                      controller: vModel.passController,
+                                      hintText: 'Password',
+                                      validator: (value) {
                                         if (value!.isEmpty) {
                                           return 'Enter correct password';
                                         } else {

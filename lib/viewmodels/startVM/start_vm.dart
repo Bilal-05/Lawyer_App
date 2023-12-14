@@ -70,6 +70,12 @@ class StartVM extends BaseViewModel {
     fetchData();
   }
 
+  googleSignIn() async {
+    setBusy(true);
+    await signInWithGoogle();
+    setBusy(false);
+  }
+
   signInWithGoogle() async {
     setBusy(true);
     // Trigger the authentication flow

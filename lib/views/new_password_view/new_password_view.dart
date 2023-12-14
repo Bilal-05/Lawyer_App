@@ -37,50 +37,50 @@ class NewPasswordView extends StatelessWidget {
                     ),
                   ),
                   0.04.sh.verticalSpace,
-                  SizedBox(
-                    child: Form(
-                      key: vModel.formKey,
-                      child: Column(
-                        children: [
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.visiblePassword,
-                              null,
-                              vModel.newPassController,
-                              'New password',
-                              (value) {
-                                bool validPass = RegExp(
-                                        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}\$")
-                                    .hasMatch(value!);
+                  // SizedBox(
+                  //   child: Form(
+                  //     key: vModel.formKey,
+                  //     child: Column(
+                  //       children: [
+                  //         Container(
+                  //           child: vModel.textFieldService.customTextFormField(
+                  //             TextInputType.visiblePassword,
+                  //             null,
+                  //             vModel.newPassController,
+                  //             'New password',
+                  //             (value) {
+                  //               bool validPass = RegExp(
+                  //                       "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}\$")
+                  //                   .hasMatch(value!);
 
-                                if (value.isEmpty || !validPass) {
-                                  return 'Minimum eight characters and must be unique.';
-                                } else {
-                                  return null;
-                                }
-                              },
-                            ),
-                          ),
-                          20.verticalSpace,
-                          Container(
-                            child: vModel.textFieldService.customTextFormField(
-                              TextInputType.visiblePassword,
-                              null,
-                              vModel.confirmPassController,
-                              'Confirm password',
-                              (value) {
-                                if (value != vModel.newPassController.text) {
-                                  return 'Password doesn\'t match.';
-                                } else {
-                                  return null;
-                                }
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  //               if (value.isEmpty || !validPass) {
+                  //                 return 'Minimum eight characters and must be unique.';
+                  //               } else {
+                  //                 return null;
+                  //               }
+                  //             },
+                  //           ),
+                  //         ),
+                  //         20.verticalSpace,
+                  //         Container(
+                  //           child: vModel.textFieldService.customTextFormField(
+                  //             TextInputType.visiblePassword,
+                  //             null,
+                  //             vModel.confirmPassController,
+                  //             'Confirm password',
+                  //             (value) {
+                  //               if (value != vModel.newPassController.text) {
+                  //                 return 'Password doesn\'t match.';
+                  //               } else {
+                  //                 return null;
+                  //               }
+                  //             },
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   const Spacer(),
                   Container(
                     margin: EdgeInsets.only(bottom: 0.03.sh),

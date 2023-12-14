@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/forgotVM/forget_vm.dart';
+import 'package:lawyer_app/widgets/customTextField.dart';
 import 'package:stacked/stacked.dart';
 
 class ForgotView extends StatelessWidget {
@@ -54,12 +55,12 @@ class ForgotView extends StatelessWidget {
                       SizedBox(
                         child: Form(
                           key: vModel.formKey,
-                          child: vModel.textFieldService.customTextFormField(
-                            TextInputType.emailAddress,
-                            null,
-                            vModel.emailController,
-                            'Email',
-                            (value) {
+                          child: CustomTextField(
+                            keyboardType: TextInputType.emailAddress,
+                            suffix: null,
+                            controller: vModel.emailController,
+                            hintText: 'Email',
+                            validator: (value) {
                               bool emailValid = RegExp(
                                       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value!);

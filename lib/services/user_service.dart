@@ -43,6 +43,12 @@ class UserService extends BaseViewModel {
   Map<String, dynamic> userData = {};
   String? front;
   String? back;
+  String? backNetworkUrl;
+  String? frontNetworkUrl;
+  String? barFrontNetworkUrl;
+  String? barBackNetworkUrl;
+  String? profilePhoto;
+  String? profilePhotoNetworkUrl;
 
   final snackbarService = locator<SnackbarService>();
   CollectionReference clients =
@@ -94,6 +100,10 @@ class UserService extends BaseViewModel {
             'fname': fname,
             "lname": lname,
             'email': email,
+            'frontNetworkUrl': frontNetworkUrl,
+            'backNetworkUrl': backNetworkUrl,
+            'profilePhoto': profilePhoto,
+            'profilePhotoNetworkUrl': profilePhotoNetworkUrl,
           },
         )
         .then(
@@ -129,6 +139,10 @@ class UserService extends BaseViewModel {
             'fname': fname,
             "lname": lname,
             'email': email,
+            'frontNetworkUrl': frontNetworkUrl,
+            'backNetworkUrl': backNetworkUrl,
+            'profilePhoto': profilePhoto,
+            'profilePhotoNetworkUrl': profilePhotoNetworkUrl,
           },
         )
         .then(
@@ -179,6 +193,10 @@ class UserService extends BaseViewModel {
             'barFrontUrl': barCardFrontUrl,
             'barBackUrl': barCardBackUrl,
             'firstLogin': firstloginProvided,
+            'frontNetworkUrl': barFrontNetworkUrl,
+            'backNetworkUrl': barBackNetworkUrl,
+            'profilePhoto': profilePhoto,
+            'profilePhotoNetworkUrl': profilePhotoNetworkUrl,
           },
         )
         .then(
@@ -229,6 +247,10 @@ class UserService extends BaseViewModel {
             'barFrontUrl': barCardFrontUrl,
             'barBackUrl': barCardBackUrl,
             'firstLogin': firstloginProvided,
+            'barFrontNetworkUrl': barFrontNetworkUrl,
+            'barBackNetworkUrl': barBackNetworkUrl,
+            'profilePhoto': profilePhoto,
+            'profilePhotoNetworkUrl': profilePhotoNetworkUrl,
           },
         )
         .then(

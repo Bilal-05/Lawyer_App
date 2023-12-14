@@ -76,12 +76,15 @@ class Categories extends StatelessWidget {
                               ),
                             ),
                             10.verticalSpace,
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                category['area'],
-                                style: Style.regular16ptb,
-                                textAlign: TextAlign.center,
+                            Container(
+                              margin: EdgeInsets.only(right: 5.w),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  category['area'],
+                                  style: Style.regular16ptb,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             )
                           ],

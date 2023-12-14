@@ -45,7 +45,7 @@ class UploadCnicVM extends BaseViewModel {
     log('out');
   }
 
-  void onPressedback() async {
+  openCamera() async {
     final XFile? file = await imagePicker.pickImage();
     if (file != null) {
       final croppedFile = await imagePicker.crop(
@@ -57,6 +57,11 @@ class UploadCnicVM extends BaseViewModel {
         notifyListeners();
       }
     }
+  }
+
+  void onPressedback() async {
+    await openCamera();
+    await addBack();
   }
 
   saveFrontImage() async {
@@ -90,7 +95,8 @@ class UploadCnicVM extends BaseViewModel {
     notifyListeners();
   }
 
-  addFront() {
+  addFront() async {
+    await saveFrontImage();
     userService.cnicFrontUrl =
         'images/cnicFront/${userService.cnicNumber}_cnic_front.jpeg';
     notifyListeners();
@@ -98,7 +104,8 @@ class UploadCnicVM extends BaseViewModel {
     log(userService.cnicFrontUrl!);
   }
 
-  addBack() {
+  addBack() async {
+    await saveBackImage();
     userService.cincBackUrl =
         'images/cnicBack/${userService.cnicNumber}_cnic_back.jpeg';
     notifyListeners();
@@ -106,39 +113,76 @@ class UploadCnicVM extends BaseViewModel {
   }
 
   navigateToBack() async {
+    setBusy(true);
     addFront();
     snackbarService.showSnackbar(
         message: 'Wait for a while',
         duration: const Duration(seconds: 2),
         title: 'Hold');
     await Future.delayed(const Duration(seconds: 2));
-    await saveFrontImage();
     snackbarService.showSnackbar(
         message: 'Front side of CNIC uploaded successfully',
         duration: const Duration(seconds: 2),
         title: 'Success');
     await Future.delayed(const Duration(seconds: 2));
-
+    setBusy(false);
     navigationService.replaceWithUploadCnicBackView();
   }
 
+  final downloadRef = FirebaseStorage.instance;
+
+  late String frontNetwork = '';
+  late String backNetwork = '';
+
+  Future<void> getUrl(cnicNumber) async {
+    final backRef =
+        downloadRef.ref().child("images/cnicBack/${cnicNumber}_cnic_back.jpeg");
+    final frontRef = downloadRef
+        .ref()
+        .child("images/cnicFront/${cnicNumber}_cnic_front.jpeg");
+
+    frontNetwork = await frontRef.getDownloadURL();
+    backNetwork = await backRef.getDownloadURL();
+    // log('${await backRef.getDownloadURL()}');
+    userService.frontNetworkUrl = frontNetwork;
+    userService.backNetworkUrl = backNetwork;
+    notifyListeners();
+  }
+
+  // Future<void> getBarUrl() async {
+  //   final frontRef = downloadRef.ref().child(
+  //       "images/barFront/${FirebaseAuth.instance.currentUser!.uid}_bar_front.jpeg");
+  //   final backRef = downloadRef.ref().child(
+  //       "images/barBack/${FirebaseAuth.instance.currentUser!.uid}_bar_back.jpeg");
+
+  //   frontBarNetwork = await frontRef.getDownloadURL();
+  //   backBarNetwork = await backRef.getDownloadURL();
+
+  //   userService.barFrontNetworkUrl = frontBarNetwork;
+  //   userService.barBackNetworkUrl = backBarNetwork;
+  //   log(userService.barBackNetworkUrl!);
+  //   log(userService.barFrontNetworkUrl!);
+  //   notifyListeners();
+  // }
+
   navigateToMenuMain() async {
-    addBack();
+    // addBack();
+    setBusy(true);
     snackbarService.showSnackbar(
         message: 'Wait for a while',
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 3),
         title: 'Hold');
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 8));
     await setBool();
+    await getUrl(userService.cnicNumber);
     await userService.addClientinClient(false);
     await userService.addClientinUser(false);
-    await saveBackImage();
     snackbarService.showSnackbar(
         message: 'Back side of CNIC uploaded successfully',
         duration: const Duration(seconds: 2),
         title: 'Success');
     await Future.delayed(const Duration(seconds: 2));
-
+    setBusy(false);
     navigationService.replaceWithMainMenuView();
   }
 }

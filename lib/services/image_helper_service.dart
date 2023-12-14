@@ -16,6 +16,16 @@ class ImageHelperService extends BaseViewModel {
     );
   }
 
+  pickImageFromGallery({
+    ImageSource source = ImageSource.gallery,
+    int imageQuality = 100,
+  }) async {
+    return await imagePicker.pickImage(
+      source: source,
+      imageQuality: imageQuality,
+    );
+  }
+
   Future<CroppedFile?> crop({
     required XFile file,
     CropStyle cropStyle = CropStyle.rectangle,

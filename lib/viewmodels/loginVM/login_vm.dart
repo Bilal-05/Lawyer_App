@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
-import 'package:lawyer_app/services/textfield_service.dart';
 import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,7 +20,7 @@ class LoginVM extends BaseViewModel {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   String google = 'assets/svg/google.svg';
-  final texttFieldService = locator<TextFieldService>();
+  // final texttFieldService = locator<TextFieldService>();
   String? documentID;
 
   bool isLogin = false;

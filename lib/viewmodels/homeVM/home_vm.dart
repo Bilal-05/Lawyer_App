@@ -23,6 +23,7 @@ class HomeVM extends BaseViewModel {
   final userService = locator<UserService>();
   CollectionReference category =
       FirebaseFirestore.instance.collection('categories');
+  String star = 'assets/images/Star.png';
 
   String? documentID;
 
@@ -32,8 +33,6 @@ class HomeVM extends BaseViewModel {
 
   final storageRef = FirebaseStorage.instance;
 
-  late String front = '';
-  late String back = '';
 //
   Map<String, dynamic> userData = {};
 
@@ -57,6 +56,8 @@ class HomeVM extends BaseViewModel {
     }
   }
 
+  late String front = '';
+  late String back = '';
   Future<void> getUrl(cnicNumber) async {
     final backRef =
         storageRef.ref().child("images/cnicBack/${cnicNumber}_cnic_back.jpeg");

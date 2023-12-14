@@ -13,7 +13,6 @@ import 'package:stacked_shared/stacked_shared.dart';
 
 import '../services/appbar_service.dart';
 import '../services/image_helper_service.dart';
-import '../services/textfield_service.dart';
 import '../services/user_service.dart';
 
 final locator = StackedLocator.instance;
@@ -29,7 +28,6 @@ Future<void> setupLocator({
 // Register dependencies
   locator.registerSingleton(NavigationService());
   locator.registerSingleton(SnackbarService());
-  locator.registerLazySingleton(() => TextFieldService());
   locator.registerLazySingleton(() => AppBarService());
   locator.registerLazySingleton(() => UserService());
   locator.registerSingleton(DialogService());

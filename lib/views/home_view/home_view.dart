@@ -10,6 +10,7 @@ import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/homeVM/home_vm.dart';
 import 'package:lawyer_app/views/home_view/widgets/categories.dart';
+import 'package:lawyer_app/views/home_view/widgets/top_lawyers.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeView extends StatelessWidget {
@@ -79,11 +80,11 @@ class HomeView extends StatelessWidget {
                                       )
                                     : data['userType'] == 'lawyer'
                                         ? Text(
-                                            'Hello Mr. ${data['fullName']}',
+                                            'Hello ${data['fullName']}',
                                             style: Style.semiBold20ptb,
                                           )
                                         : Text(
-                                            'Hello Sir,',
+                                            'Hello Sir/Madam,',
                                             style: Style.semiBold20ptb,
                                           );
                               }
@@ -128,59 +129,10 @@ class HomeView extends StatelessWidget {
                               style:
                                   Style.semiBold35ptb.copyWith(fontSize: 25.sp),
                             ),
-                            const Spacer(),
-                            InkWell(
-                              onTap: () {},
-                              child: Text('See all', style: Style.regular16ptb),
-                            ),
                           ],
                         ),
                       ),
-                      // const TopLawyers()
-                      // Text(vModel.front),
-                      // Text(vModel.back),
-                      // 20.verticalSpace,
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     vModel.showImage(vModel.userData);
-                      //   },
-                      //   child: Text(
-                      //     'Show Image',
-                      //     style: Style.semiBold20ptw,
-                      //   ),
-                      // ),
-
-                      // if (vModel.front != '') 20.verticalSpace,
-                      // vModel.front != ''
-                      //     ? SizedBox(
-                      //         child: Image(
-                      //           loadingBuilder:
-                      //               (context, child, loadingProgress) =>
-                      //                   loadingProgress == null
-                      //                       ? child
-                      //                       : CircularProgressIndicator(
-                      //                           color: AppColors.primaryColor,
-                      //                         ),
-                      //           image: NetworkImage(vModel.front),
-                      //         ),
-                      //       )
-                      //     : const SizedBox(),
-
-                      // if (vModel.back != '') 20.verticalSpace,
-                      // vModel.back != ''
-                      //     ? SizedBox(
-                      //         child: Image(
-                      //           loadingBuilder:
-                      //               (context, child, loadingProgress) =>
-                      //                   loadingProgress == null
-                      //                       ? child
-                      //                       : CircularProgressIndicator(
-                      //                           color: AppColors.primaryColor,
-                      //                         ),
-                      //           image: NetworkImage(vModel.back),
-                      //         ),
-                      //       )
-                      //     : const SizedBox(),
+                      const TopLawyers(),
                     ],
                   ),
                 ),

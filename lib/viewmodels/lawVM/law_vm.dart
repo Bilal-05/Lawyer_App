@@ -42,9 +42,9 @@ class LawVM extends BaseViewModel {
     } else {
       results = items
           .where((element) =>
-              element["id"].toString().contains(value) ||
               element["title"].toString().toLowerCase().contains(value) ||
-              element["description"].toString().toLowerCase().contains(value))
+              element["description"].toString().toLowerCase().contains(value) ||
+              element["id"].toString().contains(value))
           .toList();
       foundItems = results;
       notifyListeners();

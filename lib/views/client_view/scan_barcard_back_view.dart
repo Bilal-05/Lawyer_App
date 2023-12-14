@@ -99,10 +99,14 @@ class BarBackView extends StatelessWidget {
                             onPressed: () {
                               viewModel.navigateToMenuMain();
                             },
-                            child: Text(
-                              "The picture is clear.",
-                              style: Style.semiBold20ptw,
-                            ),
+                            child: viewModel.isBusy
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+                                : Text(
+                                    "The picture is clear.",
+                                    style: Style.semiBold20ptw,
+                                  ),
                           ),
                         ),
                 ],
