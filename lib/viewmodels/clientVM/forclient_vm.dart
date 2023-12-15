@@ -125,8 +125,16 @@ class ClientVM extends BaseViewModel {
 
   navigateToEducation() {
     if (formKey.currentState!.validate()) {
-      add();
-      navigationService.replaceWithEducationView();
+      if (profileImage != null) {
+        add();
+        navigationService.replaceWithEducationView();
+      } else {
+        snackbarService.showSnackbar(
+          message: "Please select a profile photo",
+          title: 'Error',
+          duration: const Duration(seconds: 2),
+        );
+      }
     } else {
       snackbarService.showSnackbar(
           message: "Please fill all the fields",

@@ -169,7 +169,9 @@ class LawyerVM extends BaseViewModel {
   }
 
   add() async {
+    setBusy(true);
     await getProfileUrl();
+    await Future.delayed(const Duration(seconds: 5));
     log(userService.profilePhotoNetworkUrl!);
     userService.phoneNumber = numberText;
     userService.fname = fnameController.text;
@@ -177,13 +179,22 @@ class LawyerVM extends BaseViewModel {
     userService.email = FirebaseAuth.instance.currentUser!.email;
     notifyListeners();
     log(userService.phoneNumber.toString());
+    setBusy(false);
   }
 
   navigateToCnic() async {
     if (formKey.currentState!.validate() && correctNumber) {
-      await add();
-      clear();
-      navigationService.replaceWithCnicView();
+      if (profileImage != null) {
+        await add();
+        clear();
+        navigationService.replaceWithCnicView();
+      } else {
+        snackBarService.showSnackbar(
+          message: 'Please select a profile photo',
+          title: 'Error',
+          duration: const Duration(seconds: 2),
+        );
+      }
     } else {
       snackBarService.showSnackbar(
         message: 'Fill all fields',

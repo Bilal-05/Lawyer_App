@@ -57,6 +57,7 @@ import 'package:stacked_services/stacked_services.dart';
     LazySingleton(classType: AppBarService),
     LazySingleton(classType: UserService),
     Singleton(classType: DialogService),
+    Singleton(classType: BottomSheetService),
     LazySingleton(classType: ImageHelperService),
   ],
 )

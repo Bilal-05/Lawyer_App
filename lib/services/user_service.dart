@@ -49,6 +49,9 @@ class UserService extends BaseViewModel {
   String? barBackNetworkUrl;
   String? profilePhoto;
   String? profilePhotoNetworkUrl;
+  List? allLawyersData;
+  List? practiceAreas;
+  List<String>? areas;
 
   final snackbarService = locator<SnackbarService>();
   CollectionReference clients =
@@ -57,29 +60,6 @@ class UserService extends BaseViewModel {
       FirebaseFirestore.instance.collection('lawyers');
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-
-  // Future<void> addType(usertype) async {
-  //   final user = FirebaseAuth.instance.currentUser;
-  //   return usersType
-  //       .doc(user!.uid.toString())
-  //       .set(
-  //         {
-  //           'userType': usertype,
-  //         },
-  //       )
-  //       .then(
-  //         (value) => log("User Type Added"),
-  //       )
-  //       .catchError(
-  //         (error) {
-  //           snackbarService.showSnackbar(
-  //             message: error,
-  //             title: 'Error',
-  //             duration: const Duration(seconds: 2),
-  //           );
-  //         },
-  //       );
-  // }
 
   Future<void> addClientinUser(loginProvided) async {
     final user = FirebaseAuth.instance.currentUser;

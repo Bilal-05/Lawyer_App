@@ -123,10 +123,14 @@ class LawyerView extends StatelessWidget {
                             // print(vModel.phoneController.text);
                             vModel.navigateToCnic();
                           },
-                          child: Text(
-                            'Next',
-                            style: Style.semiBold20ptw,
-                          ),
+                          child: vModel.isBusy
+                              ? const CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                              : Text(
+                                  'Next',
+                                  style: Style.semiBold20ptw,
+                                ),
                         ),
                       ),
                     ],

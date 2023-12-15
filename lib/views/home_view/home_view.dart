@@ -45,60 +45,79 @@ class HomeView extends StatelessWidget {
                       20.verticalSpace,
                       SizedBox(
                         child: FutureBuilder<DocumentSnapshot>(
-                            future: vModel.users
-                                .doc(FirebaseAuth.instance.currentUser!.uid)
-                                .get(),
-                            builder: (context,
-                                AsyncSnapshot<DocumentSnapshot> snapshot) {
-                              if (snapshot.hasError) {
-                                return const Scaffold(
-                                  body: Center(
-                                    child: Text("Something went wrong"),
-                                  ),
-                                );
-                              }
-
-                              if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                Map<String, dynamic> data = {};
-                                if (snapshot.data!.data() != null) {
-                                  vModel.userData = snapshot.data!.data()
-                                      as Map<String, dynamic>;
-                                  data = snapshot.data!.data()
-                                      as Map<String, dynamic>;
-                                  vModel.userService.userData = snapshot.data!
-                                      .data() as Map<String, dynamic>;
-                                  // vModel.saveData(data);
-                                  // vModel.userService.userData = snapshot.data!
-                                  //     .data() as Map<String, dynamic>;
-                                }
-
-                                return data['userType'] == 'client'
-                                    ? Text(
-                                        'Hello ${data['fname']}',
-                                        style: Style.semiBold20ptb,
-                                      )
-                                    : data['userType'] == 'lawyer'
-                                        ? Text(
-                                            'Hello ${data['fullName']}',
-                                            style: Style.semiBold20ptb,
-                                          )
-                                        : Text(
-                                            'Hello Sir/Madam,',
-                                            style: Style.semiBold20ptb,
-                                          );
-                              }
-
-                              return CircularProgressIndicator(
-                                color: AppColors.primaryColor,
+                          future: vModel.users
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .get(),
+                          builder: (context,
+                              AsyncSnapshot<DocumentSnapshot> snapshot) {
+                            if (snapshot.hasError) {
+                              return const Scaffold(
+                                body: Center(
+                                  child: Text("Something went wrong"),
+                                ),
                               );
-                            }),
+                            }
+
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              Map<String, dynamic> data = {};
+                              if (snapshot.data!.data() != null) {
+                                vModel.userData = snapshot.data!.data()
+                                    as Map<String, dynamic>;
+                                data = snapshot.data!.data()
+                                    as Map<String, dynamic>;
+                                vModel.userService.userData = snapshot.data!
+                                    .data() as Map<String, dynamic>;
+                                // vModel.saveData(data);
+                                // vModel.userService.userData = snapshot.data!
+                                //     .data() as Map<String, dynamic>;
+                              }
+
+                              return data['userType'] == 'client'
+                                  ? Text(
+                                      'Hello ${data['fname']}',
+                                      style: Style.semiBold20ptb,
+                                    )
+                                  : data['userType'] == 'lawyer'
+                                      ? Text(
+                                          'Hello ${data['fullName']}',
+                                          style: Style.semiBold20ptb,
+                                        )
+                                      : Text(
+                                          'Hello Sir/Madam,',
+                                          style: Style.semiBold20ptb,
+                                        );
+                            }
+
+                            // return CircularProgressIndicator(
+                            //   color: AppColors.primaryColor,
+                            // );
+                            return SkeletonLoader(
+                              duration: const Duration(seconds: 1),
+                              startColor: AppColors.primaryColor.withOpacity(1),
+                              endColor: AppColors.primaryColor.withOpacity(0.7),
+                              loading: true,
+                              child: Text(
+                                'Hello Sir/Madam,',
+                                style: Style.semiBold20ptb,
+                              ),
+                            );
+                          },
+                        ),
                         // child: Text('Hello'),
+                      ),
+                      5.verticalSpace,
+                      SizedBox(
+                        width: 0.75.sw,
+                        child: Text(
+                          'Lets find,',
+                          style: Style.bol30ptb.copyWith(fontSize: 25.sp),
+                        ),
                       ),
                       SizedBox(
                         width: 0.75.sw,
                         child: Text(
-                          'Lets find the best lawyer to help you',
+                          'The best lawyer to help you',
                           style: Style.semiBold20ptb,
                         ),
                       ),

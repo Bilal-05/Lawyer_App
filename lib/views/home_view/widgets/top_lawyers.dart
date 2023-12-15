@@ -41,7 +41,8 @@ class TopLawyers extends StatelessWidget {
                 itemCount: 3,
                 itemBuilder: (context, index) {
                   DocumentSnapshot user = snapshot.data!.docs[index];
-
+                  vModel.userService.allLawyersData = snapshot.data!.docs;
+                  log(vModel.userService.allLawyersData![index]['fullName']);
                   return InkWell(
                     onTap: () {},
                     child: Container(
@@ -64,7 +65,8 @@ class TopLawyers extends StatelessWidget {
                                   right: 0.02.sw,
                                 ),
                                 child: CircleAvatar(
-                                  radius: 50.r,
+                                  radius: 30.r,
+                                  backgroundColor: AppColors.primaryColor,
                                   backgroundImage: NetworkImage(
                                     user['profilePhotoNetworkUrl'],
                                   ),
@@ -78,7 +80,7 @@ class TopLawyers extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     SizedBox(
-                                      width: 20.w,
+                                      width: 15.w,
                                       child: Image.asset(
                                         vModel.star,
                                         fit: BoxFit.cover,
@@ -89,8 +91,7 @@ class TopLawyers extends StatelessWidget {
                                       // margin: EdgeInsets.only(bottom: 0.01.sh),
                                       child: Text(
                                         user['rating'],
-                                        style: Style.regular14ptb
-                                            .copyWith(fontSize: 16.sp),
+                                        style: Style.regular14ptb,
                                       ),
                                     ),
                                   ],
@@ -104,34 +105,39 @@ class TopLawyers extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(
+                                width: 0.61.sw,
                                 child: Text(
                                   user['fullName'],
+                                  overflow: TextOverflow.clip,
                                   style: Style.semiBold20ptb,
                                 ),
                               ),
                               SizedBox(
+                                width: 0.6.sw,
                                 child: Text(
                                   user['designation'],
+                                  overflow: TextOverflow.ellipsis,
                                   style: Style.medium20ptb
                                       .copyWith(fontSize: 16.sp),
                                 ),
                               ),
-                              10.verticalSpace,
+                              5.verticalSpace,
                               ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.primaryColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                  onPressed: () {
-                                    log(snapshot.data!.docs.length.toString());
-                                    log(snapshot.data!.docs.toString());
-                                  },
-                                  child: Text(
-                                    'Appointment',
-                                    style: Style.semiBold20ptw,
-                                  ))
+                                ),
+                                onPressed: () {},
+                                child: Text(
+                                  'Appointment',
+                                  style: Style.regular14ptb.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              5.verticalSpace,
                               // SizedBox(
                               //   child: Text(
                               //     "Practice Area:",
