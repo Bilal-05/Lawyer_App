@@ -54,50 +54,6 @@ class EducationView extends StatelessWidget {
                       key: vModel.formKey,
                       child: Column(
                         children: [
-                          // // Container(
-                          // //   child: vModel.textFieldService.customTextFormField(
-                          // //     TextInputType.text,
-                          // //     null,
-                          // //     vModel.institutionController,
-                          // //     'Institution name',
-                          // //     (value) {
-                          // //       if (value!.isEmpty) {
-                          // //         return 'Please enter institution name';
-                          // //       }
-                          // //       return null;
-                          // //     },
-                          // //   ),
-                          // // ),
-                          // // 20.verticalSpace,
-                          // // Container(
-                          // //   child: vModel.textFieldService.customTextFormField(
-                          // //     TextInputType.text,
-                          // //     null,
-                          // //     vModel.degreeController,
-                          // //     'Degree',
-                          // //     (value) {
-                          // //       if (value!.isEmpty) {
-                          // //         return 'What degree did you persue?.';
-                          // //       }
-                          // //       return null;
-                          // //     },
-                          // //   ),
-                          // // ),
-                          // 20.verticalSpace,
-                          vModel.dateTextField(
-                            vModel.doeController,
-                            context,
-                            'Year of enrollment',
-                            (value) {
-                              if (value!.isEmpty) {
-                                return 'Please enter your year of enrollment';
-                              } else if (value == vModel.dogController.text) {
-                                return 'Date of enrollment and date of graduation cannot be same';
-                              }
-                              return null;
-                            },
-                          ),
-                          20.verticalSpace,
                           vModel.dateTextField(
                             vModel.dogController,
                             context,
@@ -121,6 +77,7 @@ class EducationView extends StatelessWidget {
                   //     ),
                   // 20.verticalSpace,
                   const Spacer(),
+                  // 20.verticalSpace,
                   Container(
                     margin: EdgeInsets.only(bottom: 0.03.sh),
                     child: ElevatedButton(

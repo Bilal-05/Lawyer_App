@@ -16,115 +16,114 @@ class ForAppointmentView extends StatelessWidget {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           body: SafeArea(
-            child: Container(
-              margin: EdgeInsets.only(
-                top: 0.075.sh,
-                left: 0.05.sw,
-                right: 0.05.sw,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'Appointment',
-                    textAlign: TextAlign.center,
-                    style: Style.bol30ptb,
+            child: SizedBox(
+              child: SingleChildScrollView(
+                child: Container(
+                  margin: EdgeInsets.only(
+                    top: 0.075.sh,
+                    left: 0.05.sw,
+                    right: 0.05.sw,
                   ),
-                  0.02.sh.verticalSpace,
-                  SizedBox(
-                    width: 0.75.sw,
-                    child: Text(
-                      'Provide us your appointment details.',
-                      style: Style.medium14ptb,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  0.03.sh.verticalSpace,
-                  SizedBox(
-                    child: Form(
-                      key: vModel.formKey,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            child: CustomTextField(
-                              keyboardType: TextInputType.text,
-                              suffix: null,
-                              controller: vModel.practiceController,
-                              hintText: 'Eg. Civil, Criminal, Family etc.',
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your practice area';
-                                } else if (value.contains('_') ||
-                                    value.contains('.') ||
-                                    value.contains(r'[0-9]')) {
-                                  return 'It should not contain special characters or numbers';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          20.verticalSpace,
-                          SizedBox(
-                            child: CustomTextField(
-                              keyboardType: TextInputType.text,
-                              suffix: null,
-                              controller: vModel.hourlyController,
-                              hintText: 'Fees in PKR',
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your fees';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          20.verticalSpace,
-                          SizedBox(
-                            child: CustomTextField(
-                              keyboardType: TextInputType.text,
-                              suffix: null,
-                              controller: vModel.locationController,
-                              hintText: 'Where is your office situated?',
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your office address';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ],
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    // mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Appointment',
+                        textAlign: TextAlign.center,
+                        style: Style.bol30ptb,
                       ),
-                    ),
-                  ),
-                  20.verticalSpace,
-                  Container(
-                    child: vModel.dropDownConsultation(),
-                  ),
-                  // 20.verticalSpace,
-                  // Container(
-                  //     // child: vModel.phoneNumberField(),
-                  //     ),
-                  // 20.verticalSpace,
-                  const Spacer(),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 0.03.sh),
-                    child: ElevatedButton(
-                      style: vModel.b1style,
-                      onPressed: () {
-                        // print(vModel.fnameController.text);
-                        // print(vModel.lnameController.text);
-                        // print(vModel.phoneController.text);
-                        // vModel.navigateToTiming();
-                        vModel.navigateToExperience();
-                      },
-                      child: Text(
-                        'Next',
-                        style: Style.semiBold20ptw,
+                      0.02.sh.verticalSpace,
+                      SizedBox(
+                        width: 0.75.sw,
+                        child: Text(
+                          'Provide us your appointment details.',
+                          style: Style.medium14ptb,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    ),
+                      0.03.sh.verticalSpace,
+                      vModel.area(),
+                      20.verticalSpace,
+                      SizedBox(
+                        child: Form(
+                          key: vModel.formKey,
+                          child: Column(
+                            children: [
+                              // SizedBox(
+                              //   child: CustomTextField(
+                              //     keyboardType: TextInputType.text,
+                              //     suffix: null,
+                              //     controller: vModel.practiceController,
+                              //     hintText: 'Eg. Civil, Criminal, Family etc.',
+                              //     validator: (value) {
+                              //       if (value!.isEmpty) {
+                              //         return 'Please enter your practice area';
+                              //       } else if (value.contains('_') ||
+                              //           value.contains('.') ||
+                              //           value.contains(r'[0-9]')) {
+                              //         return 'It should not contain special characters or numbers';
+                              //       }
+                              //       return null;
+                              //     },
+                              //   ),
+                              // ),
+                              20.verticalSpace,
+                              SizedBox(
+                                child: CustomTextField(
+                                  keyboardType: TextInputType.text,
+                                  suffix: null,
+                                  controller: vModel.hourlyController,
+                                  hintText: 'Fees in PKR',
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Please enter your fees';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                              20.verticalSpace,
+                              SizedBox(
+                                child: CustomTextField(
+                                  keyboardType: TextInputType.text,
+                                  suffix: null,
+                                  controller: vModel.locationController,
+                                  hintText: 'Where is your office situated?',
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Please enter your office address';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      20.verticalSpace,
+                      Container(
+                        child: vModel.dropDownConsultation(),
+                      ),
+                      // 0.22.sh.verticalSpace,
+                      20.verticalSpace,
+                      Container(
+                        margin: EdgeInsets.only(bottom: 0.03.sh),
+                        child: ElevatedButton(
+                          style: vModel.b1style,
+                          onPressed: () {
+                            vModel.navigateToExperience();
+                          },
+                          child: Text(
+                            'Next',
+                            style: Style.semiBold20ptw,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

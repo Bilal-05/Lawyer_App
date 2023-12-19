@@ -73,11 +73,13 @@ class StartVM extends BaseViewModel {
   googleSignIn() async {
     setBusy(true);
     await signInWithGoogle();
-    setBusy(false);
+    Future.delayed(const Duration(seconds: 2), () {
+      setBusy(false);
+    });
+    log('done');
   }
 
   signInWithGoogle() async {
-    setBusy(true);
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -87,7 +89,6 @@ class StartVM extends BaseViewModel {
 
     // Create a new credential
     if (googleAuth == null) {
-      setBusy(false);
       return;
     }
     final credential = GoogleAuthProvider.credential(
@@ -98,7 +99,6 @@ class StartVM extends BaseViewModel {
     // Once signed in, return the UserCredential
     await FirebaseAuth.instance.signInWithCredential(credential);
 
-    setBusy(false);
     // navigationService.replaceWithView();
     navigateToView();
   }

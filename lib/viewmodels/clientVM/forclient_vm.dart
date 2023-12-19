@@ -70,14 +70,22 @@ class ClientVM extends BaseViewModel {
   getProfileImage() async {
     await dialogService
         .showConfirmationDialog(
-          title: 'Profile Photo',
-          description: 'Please select a profile photo',
-          cancelTitle: 'Gallery',
-          confirmationTitle: 'Camera',
-        )
+      title: 'Profile Photo',
+      description: 'Please select a profile photo',
+      cancelTitle: 'Gallery',
+      confirmationTitle: 'Camera',
+    )
         .then(
-          (value) => (value!.confirmed) ? openCamera() : openGallery(),
-        );
+      (value) {
+        if (value != null) {
+          if (value.confirmed) {
+            openCamera();
+          } else {
+            openGallery();
+          }
+        } else {}
+      },
+    );
 
     if (profileImage != null) {
       await addDP();
@@ -114,7 +122,7 @@ class ClientVM extends BaseViewModel {
   }
 
   add() async {
-    // await addDP();
+    await addDP();
     await getProfileUrl();
     log(userService.profilePhotoNetworkUrl!);
     userService.fullName = fullnameController.text;

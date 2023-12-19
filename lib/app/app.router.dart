@@ -5,8 +5,10 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i24;
+import 'package:flutter/material.dart' as _i29;
 import 'package:flutter/material.dart';
+import 'package:lawyer_app/views/appointment_view/appointment_view.dart'
+    as _i25;
 import 'package:lawyer_app/views/client_view/contact_info_view.dart' as _i21;
 import 'package:lawyer_app/views/client_view/education_view.dart' as _i15;
 import 'package:lawyer_app/views/client_view/experience_view.dart' as _i23;
@@ -29,11 +31,16 @@ import 'package:lawyer_app/views/new_password_view/new_password_view.dart'
     as _i8;
 import 'package:lawyer_app/views/onboarding_view/onboarding_view.dart' as _i9;
 import 'package:lawyer_app/views/otp_view/otp_view.dart' as _i7;
+import 'package:lawyer_app/views/profile_view/profile_view.dart' as _i24;
 import 'package:lawyer_app/views/register_view/register_view.dart' as _i5;
+import 'package:lawyer_app/views/request_view/request_view.dart' as _i26;
+import 'package:lawyer_app/views/response_view.dart/response_view.dart' as _i27;
 import 'package:lawyer_app/views/splash_view/splash_view.dart' as _i2;
 import 'package:lawyer_app/views/start_view/start_view.dart' as _i3;
+import 'package:lawyer_app/views/user_profile_view/user_profile_view.dart'
+    as _i28;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i25;
+import 'package:stacked_services/stacked_services.dart' as _i30;
 
 class Routes {
   static const splashView = '/';
@@ -80,6 +87,16 @@ class Routes {
 
   static const experienceView = '/experience-view';
 
+  static const profileView = '/profile-view';
+
+  static const appointmentView = '/appointment-view';
+
+  static const requestView = '/request-view';
+
+  static const responseView = '/response-view';
+
+  static const userProfileView = '/user-profile-view';
+
   static const all = <String>{
     splashView,
     startView,
@@ -103,6 +120,11 @@ class Routes {
     contactInfoView,
     forgotSelectView,
     experienceView,
+    profileView,
+    appointmentView,
+    requestView,
+    responseView,
+    userProfileView,
   };
 }
 
@@ -196,138 +218,192 @@ class StackedRouter extends _i1.RouterBase {
       Routes.experienceView,
       page: _i23.ExperienceView,
     ),
+    _i1.RouteDef(
+      Routes.profileView,
+      page: _i24.ProfileView,
+    ),
+    _i1.RouteDef(
+      Routes.appointmentView,
+      page: _i25.AppointmentView,
+    ),
+    _i1.RouteDef(
+      Routes.requestView,
+      page: _i26.RequestView,
+    ),
+    _i1.RouteDef(
+      Routes.responseView,
+      page: _i27.ResponseView,
+    ),
+    _i1.RouteDef(
+      Routes.userProfileView,
+      page: _i28.UserProfileView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.SplashView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.SplashView(),
         settings: data,
       );
     },
     _i3.StartView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartView(),
         settings: data,
       );
     },
     _i4.LoginView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.LoginView(),
         settings: data,
       );
     },
     _i5.RegisterView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.RegisterView(),
         settings: data,
       );
     },
     _i6.ForgotView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ForgotView(),
         settings: data,
       );
     },
     _i7.OtpView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.OtpView(),
         settings: data,
       );
     },
     _i8.NewPasswordView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.NewPasswordView(),
         settings: data,
       );
     },
     _i9.OnBoardingView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.OnBoardingView(),
         settings: data,
       );
     },
     _i10.LawyerView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.LawyerView(),
         settings: data,
       );
     },
     _i11.CnicView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.CnicView(),
         settings: data,
       );
     },
     _i12.UploadCnicView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.UploadCnicView(),
         settings: data,
       );
     },
     _i13.ClientView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.ClientView(),
         settings: data,
       );
     },
     _i14.UploadCnicBackView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i14.UploadCnicBackView(),
         settings: data,
       );
     },
     _i15.EducationView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i15.EducationView(),
         settings: data,
       );
     },
     _i16.TimingView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i16.TimingView(),
         settings: data,
       );
     },
     _i17.BarFrontView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i17.BarFrontView(),
         settings: data,
       );
     },
     _i18.BarBackView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i18.BarBackView(),
         settings: data,
       );
     },
     _i19.ForAppointmentView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i19.ForAppointmentView(),
         settings: data,
       );
     },
     _i20.MainMenuView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i20.MainMenuView(),
         settings: data,
       );
     },
     _i21.ContactInfoView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i21.ContactInfoView(),
         settings: data,
       );
     },
     _i22.ForgotSelectView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i22.ForgotSelectView(),
         settings: data,
       );
     },
     _i23.ExperienceView: (data) {
-      return _i24.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i23.ExperienceView(),
+        settings: data,
+      );
+    },
+    _i24.ProfileView: (data) {
+      final args = data.getArgs<ProfileViewArguments>(nullOk: false);
+      return _i29.MaterialPageRoute<dynamic>(
+        builder: (context) =>
+            _i24.ProfileView(key: args.key, lawyerUid: args.lawyerUid),
+        settings: data,
+      );
+    },
+    _i25.AppointmentView: (data) {
+      final args = data.getArgs<AppointmentViewArguments>(nullOk: false);
+      return _i29.MaterialPageRoute<dynamic>(
+        builder: (context) => _i25.AppointmentView(
+            key: args.key, data: args.data, timing: args.timing),
+        settings: data,
+      );
+    },
+    _i26.RequestView: (data) {
+      return _i29.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i26.RequestView(),
+        settings: data,
+      );
+    },
+    _i27.ResponseView: (data) {
+      return _i29.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i27.ResponseView(),
+        settings: data,
+      );
+    },
+    _i28.UserProfileView: (data) {
+      return _i29.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i28.UserProfileView(),
         settings: data,
       );
     },
@@ -340,7 +416,64 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i25.NavigationService {
+class ProfileViewArguments {
+  const ProfileViewArguments({
+    this.key,
+    required this.lawyerUid,
+  });
+
+  final _i29.Key? key;
+
+  final String lawyerUid;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "lawyerUid": "$lawyerUid"}';
+  }
+
+  @override
+  bool operator ==(covariant ProfileViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.lawyerUid == lawyerUid;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ lawyerUid.hashCode;
+  }
+}
+
+class AppointmentViewArguments {
+  const AppointmentViewArguments({
+    this.key,
+    required this.data,
+    required this.timing,
+  });
+
+  final _i29.Key? key;
+
+  final Map<dynamic, dynamic> data;
+
+  final List<dynamic> timing;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "data": "$data", "timing": "$timing"}';
+  }
+
+  @override
+  bool operator ==(covariant AppointmentViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.data == data && other.timing == timing;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ data.hashCode ^ timing.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i30.NavigationService {
   Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -649,6 +782,84 @@ extension NavigatorStateExtension on _i25.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToProfileView({
+    _i29.Key? key,
+    required String lawyerUid,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.profileView,
+        arguments: ProfileViewArguments(key: key, lawyerUid: lawyerUid),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToAppointmentView({
+    _i29.Key? key,
+    required Map<dynamic, dynamic> data,
+    required List<dynamic> timing,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.appointmentView,
+        arguments:
+            AppointmentViewArguments(key: key, data: data, timing: timing),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToRequestView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.requestView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToResponseView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.responseView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToUserProfileView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.userProfileView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -951,6 +1162,84 @@ extension NavigatorStateExtension on _i25.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.experienceView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithProfileView({
+    _i29.Key? key,
+    required String lawyerUid,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.profileView,
+        arguments: ProfileViewArguments(key: key, lawyerUid: lawyerUid),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithAppointmentView({
+    _i29.Key? key,
+    required Map<dynamic, dynamic> data,
+    required List<dynamic> timing,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.appointmentView,
+        arguments:
+            AppointmentViewArguments(key: key, data: data, timing: timing),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithRequestView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.requestView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithResponseView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.responseView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithUserProfileView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.userProfileView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

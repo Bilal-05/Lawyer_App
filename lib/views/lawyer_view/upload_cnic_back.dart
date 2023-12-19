@@ -1,12 +1,6 @@
-// import 'dart:developer';
-// import 'dart:io';
-// import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/colors.dart';
-// import 'package:lawyer_app/theme/colors.dart';
-// import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/lawyerVM/upload_vm.dart';
 import 'package:stacked/stacked.dart';

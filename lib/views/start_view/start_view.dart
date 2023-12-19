@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/startVM/start_vm.dart';
-// import 'package:lawyer_app/views/start_view/start_vm.dart';
 import 'package:stacked/stacked.dart';
 
 class StartView extends StatelessWidget {
@@ -12,7 +11,7 @@ class StartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.nonReactive(
+    return ViewModelBuilder.reactive(
       viewModelBuilder: () => StartVM(),
       onViewModelReady: (viewModel) => viewModel.initialize(),
       builder: (ctx, vModel, child) {
@@ -23,8 +22,6 @@ class StartView extends StatelessWidget {
               width: 1.sh,
               height: 1.sh,
               margin: EdgeInsets.only(
-                // right: 0.05.sw,
-                // left: 0.05.sw,
                 top: 0.02.sh,
               ),
               child: Center(

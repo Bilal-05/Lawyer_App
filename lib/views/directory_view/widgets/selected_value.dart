@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lawyer_app/theme/textstyle.dart';
 
 class MySelectionItem extends StatelessWidget {
   final String title;
@@ -13,7 +14,7 @@ class MySelectionItem extends StatelessWidget {
     return SizedBox(
       height: 50.w,
       child: isForList
-          ? Container(
+          ? SizedBox(
               height: 0.5.sh,
               child: _buildItem(context),
               // padding: const EdgeInsets.all(10.0),
@@ -37,7 +38,10 @@ class MySelectionItem extends StatelessWidget {
     return Container(
       width: 1.sw,
       alignment: Alignment.center,
-      child: Text(title),
+      child: Text(
+        title,
+        style: Style.medium14ptb.copyWith(fontSize: 12.sp),
+      ),
     );
   }
 }

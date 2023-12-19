@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:flutter/material.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
@@ -72,6 +73,10 @@ class HomeVM extends BaseViewModel {
     notifyListeners();
   }
 
+  navigateToProfile(lawyerUId) {
+    navigationService.navigateToProfileView(lawyerUid: lawyerUId);
+  }
+
   Future<void> getBarUrl() async {
     final frontRef = storageRef.ref().child(
         "images/barFront/${FirebaseAuth.instance.currentUser!.uid}_bar_front.jpeg");
@@ -124,7 +129,7 @@ class HomeVM extends BaseViewModel {
   eraseData() async {
     FirebaseAuth.instance.signOut();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
+    GoogleSignIn().signOut();
     log(prefs.getBool('isLogin').toString());
     log(prefs.getBool('firstLogin').toString());
     log(prefs.getString('documentID').toString());

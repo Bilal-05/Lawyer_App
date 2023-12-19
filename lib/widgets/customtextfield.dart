@@ -28,7 +28,9 @@ class CustomTextField extends StatelessWidget {
         builder: (context, vModel, child) {
           return TextFormField(
             readOnly: hintText == 'Rating' ? true : false,
-            maxLines: hintText == 'Bio' ? null : 1,
+            maxLines: hintText == 'Bio' || hintText == 'Describe your problem'
+                ? null
+                : 1,
             keyboardType: keyboardType,
             obscureText:
                 hintText == 'Password' || hintText == 'Confirm Password'

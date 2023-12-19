@@ -11,6 +11,7 @@ import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/homeVM/home_vm.dart';
 import 'package:lawyer_app/views/home_view/widgets/categories.dart';
 import 'package:lawyer_app/views/home_view/widgets/top_lawyers.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeView extends StatelessWidget {
@@ -29,8 +30,6 @@ class HomeView extends StatelessWidget {
                 child: Container(
                   margin: EdgeInsets.only(
                     top: 0.02.sh,
-                    left: 0.05.sw,
-                    right: 0.05.sw,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +42,8 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
                       20.verticalSpace,
-                      SizedBox(
+                      Container(
+                        margin: EdgeInsets.only(left: 0.05.sw),
                         child: FutureBuilder<DocumentSnapshot>(
                           future: vModel.users
                               .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -68,9 +68,6 @@ class HomeView extends StatelessWidget {
                                     as Map<String, dynamic>;
                                 vModel.userService.userData = snapshot.data!
                                     .data() as Map<String, dynamic>;
-                                // vModel.saveData(data);
-                                // vModel.userService.userData = snapshot.data!
-                                //     .data() as Map<String, dynamic>;
                               }
 
                               return data['userType'] == 'client'
@@ -89,40 +86,40 @@ class HomeView extends StatelessWidget {
                                         );
                             }
 
-                            // return CircularProgressIndicator(
-                            //   color: AppColors.primaryColor,
-                            // );
-                            return SkeletonLoader(
-                              duration: const Duration(seconds: 1),
-                              startColor: AppColors.primaryColor.withOpacity(1),
-                              endColor: AppColors.primaryColor.withOpacity(0.7),
-                              loading: true,
-                              child: Text(
-                                'Hello Sir/Madam,',
-                                style: Style.semiBold20ptb,
+                            return SizedBox(
+                              child: Skeletonizer(
+                                enabled: true,
+                                containersColor: AppColors.primaryColor,
+                                child: Container(
+                                  width: 100.w,
+                                  height: 20.h,
+                                  color: AppColors.primaryColor,
+                                ),
                               ),
                             );
                           },
                         ),
-                        // child: Text('Hello'),
                       ),
                       5.verticalSpace,
-                      SizedBox(
+                      Container(
+                        margin: EdgeInsets.only(left: 0.05.sw),
                         width: 0.75.sw,
                         child: Text(
                           'Lets find,',
                           style: Style.bol30ptb.copyWith(fontSize: 25.sp),
                         ),
                       ),
-                      SizedBox(
+                      Container(
+                        margin: EdgeInsets.only(left: 0.05.sw),
                         width: 0.75.sw,
                         child: Text(
-                          'The best lawyer to help you',
+                          'The best lawyer to help you out!',
                           style: Style.semiBold20ptb,
                         ),
                       ),
                       20.verticalSpace,
-                      SizedBox(
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
                         child: Row(
                           children: [
                             Text(
@@ -138,9 +135,12 @@ class HomeView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const Categories(),
+                      Container(
+                          margin: EdgeInsets.only(left: 0.05.sw),
+                          child: const Categories()),
                       20.verticalSpace,
-                      SizedBox(
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
                         child: Row(
                           children: [
                             Text(
@@ -151,7 +151,10 @@ class HomeView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const TopLawyers(),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
+                        child: const TopLawyers(),
+                      ),
                     ],
                   ),
                 ),

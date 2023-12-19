@@ -245,12 +245,18 @@ class DirectoryView extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: vModel.foundItems!.length,
                           itemBuilder: (context, index) {
-                            return SizedBox(
+                            return Container(
+                              margin: EdgeInsets.symmetric(horizontal: 0.02.sw),
                               // margin: const EdgeInsets.all(10),
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  vModel.navigateToProfile(
+                                      vModel.foundItems![index]['uid']);
+                                },
                                 child: Container(
-                                  margin: EdgeInsets.only(top: 0.01.sh),
+                                  margin: EdgeInsets.only(
+                                    top: 0.01.sh,
+                                  ),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(
@@ -259,55 +265,63 @@ class DirectoryView extends StatelessWidget {
                                     ),
                                   ),
                                   child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Column(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                              top: 0.02.sh,
-                                              left: 0.02.sw,
-                                              right: 0.02.sw,
-                                            ),
-                                            child: CircleAvatar(
-                                              radius: 30.r,
-                                              backgroundImage: NetworkImage(
-                                                vModel.foundItems![index]
-                                                    ['profilePhotoNetworkUrl'],
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          left: 0.05.sw,
+                                          // right: 0.02.sw,
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                top: 0.02.sh,
+                                                // left: 0.05.sw,
+                                                // right: 0.02.sw,
+                                              ),
+                                              child: CircleAvatar(
+                                                radius: 30.r,
+                                                backgroundImage: NetworkImage(
+                                                  vModel.foundItems![index][
+                                                      'profilePhotoNetworkUrl'],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          10.verticalSpace,
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                bottom: 0.01.sh),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                SizedBox(
-                                                  width: 15.w,
-                                                  child: Image.asset(
-                                                    vModel.star,
-                                                    fit: BoxFit.cover,
+                                            10.verticalSpace,
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  bottom: 0.01.sh),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 15.w,
+                                                    child: Image.asset(
+                                                      vModel.star,
+                                                      fit: BoxFit.cover,
+                                                    ),
                                                   ),
-                                                ),
-                                                5.horizontalSpace,
-                                                SizedBox(
-                                                  // margin: EdgeInsets.only(bottom: 0.01.sh),
-                                                  child: Text(
-                                                    vModel.foundItems![index]
-                                                        ['rating'],
-                                                    style: Style.regular14ptb,
+                                                  5.horizontalSpace,
+                                                  SizedBox(
+                                                    // margin: EdgeInsets.only(bottom: 0.01.sh),
+                                                    child: Text(
+                                                      vModel.foundItems![index]
+                                                          ['rating'],
+                                                      style: Style.regular14ptb,
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                      20.horizontalSpace,
+                                      // 15.horizontalSpace,
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -343,7 +357,10 @@ class DirectoryView extends StatelessWidget {
                                                     BorderRadius.circular(10),
                                               ),
                                             ),
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              vModel.navigateToProfile(vModel
+                                                  .foundItems![index]['uid']);
+                                            },
                                             child: Text(
                                               'Appointment',
                                               style: Style.medium14ptb.copyWith(

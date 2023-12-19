@@ -124,14 +124,22 @@ class LawyerVM extends BaseViewModel {
   getProfileImage() async {
     await dialogService
         .showConfirmationDialog(
-          title: 'Profile Photo',
-          description: 'Please select a profile photo',
-          cancelTitle: 'Gallery',
-          confirmationTitle: 'Camera',
-        )
+      title: 'Profile Photo',
+      description: 'Please select a profile photo',
+      cancelTitle: 'Gallery',
+      confirmationTitle: 'Camera',
+    )
         .then(
-          (value) => (value!.confirmed) ? openCamera() : openGallery(),
-        );
+      (value) {
+        if (value != null) {
+          if (value.confirmed) {
+            openCamera();
+          } else {
+            openGallery();
+          }
+        } else {}
+      },
+    );
 
     if (profileImage != null) {
       await addDP();
@@ -170,6 +178,7 @@ class LawyerVM extends BaseViewModel {
 
   add() async {
     setBusy(true);
+    await addDP();
     await getProfileUrl();
     await Future.delayed(const Duration(seconds: 5));
     log(userService.profilePhotoNetworkUrl!);

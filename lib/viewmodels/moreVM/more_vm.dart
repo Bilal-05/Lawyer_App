@@ -12,8 +12,9 @@ import 'package:stacked_services/stacked_services.dart';
 class MoreVM extends BaseViewModel {
   final navigationService = locator<NavigationService>();
   final userService = locator<UserService>();
+  final user = FirebaseAuth.instance.currentUser;
 
-  eraseData() async {
+  signOut() async {
     FirebaseAuth.instance.signOut();
     GoogleSignIn().signOut();
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -28,5 +29,17 @@ class MoreVM extends BaseViewModel {
     log(prefs.getBool('firstLogin').toString());
     log(prefs.getString('documentID').toString());
     navigationService.replaceWithStartView();
+  }
+
+  goToRequest() {
+    navigationService.navigateToRequestView();
+  }
+
+  goToRespone() {
+    navigationService.navigateToResponseView();
+  }
+
+  goToProfile() {
+    navigationService.navigateToUserProfileView();
   }
 }

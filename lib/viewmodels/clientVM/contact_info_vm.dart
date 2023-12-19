@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -24,6 +25,12 @@ class ContactInfoVM extends BaseViewModel {
   PhoneNumber number = PhoneNumber(isoCode: 'PK');
   bool correctNumber = false;
   String numberText = '';
+
+  onInit() {
+    final user = FirebaseAuth.instance.currentUser;
+    emailController.text = user!.email!;
+    notifyListeners();
+  }
 
   Widget phoneNumberField() {
     return InternationalPhoneNumberInput(

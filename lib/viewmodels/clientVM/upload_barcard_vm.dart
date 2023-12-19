@@ -237,16 +237,22 @@ class BarCardVM extends BaseViewModel {
     setBusy(true);
     await addFront();
     snackbarService.showSnackbar(
-        message: 'Wait for a while',
-        duration: const Duration(seconds: 1),
-        title: 'Hold');
-    await Future.delayed(const Duration(seconds: 1));
+      message: 'Wait for a while',
+      duration: const Duration(seconds: 1),
+      title: 'Hold',
+    );
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
     // saveBarFrontImage();
     snackbarService.showSnackbar(
-        message: 'Front side of Bar License uploaded successfully',
-        duration: const Duration(seconds: 1),
-        title: 'Success');
-    await Future.delayed(const Duration(seconds: 1));
+      message: 'Front side of Bar License uploaded successfully',
+      duration: const Duration(seconds: 1),
+      title: 'Success',
+    );
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
     setBusy(false);
     navigationService.replaceWithBarBackView();
     // navigationService.replaceWithUploadBarBackView();
@@ -256,21 +262,29 @@ class BarCardVM extends BaseViewModel {
     setBusy(true);
     // await addBack();
     snackbarService.showSnackbar(
-        message: 'Wait for a while',
-        duration: const Duration(seconds: 3),
-        title: 'Hold');
-    await Future.delayed(const Duration(seconds: 5));
+      message: 'Wait for a while',
+      duration: const Duration(seconds: 3),
+      title: 'Hold',
+    );
+    await Future.delayed(
+      const Duration(seconds: 5),
+    );
     await setBool();
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(
+      const Duration(seconds: 5),
+    );
     await getBarUrl();
     await userService.addLawyerinLawyer(false);
     await userService.addLawyerinUser(false);
     // await saveBarBackImage();
     snackbarService.showSnackbar(
-        message: 'Back side of Bar License uploaded successfully',
-        duration: const Duration(seconds: 1),
-        title: 'Success');
-    await Future.delayed(const Duration(seconds: 1));
+      message: 'Back side of Bar License uploaded successfully',
+      duration: const Duration(seconds: 1),
+      title: 'Success',
+    );
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
     setBusy(false);
     navigationService.replaceWithMainMenuView();
   }

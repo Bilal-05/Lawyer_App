@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/homeVM/home_vm.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:stacked/stacked.dart';
 
 class Categories extends StatelessWidget {
@@ -29,21 +30,17 @@ class Categories extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: 10,
+                  itemCount: 2,
                   itemBuilder: (context, index) {
-                    // DocumentSnapshot category = snapshot.data!.docs[index];
-                    return Container(
-                      margin: const EdgeInsets.all(5),
-                      child: SkeletonLoader(
-                        loading: true,
-                        startColor: AppColors.primaryColor,
-                        endColor: AppColors.primaryColor.withOpacity(0.7),
+                    return Skeletonizer(
+                      enabled: true,
+                      child: Container(
+                        margin: const EdgeInsets.all(5),
                         child: Hero(
                           tag: '$index',
                           child: InkWell(
                             onTap: () async {
                               vModel.setFalse();
-                              // vModel.showCnic();
                             },
                             child: Container(
                               margin: EdgeInsets.only(right: 0.05.sw),
@@ -66,25 +63,23 @@ class Categories extends StatelessWidget {
                                           width: 2,
                                           color: AppColors.greyShade,
                                         ),
+                                        color: AppColors.primaryColor,
                                         borderRadius: BorderRadius.circular(10),
-                                        image: const DecorationImage(
-                                          image: NetworkImage(
-                                            'https://media.istockphoto.com/id/1349700398/photo/paper-cut-family-judge-gavel-and-book-family-law.jpg?s=612x612&w=0&k=20&c=l2Lg7g0GR_XYxxQop3XXoHj33uc1oOMe2N9VEa8ZiQA=',
-                                          ),
-                                          fit: BoxFit.cover,
-                                        ),
                                       ),
                                     ),
                                   ),
                                   10.verticalSpace,
                                   Container(
                                     margin: EdgeInsets.only(right: 5.w),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: AppColors.primaryColor,
+                                    ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Area',
-                                        style: Style.regular16ptb,
-                                        textAlign: TextAlign.center,
+                                      child: SizedBox(
+                                        width: 100.w,
+                                        height: 10.h,
                                       ),
                                     ),
                                   )
@@ -101,7 +96,9 @@ class Categories extends StatelessWidget {
             }
 
             return Container(
-              margin: EdgeInsets.only(top: 0.02.sh),
+              margin: EdgeInsets.only(
+                top: 0.02.sh,
+              ),
               height: 0.1.sh,
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
@@ -116,7 +113,6 @@ class Categories extends StatelessWidget {
                     child: InkWell(
                       onTap: () async {
                         vModel.setFalse();
-                        // vModel.showCnic();
                       },
                       child: Container(
                         margin: EdgeInsets.only(right: 0.05.sw),

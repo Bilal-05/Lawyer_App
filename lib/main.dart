@@ -26,19 +26,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(360, 800),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        // Use builder only if you need to use library outside ScreenUtilInit context
-        builder: (_, child) {
-          return MaterialApp(
-            navigatorKey: StackedService.navigatorKey,
-            onGenerateRoute: StackedRouter().onGenerateRoute,
-            theme: ThemeData(
-              fontFamily: 'Poppins',
-            ),
-            // home: const ForAppointmentView(),
-          );
-        });
+      designSize: const Size(360, 800),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      // Use builder only if you need to use library outside ScreenUtilInit context
+      builder: (_, child) {
+        return MaterialApp(
+          navigatorKey: StackedService.navigatorKey,
+          onGenerateRoute: StackedRouter().onGenerateRoute,
+          theme: ThemeData(
+            fontFamily: 'Poppins',
+          ),
+          // home: const ForAppointmentView(),
+        );
+      },
+    );
   }
 }

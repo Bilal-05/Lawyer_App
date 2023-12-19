@@ -1,6 +1,7 @@
 import 'package:lawyer_app/services/appbar_service.dart';
 import 'package:lawyer_app/services/image_helper_service.dart';
 import 'package:lawyer_app/services/user_service.dart';
+import 'package:lawyer_app/views/appointment_view/appointment_view.dart';
 import 'package:lawyer_app/views/client_view/contact_info_view.dart';
 import 'package:lawyer_app/views/client_view/education_view.dart';
 import 'package:lawyer_app/views/client_view/experience_view.dart';
@@ -20,9 +21,13 @@ import 'package:lawyer_app/views/mainmenu_view/mainmenu_view.dart';
 import 'package:lawyer_app/views/new_password_view/new_password_view.dart';
 import 'package:lawyer_app/views/onboarding_view/onboarding_view.dart';
 import 'package:lawyer_app/views/otp_view/otp_view.dart';
+import 'package:lawyer_app/views/profile_view/profile_view.dart';
 import 'package:lawyer_app/views/register_view/register_view.dart';
+import 'package:lawyer_app/views/request_view/request_view.dart';
+import 'package:lawyer_app/views/response_view.dart/response_view.dart';
 import 'package:lawyer_app/views/splash_view/splash_view.dart';
 import 'package:lawyer_app/views/start_view/start_view.dart';
+import 'package:lawyer_app/views/user_profile_view/user_profile_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -49,7 +54,12 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: MainMenuView),
     MaterialRoute(page: ContactInfoView),
     MaterialRoute(page: ForgotSelectView),
-    MaterialRoute(page: ExperienceView)
+    MaterialRoute(page: ExperienceView),
+    MaterialRoute(page: ProfileView),
+    MaterialRoute(page: AppointmentView),
+    MaterialRoute(page: RequestView),
+    MaterialRoute(page: ResponseView),
+    MaterialRoute(page: UserProfileView)
   ],
   dependencies: [
     Singleton(classType: NavigationService),

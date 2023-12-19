@@ -12,6 +12,7 @@ class ContactInfoView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => ContactInfoVM(),
+      onViewModelReady: (viewModel) => viewModel.onInit(),
       builder: (context, vModel, child) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
