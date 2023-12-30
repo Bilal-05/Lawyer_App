@@ -17,6 +17,7 @@ class DirectoryView extends StatelessWidget {
       onViewModelReady: (viewModel) => viewModel.initialize(),
       builder: (context, vModel, child) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: InkWell(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SafeArea(
@@ -62,7 +63,10 @@ class DirectoryView extends StatelessWidget {
                                 'Search Lawyer, Practice Area, Designation',
                             prefixIcon: const Icon(Icons.search),
                             suffixIcon: IconButton(
-                              onPressed: () {
+                              onPressed: () async {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                // await Future.delayed(
+                                //     const Duration(seconds: 2));
                                 vModel.openSheet();
                               },
                               icon: Icon(

@@ -105,6 +105,11 @@ class LawyerVM extends BaseViewModel {
         notifyListeners();
       }
     }
+
+    if (profileImage != null) {
+      await addDP();
+      await getProfileUrl();
+    }
   }
 
   openGallery() async {
@@ -118,6 +123,11 @@ class LawyerVM extends BaseViewModel {
         profileImage = File(croppedFile.path);
         notifyListeners();
       }
+    }
+
+    if (profileImage != null) {
+      await addDP();
+      await getProfileUrl();
     }
   }
 
@@ -158,6 +168,12 @@ class LawyerVM extends BaseViewModel {
   String? profileNetworkUrl;
 
   getProfileUrl() async {
+    snackBarService.showSnackbar(
+      message: 'Uploading Image',
+      title: 'Please wait..',
+      duration: const Duration(seconds: 3),
+    );
+    setBusy(true);
     final profileRef = storageRef
         .child("images/DP/${FirebaseAuth.instance.currentUser!.uid}.jpeg");
 
@@ -165,6 +181,7 @@ class LawyerVM extends BaseViewModel {
 
     userService.profilePhotoNetworkUrl = profileNetworkUrl;
     notifyListeners();
+    setBusy(false);
   }
 
   addDP() async {
@@ -178,8 +195,6 @@ class LawyerVM extends BaseViewModel {
 
   add() async {
     setBusy(true);
-    await addDP();
-    await getProfileUrl();
     await Future.delayed(const Duration(seconds: 5));
     log(userService.profilePhotoNetworkUrl!);
     userService.phoneNumber = numberText;

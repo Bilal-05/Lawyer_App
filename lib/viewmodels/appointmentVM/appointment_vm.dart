@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,11 +8,13 @@ import 'package:intl/intl.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
 import 'package:lawyer_app/services/appbar_service.dart';
+import 'package:lawyer_app/services/notification_service.dart';
 import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/views/directory_view/widgets/selected_value.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:http/http.dart' as http;
 
 class AppointmentVM extends BaseViewModel {
   final appBarService = AppBarService();
@@ -20,6 +23,7 @@ class AppointmentVM extends BaseViewModel {
   final userService = locator<UserService>();
   final formKey = GlobalKey<FormState>();
   final snackbarService = locator<SnackbarService>();
+  NotificationService notificationService = NotificationService();
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
@@ -27,8 +31,12 @@ class AppointmentVM extends BaseViewModel {
     snackbarService.showSnackbar(
       title: 'Congralution 🎉',
       message: 'Request Sent',
-      mainButtonTitle: 'OK',
+      duration: const Duration(seconds: 2),
     );
+    navigationService.replaceWithMainMenuView();
+  }
+
+  back() {
     navigationService.back();
   }
 
@@ -100,6 +108,33 @@ class AppointmentVM extends BaseViewModel {
     }
   }
 
+  sendNotification(lawyerDeviceToken, userData) async {
+    log(lawyerDeviceToken);
+    notificationService.getNotificationToken().then((value) async {
+      var data = {
+        'to': lawyerDeviceToken,
+        'priority': 'high',
+        'notification': {
+          'title': 'New Request',
+          'body':
+              'You have a new appointment request from ${userData['fname'] ?? userData['fullName']}',
+        },
+        'data': {
+          'type': 'request',
+        }
+      };
+      await http.post(
+        Uri.parse('https://fcm.googleapis.com/fcm/send'),
+        body: jsonEncode(data),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization':
+              'key=AAAAvOrBp2o:APA91bGiJLvPd8ruBb4eReJJOrUSMdDF7Ovs9sxBJpuSRTa06Rli9Ju6Yonyi6HGXRMwkRfYTvIT4JnPOfoV0mydCXH9219dxtg6n_zOY_aGBzbzEEvo05HwHnuXB7_HKY-2-BXbJNwG',
+        },
+      );
+    });
+  }
+
   setDate(date) {
     selectedDate = date;
     userService.selectedDate = DateFormat('dd-MM-yyyy').format(selectedDate!);
@@ -128,6 +163,7 @@ class AppointmentVM extends BaseViewModel {
   }
 
   initialize(timing) {
+    //context) {
     hour = timing;
     userService.selectedTime = hour[0];
     userService.selectedDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
@@ -135,6 +171,11 @@ class AppointmentVM extends BaseViewModel {
     log(userService.selectedDate!);
     init();
     notifyListeners();
+    // notificationService.requestNotificationPermission();
+    // // notificationService.isRefreshToken();
+    // notificationService.firebaseInit(context);
+    // notificationService.setupInteractMethod(context);
+    // notificationService.getNotificationToken().then((value) {});
   }
 
   init() async {
@@ -182,6 +223,7 @@ class AppointmentVM extends BaseViewModel {
               'date': userService.selectedDate,
               'time': userService.selectedTime,
               'uid': user.uid,
+              'deviceToken': userData['deviceToken'],
             },
           },
         )

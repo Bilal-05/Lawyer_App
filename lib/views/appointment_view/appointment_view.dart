@@ -18,7 +18,8 @@ class AppointmentView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.nonReactive(
       viewModelBuilder: () => AppointmentVM(),
-      onViewModelReady: (viewModel) => viewModel.initialize(timing),
+      onViewModelReady: (viewModel) =>
+          viewModel.initialize(timing), //, context),
       builder: (context, vModel, child) {
         return Scaffold(
           body: SafeArea(
@@ -34,7 +35,7 @@ class AppointmentView extends StatelessWidget {
                         'Appointment',
                         IconButton(
                           onPressed: () {
-                            vModel.goBack();
+                            vModel.back();
                           },
                           icon: Icon(
                             Icons.arrow_back_ios_new_rounded,
@@ -141,8 +142,10 @@ class AppointmentView extends StatelessWidget {
                                     vModel.selectedDate != null) {
                                   await vModel.sendRequestTo(
                                       data['uid'], vModel.userService.userData);
-
-                                  vModel.navigateToMainMenu();
+                                  await vModel.sendNotification(
+                                      data['deviceToken'],
+                                      vModel.userService.userData);
+                                  vModel.goBack();
                                 }
                               } else {
                                 vModel.snackbarService.showSnackbar(

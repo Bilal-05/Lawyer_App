@@ -164,9 +164,12 @@ class RequestTile extends StatelessWidget {
                       children: [
                         ElevatedButton(
                           style: vModel.b1style,
-                          onPressed: () {
-                            vModel.response(
+                          onPressed: () async {
+                            await vModel.splitDateandTime(userData);
+                            await vModel.response(
                                 userData['uid'].toString(), userData);
+                            // log(vModel.totalMeeting.toString());
+                            // vModel.addMeetingLawyer(userData);
                           },
                           child: Text(
                             'OK',

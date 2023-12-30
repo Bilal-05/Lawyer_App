@@ -45,50 +45,73 @@ class RequestView extends StatelessWidget {
             }
 
             return Scaffold(
-                body: SafeArea(
-              child: Container(
-                margin: EdgeInsets.only(
-                    top: 0.02.sh, left: 0.02.sw, right: 0.02.sw),
-                child: Column(
-                  children: [
-                    vModel.appbarService.customAppBar(
-                      'Requests',
-                      IconButton(
-                        onPressed: () {
-                          vModel.navigation.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                      Container(),
-                    ),
-                    if (snapshot.data!.docs.isEmpty)
-                      Text(
-                        'No Request',
-                        style: Style.semiBold20ptb,
-                      ),
-                    if (snapshot.data!.docs.isNotEmpty)
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: snapshot.data!.docs.length,
-                          itemBuilder: (context, index) {
-                            // ignore: unused_local_variable
-                            DocumentSnapshot data = snapshot.data!.docs[index];
-                            return RequestTile(
-                              userData: data['request'],
-                              index: index + 1,
-                            );
+              body: SafeArea(
+                child: Container(
+                  margin: EdgeInsets.only(
+                      top: 0.02.sh, left: 0.02.sw, right: 0.02.sw),
+                  child: Column(
+                    children: [
+                      vModel.appbarService.customAppBar(
+                        'Requests',
+                        IconButton(
+                          onPressed: () {
+                            vModel.navigation.back();
                           },
+                          icon: Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                            color: AppColors.primaryColor,
+                          ),
                         ),
+                        Container(),
                       ),
-                  ],
+                      if (snapshot.data!.docs.isEmpty)
+                        Text(
+                          'No Request',
+                          style: Style.semiBold20ptb,
+                        ),
+                      if (snapshot.data!.docs.isNotEmpty)
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: (context, index) {
+                              // ignore: unused_local_variable
+                              DocumentSnapshot data =
+                                  snapshot.data!.docs[index];
+                              return RequestTile(
+                                userData: data['request'],
+                                index: index + 1,
+                              );
+                            },
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
-            ));
+            );
           },
         );
+        // return StreamBuilder(
+        //   stream: vModel.meeting.snapshots(),
+        //   builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
+        //     if (snapshots.hasError) {
+        //       log('Error');
+        //     }
+
+        //     if (snapshots.connectionState == ConnectionState.done) {
+        //       if (snapshots.data!.docs.isNotEmpty) {
+        //         for (int i = 0; i < snapshots.data!.docs.length; i++) {
+        //           DocumentSnapshot data = snapshots.data!.docs[i];
+        //           vModel.totalMeeting.add(data['meeting']);
+        //         }
+        //         log('true');
+        //       } else {
+        //         log('Empty');
+        //       }
+        //     }
+        //     return Scaffold();
+        //   },
+        // );
       },
     );
   }

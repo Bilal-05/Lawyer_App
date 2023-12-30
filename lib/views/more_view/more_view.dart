@@ -116,7 +116,9 @@ class MoreView extends StatelessWidget {
                           ),
                           20.verticalSpace,
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              vModel.goToCalendar();
+                            },
                             child: Text(
                               'Calender',
                               style: Style.medium20ptb,

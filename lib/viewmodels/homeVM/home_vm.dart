@@ -1,9 +1,12 @@
 // import 'dart:developer';
 
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:flutter/material.dart';
 import 'package:lawyer_app/app/app.locator.dart';
@@ -11,6 +14,7 @@ import 'package:lawyer_app/app/app.router.dart';
 // import 'package:lawyer_app/app/app.router.dart';
 import 'package:lawyer_app/services/appbar_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lawyer_app/services/notification_service.dart';
 import 'package:lawyer_app/services/user_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
@@ -36,6 +40,7 @@ class HomeVM extends BaseViewModel {
 
 //
   Map<String, dynamic> userData = {};
+  NotificationService notificationService = NotificationService();
 
   // saveData(Map<String, dynamic> data) {
   //   userData = data;
@@ -89,12 +94,16 @@ class HomeVM extends BaseViewModel {
     notifyListeners();
   }
 
-  initialize() async {
+  initialize(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     documentID = prefs.getString('documentID');
-    // cnicFront = '';
-    // cnicBack = '';
-    // getUrl();
+    notificationService.requestNotificationPermission();
+    // notificationService.isRefreshToken();
+    notificationService.firebaseInit(context);
+    notificationService.setupInteractMethod(context);
+    notificationService.getNotificationToken().then((value) {
+      log(value);
+    });
     notifyListeners();
   }
 

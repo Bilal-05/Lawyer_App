@@ -81,7 +81,7 @@ class OnBoardingVM extends BaseViewModel {
             color: const Color(0xff626262).withOpacity(0.10),
           ),
           height: 50,
-          width: 0.75.sw,
+          width: 1.sw,
         ),
         menuItemStyleData: const MenuItemStyleData(
           height: 50,

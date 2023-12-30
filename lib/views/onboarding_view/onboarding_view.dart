@@ -166,7 +166,7 @@ class OnBoardingView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(
-                                  width: 0.75.sw,
+                                  width: 0.50.sw,
                                   child: Text(
                                     'Skip to Home',
                                     textAlign: TextAlign.center,
@@ -220,7 +220,7 @@ class OnBoardingView extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 0.65.sw,
+                                  width: 0.50.sw,
                                   child: Lottie.asset(vModel.looking),
                                 ),
                                 0.02.sh.verticalSpace,

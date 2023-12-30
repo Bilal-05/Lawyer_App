@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lawyer_app/app/app.locator.dart';
 import 'package:lawyer_app/app/app.router.dart';
+import 'package:lawyer_app/services/notification_service.dart';
+import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
@@ -19,6 +21,8 @@ class StartVM extends BaseViewModel {
   bool isLogin = false;
   bool firstLogin = true;
   bool getFirstlogin = true;
+  NotificationService notificationService = NotificationService();
+  final UserService userService = locator<UserService>();
 
   var b1style = ElevatedButton.styleFrom(
     backgroundColor: AppColors.primaryColor,
@@ -66,8 +70,17 @@ class StartVM extends BaseViewModel {
     await checkIsFirstLogin();
   }
 
-  initialize() {
+  initialize(BuildContext context) {
     fetchData();
+    notificationService.requestNotificationPermission();
+    // notificationService.isRefreshToken();
+    notificationService.firebaseInit(context);
+    notificationService.setupInteractMethod(context);
+    notificationService.getNotificationToken().then((value) {
+      log(value);
+      userService.deviceToken = value.toString();
+      debugPrint(userService.deviceToken!);
+    });
   }
 
   googleSignIn() async {

@@ -15,6 +15,7 @@ class LawView extends StatelessWidget {
       viewModelBuilder: () => LawVM(),
       builder: (context, vModel, child) {
         return Scaffold(
+          resizeToAvoidBottomInset: true,
           body: SafeArea(
             child: SizedBox(
               child: Container(

@@ -48,7 +48,7 @@ class DateSelector extends StatelessWidget {
               ),
               10.verticalSpace,
               SizedBox(
-                height: 0.15.sh,
+                height: 0.2.sh,
                 child: DatePicker(
                   vModel.initialDate,
                   daysCount: 31,

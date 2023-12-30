@@ -15,8 +15,8 @@ class MoreVM extends BaseViewModel {
   final user = FirebaseAuth.instance.currentUser;
 
   signOut() async {
-    FirebaseAuth.instance.signOut();
-    GoogleSignIn().signOut();
+    await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     log(prefs.getBool('isLogin').toString());
     log(prefs.getBool('firstLogin').toString());
@@ -29,6 +29,10 @@ class MoreVM extends BaseViewModel {
     log(prefs.getBool('firstLogin').toString());
     log(prefs.getString('documentID').toString());
     navigationService.replaceWithStartView();
+  }
+
+  goToCalendar() {
+    navigationService.navigateToSFCalendarView();
   }
 
   goToRequest() {

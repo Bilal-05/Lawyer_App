@@ -144,7 +144,10 @@ class TopLawyers extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                itemCount: 3,
+                itemCount: snapshot.data!.docs.isNotEmpty &&
+                        snapshot.data!.docs.length < 4
+                    ? snapshot.data!.docs.length
+                    : 3,
                 itemBuilder: (context, index) {
                   DocumentSnapshot user = snapshot.data!.docs[index];
                   vModel.userService.allLawyersData = snapshot.data!.docs;

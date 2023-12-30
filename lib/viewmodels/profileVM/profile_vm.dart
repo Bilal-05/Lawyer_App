@@ -180,7 +180,10 @@ class ProfileVM extends BaseViewModel {
   addAMPM() {
     for (var i = 0; i < hours.length; i++) {
       int time = int.parse(hours[i].split(':')[0]);
-      if (time > 12) {
+
+      if (time == 12) {
+        hours[i] = '$time:00 PM';
+      } else if (time > 12) {
         hours[i] = '${time - 12}:00 PM';
       } else {
         hours[i] = '$time:00 AM';

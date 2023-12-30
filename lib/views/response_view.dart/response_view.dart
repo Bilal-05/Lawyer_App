@@ -12,7 +12,7 @@ class ResponseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.nonReactive(
+    return ViewModelBuilder.reactive(
         viewModelBuilder: () => ResponseVM(),
         builder: ((context, vModel, child) {
           return StreamBuilder<QuerySnapshot>(

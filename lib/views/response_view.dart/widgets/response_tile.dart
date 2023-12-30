@@ -4,6 +4,7 @@ import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/responseVM/response_vm.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class ResponseTile extends StatelessWidget {
   final Map userData;
@@ -127,7 +128,7 @@ class ResponseTile extends StatelessWidget {
                   SizedBox(
                     width: 0.90.sw,
                     child: Text(
-                      "Appointment request ${userData['response']}ed.",
+                      "Appointment request has been ${userData['response'].toString().toLowerCase()}ed.",
                       // overflow: TextOverflow.ellipsis,
                       style: Style.medium14ptb.copyWith(fontSize: 16.sp),
                     ),
@@ -140,8 +141,13 @@ class ResponseTile extends StatelessWidget {
                       children: [
                         ElevatedButton(
                           style: vModel.b1style,
-                          onPressed: () {
+                          onPressed: () async {
                             // vModel.response(userData['uid'].toString(), userData);
+                            // vModel.deleteResponse(userData);
+                            // vModel.sendNotifcation('Reminder', 'Reminder');
+                            SnackbarService().showSnackbar(
+                                message: 'Appointment added in your calendar',
+                                duration: const Duration(seconds: 1));
                           },
                           child: Text(
                             'OK',

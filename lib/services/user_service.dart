@@ -55,6 +55,7 @@ class UserService extends BaseViewModel {
   List? slots;
   String? selectedDate;
   String? selectedTime;
+  String? deviceToken;
 
   final snackbarService = locator<SnackbarService>();
   CollectionReference clients =
@@ -87,6 +88,7 @@ class UserService extends BaseViewModel {
             'backNetworkUrl': backNetworkUrl!,
             'profilePhoto': profilePhoto!,
             'profilePhotoNetworkUrl': profilePhotoNetworkUrl!,
+            'deviceToken': deviceToken!,
           },
         )
         .then(
@@ -126,6 +128,7 @@ class UserService extends BaseViewModel {
             'backNetworkUrl': backNetworkUrl!,
             'profilePhoto': profilePhoto!,
             'profilePhotoNetworkUrl': profilePhotoNetworkUrl!,
+            'deviceToken': deviceToken!,
           },
         )
         .then(
@@ -180,6 +183,7 @@ class UserService extends BaseViewModel {
             'backNetworkUrl': barBackNetworkUrl!,
             'profilePhoto': profilePhoto!,
             'profilePhotoNetworkUrl': profilePhotoNetworkUrl!,
+            'deviceToken': deviceToken!,
           },
         )
         .then(
@@ -234,6 +238,7 @@ class UserService extends BaseViewModel {
             'backNetworkUrl': barBackNetworkUrl!,
             'profilePhoto': profilePhoto!,
             'profilePhotoNetworkUrl': profilePhotoNetworkUrl!,
+            'deviceToken': deviceToken!,
           },
         )
         .then(

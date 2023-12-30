@@ -2,6 +2,7 @@ import 'package:lawyer_app/services/appbar_service.dart';
 import 'package:lawyer_app/services/image_helper_service.dart';
 import 'package:lawyer_app/services/user_service.dart';
 import 'package:lawyer_app/views/appointment_view/appointment_view.dart';
+import 'package:lawyer_app/views/calendar_view/calendar_view.dart';
 import 'package:lawyer_app/views/client_view/contact_info_view.dart';
 import 'package:lawyer_app/views/client_view/education_view.dart';
 import 'package:lawyer_app/views/client_view/experience_view.dart';
@@ -59,7 +60,8 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: AppointmentView),
     MaterialRoute(page: RequestView),
     MaterialRoute(page: ResponseView),
-    MaterialRoute(page: UserProfileView)
+    MaterialRoute(page: UserProfileView),
+    MaterialRoute(page: SFCalendarView),
   ],
   dependencies: [
     Singleton(classType: NavigationService),

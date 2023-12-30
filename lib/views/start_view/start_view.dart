@@ -13,7 +13,7 @@ class StartView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => StartVM(),
-      onViewModelReady: (viewModel) => viewModel.initialize(),
+      onViewModelReady: (viewModel) => viewModel.initialize(context),
       builder: (ctx, vModel, child) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -29,7 +29,7 @@ class StartView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 0.75.sw,
+                      width: 0.50.sw,
                       child: Image.asset(
                         vModel.personLaptop,
                         fit: BoxFit.contain,
