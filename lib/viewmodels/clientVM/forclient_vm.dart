@@ -106,6 +106,7 @@ class ClientVM extends BaseViewModel {
     final profileRef = storageRef
         .child("images/DP/${FirebaseAuth.instance.currentUser!.uid}.jpeg");
 
+    await Future.delayed(const Duration(seconds: 5));
     profileNetworkUrl = await profileRef.getDownloadURL();
 
     userService.profilePhotoNetworkUrl = profileNetworkUrl;

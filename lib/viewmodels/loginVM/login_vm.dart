@@ -100,6 +100,7 @@ class LoginVM extends BaseViewModel {
       clear();
       setBusy(false);
       navigateToView();
+      log('SignedIn');
     } on FirebaseAuthException catch (e) {
       setBusy(false);
       if (e.code == 'invalid-credential') {
@@ -144,10 +145,10 @@ class LoginVM extends BaseViewModel {
   // }
 
   navigateToView() {
-    // if (firstLogin) {
-    navigationService.replaceWithOnBoardingView();
-    // } else {
-    //   navigationService.replaceWithMainMenuView();
-    // }
+    if (firstLogin) {
+      navigationService.replaceWithOnBoardingView();
+    } else {
+      navigationService.replaceWithMainMenuView();
+    }
   }
 }

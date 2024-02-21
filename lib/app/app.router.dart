@@ -35,7 +35,7 @@ import 'package:lawyer_app/views/otp_view/otp_view.dart' as _i7;
 import 'package:lawyer_app/views/profile_view/profile_view.dart' as _i24;
 import 'package:lawyer_app/views/register_view/register_view.dart' as _i5;
 import 'package:lawyer_app/views/request_view/request_view.dart' as _i26;
-import 'package:lawyer_app/views/response_view.dart/response_view.dart' as _i27;
+import 'package:lawyer_app/views/response_view/response_view.dart' as _i27;
 import 'package:lawyer_app/views/splash_view/splash_view.dart' as _i2;
 import 'package:lawyer_app/views/start_view/start_view.dart' as _i3;
 import 'package:lawyer_app/views/user_profile_view/user_profile_view.dart'

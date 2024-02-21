@@ -57,7 +57,7 @@ class HomeView extends StatelessWidget {
                                 ),
                               );
                             }
-
+                            
                             if (snapshot.connectionState ==
                                 ConnectionState.done) {
                               Map<String, dynamic> data = {};

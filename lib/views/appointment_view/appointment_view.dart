@@ -139,13 +139,10 @@ class AppointmentView extends StatelessWidget {
                               if (data['uid'] != user!.uid) {
                                 if (vModel.formKey.currentState!.validate() ||
                                     vModel.hour.isNotEmpty ||
-                                    vModel.selectedDate != null) {
-                                  await vModel.sendRequestTo(
-                                      data['uid'], vModel.userService.userData);
-                                  await vModel.sendNotification(
-                                      data['deviceToken'],
-                                      vModel.userService.userData);
-                                  vModel.goBack();
+                                    vModel.selectedDate != null ||
+                                    vModel.descriptionController.text != '') {
+                                  await vModel.sendRequestTo(data['uid'],
+                                      vModel.userService.userData, data);
                                 }
                               } else {
                                 vModel.snackbarService.showSnackbar(

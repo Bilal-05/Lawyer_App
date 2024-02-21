@@ -18,6 +18,7 @@ class StartVM extends BaseViewModel {
   String personLaptop = 'assets/images/welcomeImage.png';
   final navigationService = locator<NavigationService>();
   String google = 'assets/svg/google.svg';
+  String meeting = 'assets/JSON/meeting.json';
   bool isLogin = false;
   bool firstLogin = true;
   bool getFirstlogin = true;

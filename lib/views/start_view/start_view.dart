@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/startVM/start_vm.dart';
+import 'package:lottie/lottie.dart';
 import 'package:stacked/stacked.dart';
 
 class StartView extends StatelessWidget {
@@ -29,11 +30,9 @@ class StartView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 0.50.sw,
-                      child: Image.asset(
-                        vModel.personLaptop,
-                        fit: BoxFit.contain,
-                      ),
+                      height: 0.4.sh,
+                      width: 1.sw,
+                      child: Lottie.asset(vModel.meeting),
                     ),
                     0.05.sh.verticalSpace,
                     Column(

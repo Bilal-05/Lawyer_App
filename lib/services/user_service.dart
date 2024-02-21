@@ -254,35 +254,4 @@ class UserService extends BaseViewModel {
           },
         );
   }
-
-  // Future<void> getClients() async {
-  //   final user = FirebaseAuth.instance.currentUser;
-  //   // log('inside');
-  //   // // Call the user's CollectionReference to add a new user
-  //   // return clients
-  //   //     .doc(user!.uid.toString())
-  //   //     .get()
-  //   //     .then(
-  //   //       (value) => log("Got data"),
-  //   //     )
-  //   //     .catchError(
-  //   //   (error) {
-  //   //     snackbarService.showSnackbar(
-  //   //       message: error,
-  //   //       title: 'Error',
-  //   //       duration: const Duration(seconds: 2),
-  //   //     );
-  //   //   },
-  //   // );
-  //   return clients
-  //       .doc(user!.uid.toString())
-  //       .get()
-  //       .then((DocumentSnapshot documentSnapshot) {
-  //     if (documentSnapshot.exists) {
-  //       log('Document data: ${documentSnapshot.data()}');
-  //     } else {
-  //       log('Document does not exist on the database');
-  //     }
-  //   });
-  // }
 }

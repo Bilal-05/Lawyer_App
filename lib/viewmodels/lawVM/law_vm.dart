@@ -34,7 +34,6 @@ class LawVM extends BaseViewModel {
 
   search(value) {
     List results = [];
-
     if (value.isEmpty) {
       results = items;
       foundItems = results;

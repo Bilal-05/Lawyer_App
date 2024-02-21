@@ -143,7 +143,7 @@ class ResponseTile extends StatelessWidget {
                           style: vModel.b1style,
                           onPressed: () async {
                             // vModel.response(userData['uid'].toString(), userData);
-                            // vModel.deleteResponse(userData);
+                            vModel.deleteResponse(userData);
                             // vModel.sendNotifcation('Reminder', 'Reminder');
                             SnackbarService().showSnackbar(
                                 message: 'Appointment added in your calendar',

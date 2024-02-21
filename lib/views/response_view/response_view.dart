@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyer_app/theme/colors.dart';
 import 'package:lawyer_app/theme/textstyle.dart';
 import 'package:lawyer_app/viewmodels/responseVM/response_vm.dart';
-import 'package:lawyer_app/views/response_view.dart/widgets/response_tile.dart';
+import 'package:lawyer_app/views/response_view/widgets/response_tile.dart';
 import 'package:stacked/stacked.dart';
 
 class ResponseView extends StatelessWidget {

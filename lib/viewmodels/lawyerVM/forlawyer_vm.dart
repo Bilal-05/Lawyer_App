@@ -108,6 +108,9 @@ class LawyerVM extends BaseViewModel {
 
     if (profileImage != null) {
       await addDP();
+      Future.delayed(
+        const Duration(seconds: 5),
+      );
       await getProfileUrl();
     }
   }
@@ -127,6 +130,9 @@ class LawyerVM extends BaseViewModel {
 
     if (profileImage != null) {
       await addDP();
+      Future.delayed(
+        const Duration(seconds: 5),
+      );
       await getProfileUrl();
     }
   }
@@ -176,7 +182,7 @@ class LawyerVM extends BaseViewModel {
     setBusy(true);
     final profileRef = storageRef
         .child("images/DP/${FirebaseAuth.instance.currentUser!.uid}.jpeg");
-
+    await Future.delayed(const Duration(seconds: 5));
     profileNetworkUrl = await profileRef.getDownloadURL();
 
     userService.profilePhotoNetworkUrl = profileNetworkUrl;

@@ -40,7 +40,7 @@ class Categories extends StatelessWidget {
                           tag: '$index',
                           child: InkWell(
                             onTap: () async {
-                              vModel.setFalse();
+                              // vModel.setFalse();
                             },
                             child: Container(
                               margin: EdgeInsets.only(right: 0.05.sw),

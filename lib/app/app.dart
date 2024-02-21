@@ -25,7 +25,7 @@ import 'package:lawyer_app/views/otp_view/otp_view.dart';
 import 'package:lawyer_app/views/profile_view/profile_view.dart';
 import 'package:lawyer_app/views/register_view/register_view.dart';
 import 'package:lawyer_app/views/request_view/request_view.dart';
-import 'package:lawyer_app/views/response_view.dart/response_view.dart';
+import 'package:lawyer_app/views/response_view/response_view.dart';
 import 'package:lawyer_app/views/splash_view/splash_view.dart';
 import 'package:lawyer_app/views/start_view/start_view.dart';
 import 'package:lawyer_app/views/user_profile_view/user_profile_view.dart';

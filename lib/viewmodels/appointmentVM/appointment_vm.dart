@@ -28,11 +28,6 @@ class AppointmentVM extends BaseViewModel {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   goBack() {
-    snackbarService.showSnackbar(
-      title: 'Congralution 🎉',
-      message: 'Request Sent',
-      duration: const Duration(seconds: 2),
-    );
     navigationService.replaceWithMainMenuView();
   }
 
@@ -205,40 +200,47 @@ class AppointmentVM extends BaseViewModel {
   }
 
   // ignore: non_constant_identifier_names
-  Future<void> sendRequestTo(String lawyer, userData) async {
+  Future<void> sendRequestTo(String lawyer, userData, data) async {
     log('inside');
+    log("${data['deviceToken'] + data['fullName']}");
+
     // Call the user's CollectionReference to add a new user
     final user = FirebaseAuth.instance.currentUser;
-    return sendRequest
-        .doc(lawyer)
-        .collection('requests')
-        .doc(user!.uid)
-        .set(
-          {
-            'request': {
-              'clientName': userData['fullName'] ??
-                  "${userData['fname']} ${userData['lname']}",
-              // 'userType': userData['userType'],
-              'description': descriptionController.text,
-              'date': userService.selectedDate,
-              'time': userService.selectedTime,
-              'uid': user.uid,
-              'deviceToken': userData['deviceToken'],
-            },
-          },
-        )
-        .then(
-          (value) => log("requestAdded"),
-        )
-        .catchError(
-          (error) {
-            snackbarService.showSnackbar(
-              message: error,
-              title: 'Error',
-              duration: const Duration(seconds: 2),
-            );
-          },
+    return sendRequest.doc(lawyer).collection('requests').doc(user!.uid).set(
+      {
+        'request': {
+          'clientName': userData['fullName'] ??
+              "${userData['fname']} ${userData['lname']}",
+          // 'userType': userData['userType'],
+          'description': descriptionController.text,
+          'date': userService.selectedDate,
+          'time': userService.selectedTime,
+          'uid': user.uid,
+          'deviceToken': userData['deviceToken'],
+        },
+      },
+    ).then(
+      (value) async {
+        log("requestAdded");
+        if (descriptionController.text != '') {
+          await sendNotification(data['deviceToken'], userService.userData);
+          snackbarService.showSnackbar(
+            title: 'Congralution 🎉',
+            message: 'Request Sent',
+            duration: const Duration(seconds: 2),
+          );
+          goBack();
+        }
+      },
+    ).catchError(
+      (error) {
+        snackbarService.showSnackbar(
+          message: error,
+          title: 'Error',
+          duration: const Duration(seconds: 2),
         );
+      },
+    );
   }
 
   var b1style = ElevatedButton.styleFrom(

@@ -34,8 +34,10 @@ class SFCalendarView extends StatelessWidget {
               }
 
               if (snapshot.connectionState == ConnectionState.done) {
-                var data = snapshot.data!.data() as Map<String, dynamic>;
-                vModel.getMeeting(data);
+                if (snapshot.data!.data() != null) {
+                  var data = snapshot.data!.data() as Map<String, dynamic>;
+                  vModel.getMeeting(data);
+                }
 
                 return Scaffold(
                   body: SafeArea(

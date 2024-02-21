@@ -100,10 +100,12 @@ class LawyerTile extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {},
-                  child: Text('Appointment',
-                      style: Style.regular14ptb.copyWith(
-                        color: Colors.white,
-                      )),
+                  child: Text(
+                    'Appointment',
+                    style: Style.regular14ptb.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
                 )
                 // SizedBox(
                 //   child: Text(
